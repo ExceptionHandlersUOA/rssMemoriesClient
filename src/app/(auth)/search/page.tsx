@@ -1,4 +1,6 @@
+import { Suspense } from "react"
 import { SearchSection } from "@/components/client"
+import { SearchLoadingSkeleton } from "@/components/skeletons/search-loading-skeleton"
 
 export default function SearchPage() {
   return (
@@ -10,7 +12,9 @@ export default function SearchPage() {
         </p>
       </div>
 
-      <SearchSection />
+      <Suspense fallback={<SearchLoadingSkeleton />}>
+        <SearchSection />
+      </Suspense>
     </div>
   )
 }

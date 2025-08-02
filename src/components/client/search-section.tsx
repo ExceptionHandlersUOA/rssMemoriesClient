@@ -1,25 +1,39 @@
 "use client"
 
-import { useState } from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Search, X } from "lucide-react"
+import { useQueryState, parseAsString } from "nuqs"
 import { useDebounce } from "@/hooks/use-debounce"
 import { useSearch } from "@/query/search"
 import { SearchResultCard } from "@/components/posts/search-result-card"
 import { SearchResultsSkeleton } from "@/components/skeletons/search-results-skeleton"
 
 export const SearchSection = () => {
-  const [searchQuery, setSearchQuery] = useState("")
-  const debouncedQuery = useDebounce(searchQuery, 500)
+  const [searchQuery, setSearchQuery] = useQueryState(
+    "q",
+    parseAsString.withDefault("").withOptions({ shallow: false })
+  )
+
+  const debouncedQuery = useDebounce(searchQuery || "", 500)
   const { data: searchResults, isLoading, error } = useSearch(debouncedQuery)
 
   const handleClearSearch = () => {
     setSearchQuery("")
   }
 
+  const handleSearchChange = (value: string) => {
+    setSearchQuery(value)
+  }
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      setSearchQuery(e.currentTarget.value)
+    }
+  }
+
   const hasResults = searchResults && searchResults.length > 0
-  const hasQuery = debouncedQuery.length > 0
+  const hasQuery = (searchQuery || "").length > 0
 
   return (
     <div className="space-y-6">
@@ -29,8 +43,9 @@ export const SearchSection = () => {
           <Input
             type="text"
             placeholder="Search posts..."
-            value={searchQuery}
-            onChange={e => setSearchQuery(e.target.value)}
+            value={searchQuery || ""}
+            onChange={e => handleSearchChange(e.target.value)}
+            onKeyDown={handleKeyPress}
             className="w-full pr-10 pl-10"
           />
           {searchQuery && (
