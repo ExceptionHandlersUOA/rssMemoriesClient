@@ -1,5 +1,5 @@
-import { MemoryCard } from './memory-card'
-import type { WebFeed } from '@/lib/schemas/feeds'
+import { MemoryCard } from "./memory-card"
+import type { WebFeed } from "@/lib/schemas/feeds"
 
 type MemoriesGridProps = {
   favourites: WebFeed[]

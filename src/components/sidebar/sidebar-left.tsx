@@ -1,6 +1,6 @@
-'use client'
+"use client"
 
-import * as React from 'react'
+import * as React from "react"
 import {
   AudioWaveform,
   Blocks,
@@ -13,197 +13,197 @@ import {
   Sparkles,
   Star,
   Trash2,
-} from 'lucide-react'
+} from "lucide-react"
 
-import { NavFavorites } from './nav-favorites'
-import { NavMain } from './nav-main'
-import { NavSecondary } from './nav-secondary'
-import { NavWorkspaces } from './nav-workspaces'
-import { TeamSwitcher } from './team-switcher'
+import { NavFavorites } from "./nav-favorites"
+import { NavMain } from "./nav-main"
+import { NavSecondary } from "./nav-secondary"
+import { NavWorkspaces } from "./nav-workspaces"
+import { TeamSwitcher } from "./team-switcher"
 import {
   Sidebar,
   SidebarContent,
   SidebarHeader,
   SidebarRail,
-} from '@/components/ui/sidebar'
-import { favourites } from '@/lib/data/favourites'
+} from "@/components/ui/sidebar"
+import { favourites } from "@/lib/data/favourites"
 
 // This is sample data.
 const data = {
   teams: [
     {
-      name: 'Acme Inc',
+      name: "Acme Inc",
       logo: Command,
-      plan: 'Enterprise',
+      plan: "Enterprise",
     },
     {
-      name: 'Acme Corp.',
+      name: "Acme Corp.",
       logo: AudioWaveform,
-      plan: 'Startup',
+      plan: "Startup",
     },
     {
-      name: 'Evil Corp.',
+      name: "Evil Corp.",
       logo: Command,
-      plan: 'Free',
+      plan: "Free",
     },
   ],
   navMain: [
     {
-      title: 'Search',
-      url: '#',
+      title: "Search",
+      url: "#",
       icon: Search,
     },
     {
-      title: 'Ask AI',
-      url: '#',
+      title: "Ask AI",
+      url: "#",
       icon: Sparkles,
     },
     {
-      title: 'Home',
-      url: '/dashboard',
+      title: "Home",
+      url: "/dashboard",
       icon: Home,
     },
     {
-      title: 'Categories',
-      url: '/dashboard/categories',
+      title: "Categories",
+      url: "/dashboard/categories",
       icon: Star,
     },
   ],
   navSecondary: [
     {
-      title: 'Calendar',
-      url: '#',
+      title: "Calendar",
+      url: "#",
       icon: Calendar,
     },
     {
-      title: 'Settings',
-      url: '#',
+      title: "Settings",
+      url: "#",
       icon: Settings2,
     },
     {
-      title: 'Templates',
-      url: '#',
+      title: "Templates",
+      url: "#",
       icon: Blocks,
     },
     {
-      title: 'Trash',
-      url: '#',
+      title: "Trash",
+      url: "#",
       icon: Trash2,
     },
     {
-      title: 'Help',
-      url: '#',
+      title: "Help",
+      url: "#",
       icon: MessageCircleQuestion,
     },
   ],
   favorites: favourites.map(({ title, url }) => ({
-    name: title ?? 'Untitled',
-    url: url ?? '#',
-    emoji: '⭐', // Default emoji since we don't have emoji in the new structure
+    name: title ?? "Untitled",
+    url: url ?? "#",
+    emoji: "⭐", // Default emoji since we don't have emoji in the new structure
   })),
   workspaces: [
     {
-      name: 'Childhood Memories',
-      emoji: '👶',
+      name: "Childhood Memories",
+      emoji: "👶",
       pages: [
         {
-          name: 'First Steps & Milestones',
-          url: '/dashboard/memories/1',
-          emoji: '👣',
+          name: "First Steps & Milestones",
+          url: "/dashboard/memories/1",
+          emoji: "👣",
         },
         {
-          name: 'School Days & Friends',
-          url: '/dashboard/memories/2',
-          emoji: '🎒',
+          name: "School Days & Friends",
+          url: "/dashboard/memories/2",
+          emoji: "🎒",
         },
         {
-          name: 'Holiday Traditions',
-          url: '/dashboard/memories/3',
-          emoji: '🎄',
+          name: "Holiday Traditions",
+          url: "/dashboard/memories/3",
+          emoji: "🎄",
         },
       ],
     },
     {
-      name: 'Family Moments',
-      emoji: '👨‍👩‍👧‍👦',
+      name: "Family Moments",
+      emoji: "👨‍👩‍👧‍👦",
       pages: [
         {
-          name: 'Family Vacations',
-          url: '/dashboard/memories/4',
-          emoji: '🏖️',
+          name: "Family Vacations",
+          url: "/dashboard/memories/4",
+          emoji: "🏖️",
         },
         {
-          name: 'Sunday Dinners',
-          url: '/dashboard/memories/5',
-          emoji: '🍽️',
+          name: "Sunday Dinners",
+          url: "/dashboard/memories/5",
+          emoji: "🍽️",
         },
         {
-          name: 'Game Nights',
-          url: '/dashboard/memories/6',
-          emoji: '🎲',
+          name: "Game Nights",
+          url: "/dashboard/memories/6",
+          emoji: "🎲",
         },
       ],
     },
     {
-      name: 'Special Occasions',
-      emoji: '🎉',
+      name: "Special Occasions",
+      emoji: "🎉",
       pages: [
         {
-          name: 'Birthday Celebrations',
-          url: '/dashboard/memories/7',
-          emoji: '🎂',
+          name: "Birthday Celebrations",
+          url: "/dashboard/memories/7",
+          emoji: "🎂",
         },
         {
-          name: 'Graduation Day',
-          url: '/dashboard/memories/8',
-          emoji: '🎓',
+          name: "Graduation Day",
+          url: "/dashboard/memories/8",
+          emoji: "🎓",
         },
         {
-          name: 'First Job',
-          url: '/dashboard/memories/9',
-          emoji: '💼',
+          name: "First Job",
+          url: "/dashboard/memories/9",
+          emoji: "💼",
         },
       ],
     },
     {
-      name: 'Adventures & Firsts',
-      emoji: '🌟',
+      name: "Adventures & Firsts",
+      emoji: "🌟",
       pages: [
         {
-          name: 'First Time Flying',
-          url: '/dashboard/memories/10',
-          emoji: '✈️',
+          name: "First Time Flying",
+          url: "/dashboard/memories/10",
+          emoji: "✈️",
         },
         {
-          name: 'Learning to Drive',
-          url: '/dashboard/memories/11',
-          emoji: '🚗',
+          name: "Learning to Drive",
+          url: "/dashboard/memories/11",
+          emoji: "🚗",
         },
         {
-          name: 'Moving to a New City',
-          url: '/dashboard/memories/12',
-          emoji: '🏠',
+          name: "Moving to a New City",
+          url: "/dashboard/memories/12",
+          emoji: "🏠",
         },
       ],
     },
     {
-      name: 'Pets & Companions',
-      emoji: '🐾',
+      name: "Pets & Companions",
+      emoji: "🐾",
       pages: [
         {
-          name: 'First Pet',
-          url: '/dashboard/memories/13',
-          emoji: '🐕',
+          name: "First Pet",
+          url: "/dashboard/memories/13",
+          emoji: "🐕",
         },
         {
-          name: 'Pet Adventures',
-          url: '/dashboard/memories/14',
-          emoji: '🐾',
+          name: "Pet Adventures",
+          url: "/dashboard/memories/14",
+          emoji: "🐾",
         },
         {
-          name: 'Saying Goodbye',
-          url: '/dashboard/memories/15',
-          emoji: '💔',
+          name: "Saying Goodbye",
+          url: "/dashboard/memories/15",
+          emoji: "💔",
         },
       ],
     },

@@ -1,13 +1,13 @@
-'use client'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
+"use client"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover'
+} from "@/components/ui/popover"
 import {
   Command,
   CommandEmpty,
@@ -15,13 +15,13 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from '@/components/ui/command'
-import { ImageIcon, PlusIcon, X } from 'lucide-react'
-import { useForm } from 'react-hook-form'
-import { useState } from 'react'
-import { cn } from '@/lib/utils'
-import Image from 'next/image'
-import { motion } from 'framer-motion'
+} from "@/components/ui/command"
+import { ImageIcon, PlusIcon, X } from "lucide-react"
+import { useForm } from "react-hook-form"
+import { useState } from "react"
+import { cn } from "@/lib/utils"
+import Image from "next/image"
+import { motion } from "framer-motion"
 
 type PostFormData = {
   title: string
@@ -31,24 +31,24 @@ type PostFormData = {
 }
 
 const defaultTags: string[] = [
-  'Memories',
-  'Childhood',
-  'Family',
-  'Friends',
-  'School Days',
-  'Summer',
-  'Vacations',
-  'Games',
-  'Favorite Foods',
-  'Celebrations',
-  'Milestones',
-  'Adventures',
+  "Memories",
+  "Childhood",
+  "Family",
+  "Friends",
+  "School Days",
+  "Summer",
+  "Vacations",
+  "Games",
+  "Favorite Foods",
+  "Celebrations",
+  "Milestones",
+  "Adventures",
 ]
 
 export const PostSection = () => {
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([])
   const [isPopoverOpen, setIsPopoverOpen] = useState(false)
-  const [commandInputValue, setCommandInputValue] = useState('')
+  const [commandInputValue, setCommandInputValue] = useState("")
   const [filePreviewUrls, setFilePreviewUrls] = useState<string[]>([])
 
   const {
@@ -59,31 +59,31 @@ export const PostSection = () => {
     formState: { errors, isSubmitting },
   } = useForm<PostFormData>({
     defaultValues: {
-      title: '',
-      description: '',
+      title: "",
+      description: "",
       tags: [],
       files: null,
     },
   })
 
-  const tags = watch('tags')
+  const tags = watch("tags")
 
   const addTag = (tag: string) => {
     if (tag.trim() && !tags.includes(tag.trim())) {
       const updatedTags = [...tags, tag.trim()]
-      setValue('tags', updatedTags)
-      setCommandInputValue('')
+      setValue("tags", updatedTags)
+      setCommandInputValue("")
       setIsPopoverOpen(false)
     }
   }
 
   const removeTag = (index: number) => {
     const updatedTags = tags.filter((_, i) => i !== index)
-    setValue('tags', updatedTags)
+    setValue("tags", updatedTags)
   }
 
   const handleImageClick = () => {
-    document.getElementById('file-upload')?.click()
+    document.getElementById("file-upload")?.click()
   }
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -91,7 +91,7 @@ export const PostSection = () => {
     if (files) {
       const newFiles = Array.from(files)
       setUploadedFiles(prev => [...prev, ...newFiles])
-      setValue('files', files)
+      setValue("files", files)
 
       const newPreviewUrls = newFiles.map(file => URL.createObjectURL(file))
       setFilePreviewUrls(prev => [...prev, ...newPreviewUrls])
@@ -108,27 +108,27 @@ export const PostSection = () => {
 
     const updatedFiles = uploadedFiles.filter((_, i) => i !== index)
     if (updatedFiles.length === 0) {
-      setValue('files', null)
+      setValue("files", null)
     }
   }
 
   const onSubmit = async (data: PostFormData) => {
     try {
       // Handle form submission here
-      console.log('Form data:', data)
-      console.log('Uploaded files:', uploadedFiles)
+      console.log("Form data:", data)
+      console.log("Uploaded files:", uploadedFiles)
 
       filePreviewUrls.forEach(url => URL.revokeObjectURL(url))
 
       // Reset form after successful submission
       setUploadedFiles([])
       setFilePreviewUrls([])
-      setValue('title', '')
-      setValue('description', '')
-      setValue('tags', [])
-      setValue('files', null)
+      setValue("title", "")
+      setValue("description", "")
+      setValue("tags", [])
+      setValue("files", null)
     } catch (error) {
-      console.error('Error submitting post:', error)
+      console.error("Error submitting post:", error)
     }
   }
 
@@ -136,13 +136,13 @@ export const PostSection = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <section className="bg-card mx-auto flex w-full max-w-3xl flex-col justify-center space-y-2 rounded-lg p-4 shadow-md">
         <Input
-          {...register('title', {
-            required: 'Please enter a title',
-            minLength: { value: 1, message: 'title cannot be empty' },
+          {...register("title", {
+            required: "Please enter a title",
+            minLength: { value: 1, message: "title cannot be empty" },
           })}
           placeholder="Title"
           className={cn(
-            'border-none text-xl font-semibold shadow-none md:text-xl'
+            "border-none text-xl font-semibold shadow-none md:text-xl"
           )}
         />
         {errors.description && (
@@ -155,7 +155,7 @@ export const PostSection = () => {
           {tags.map((tag, index) => (
             <motion.div
               key={tag}
-              transition={{ type: 'spring', bounce: 0.3, visualDuration: 0.3 }}
+              transition={{ type: "spring", bounce: 0.3, visualDuration: 0.3 }}
               layout
             >
               <Badge className="flex items-center gap-1">
@@ -174,7 +174,7 @@ export const PostSection = () => {
             <PopoverTrigger asChild>
               <motion.div
                 transition={{
-                  type: 'spring',
+                  type: "spring",
                   bounce: 0.3,
                   visualDuration: 0.3,
                 }}
@@ -219,7 +219,7 @@ export const PostSection = () => {
                       value={commandInputValue}
                       onSelect={(value: string) => {
                         addTag(value)
-                        setCommandInputValue('')
+                        setCommandInputValue("")
                         setIsPopoverOpen(false)
                         defaultTags.push(value)
                       }}
@@ -235,9 +235,9 @@ export const PostSection = () => {
         </div>
 
         <Textarea
-          {...register('description', {
-            required: 'Please enter something to remember',
-            minLength: { value: 1, message: 'description cannot be empty' },
+          {...register("description", {
+            required: "Please enter something to remember",
+            minLength: { value: 1, message: "description cannot be empty" },
           })}
           placeholder="Something to Remember..."
         />
@@ -261,7 +261,7 @@ export const PostSection = () => {
           </Button>
           <div className="flex-grow" />
           <Button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? 'Posting...' : 'Post'}
+            {isSubmitting ? "Posting..." : "Post"}
           </Button>
         </div>
         {uploadedFiles.length > 0 && (
@@ -271,7 +271,7 @@ export const PostSection = () => {
                 key={`${file.name}-${file.size}-${index}`}
                 className="bg-muted flex flex-col items-center justify-center space-y-2 rounded-md p-2 pt-4"
               >
-                {file.type.startsWith('image/') && filePreviewUrls[index] && (
+                {file.type.startsWith("image/") && filePreviewUrls[index] && (
                   <div className="relative h-32 w-32">
                     <Image
                       src={filePreviewUrls[index]}
@@ -281,7 +281,7 @@ export const PostSection = () => {
                     />
                   </div>
                 )}
-                {file.type.startsWith('video/') && filePreviewUrls[index] && (
+                {file.type.startsWith("video/") && filePreviewUrls[index] && (
                   <div className="relative h-32 w-32 overflow-hidden rounded-md">
                     <video
                       src={filePreviewUrls[index]}
@@ -291,8 +291,8 @@ export const PostSection = () => {
                       playsInline
                       aria-label={`Video thumbnail for ${file.name}`}
                       style={{
-                        pointerEvents: 'none',
-                        display: 'block',
+                        pointerEvents: "none",
+                        display: "block",
                       }}
                       onLoadedMetadata={e => {
                         // Set to first frame

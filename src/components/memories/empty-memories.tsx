@@ -1,5 +1,5 @@
-import { Button } from '@/components/ui/button'
-import { Star } from 'lucide-react'
+import { Button } from "@/components/ui/button"
+import { Star } from "lucide-react"
 
 export function EmptyMemories() {
   return (

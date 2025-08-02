@@ -1,4 +1,4 @@
-import { FileType, Platform } from './enums'
+import { FileType, Platform } from "./enums"
 
 /**
  * Get the display name for a file type

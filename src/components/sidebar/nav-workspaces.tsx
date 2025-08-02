@@ -1,11 +1,11 @@
-import { ChevronRight, MoreHorizontal, Plus } from 'lucide-react'
-import Link from 'next/link'
+import { ChevronRight, MoreHorizontal, Plus } from "lucide-react"
+import Link from "next/link"
 
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from '@/components/ui/collapsible'
+} from "@/components/ui/collapsible"
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -17,8 +17,8 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
-} from '@/components/ui/sidebar'
-import { useActivePath } from '@/hooks/use-active-path'
+} from "@/components/ui/sidebar"
+import { useActivePath } from "@/hooks/use-active-path"
 
 export function NavWorkspaces({
   workspaces,

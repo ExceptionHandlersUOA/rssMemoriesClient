@@ -1,5 +1,5 @@
-import { PostSection } from '@/components/post-section'
-import { fetchFeeds } from '@/lib/actions'
+import { PostSection } from "@/components/post-section"
+import { fetchFeeds } from "@/lib/actions"
 
 export default async function Page() {
   const feedsData = await fetchFeeds(1, 10)

@@ -4,8 +4,8 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
+} from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
 import {
   ArrowLeft,
   Calendar,
@@ -14,10 +14,10 @@ import {
   Heart,
   Share2,
   Edit,
-} from 'lucide-react'
-import Link from 'next/link'
-import { notFound } from 'next/navigation'
-import { favourites } from '@/lib/data/favourites'
+} from "lucide-react"
+import Link from "next/link"
+import { notFound } from "next/navigation"
+import { favourites } from "@/lib/data/favourites"
 
 type Props = {
   params: Promise<{
@@ -157,7 +157,7 @@ export default async function MemoryPage({ params }: Props) {
                   .map(item => (
                     <Link
                       key={item.title}
-                      href={`/dashboard/memories/${encodeURIComponent(item.title ?? '')}`}
+                      href={`/dashboard/memories/${encodeURIComponent(item.title ?? "")}`}
                     >
                       <div className="hover:bg-muted flex items-center gap-3 rounded-lg p-2 transition-colors">
                         <span className="text-xl">⭐</span>

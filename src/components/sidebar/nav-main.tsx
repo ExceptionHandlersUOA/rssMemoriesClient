@@ -1,14 +1,14 @@
-'use client'
+"use client"
 
-import { type LucideIcon } from 'lucide-react'
-import Link from 'next/link'
+import { type LucideIcon } from "lucide-react"
+import Link from "next/link"
 
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from '@/components/ui/sidebar'
-import { useActivePath } from '@/hooks/use-active-path'
+} from "@/components/ui/sidebar"
+import { useActivePath } from "@/hooks/use-active-path"
 
 export function NavMain({
   items,

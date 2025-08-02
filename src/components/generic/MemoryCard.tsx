@@ -1,20 +1,20 @@
-import { FC, memo } from 'react'
+import { FC, memo } from "react"
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '../ui/card'
-import dayjs from 'dayjs'
-import relativeTime from 'dayjs/plugin/relativeTime'
+} from "../ui/card"
+import dayjs from "dayjs"
+import relativeTime from "dayjs/plugin/relativeTime"
 import {
   Dialog,
   DialogTrigger,
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from '../ui/dialog'
+} from "../ui/dialog"
 
 dayjs.extend(relativeTime)
 
@@ -150,4 +150,4 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
   }
 )
 
-MemoryCard.displayName = 'MemoryCard'
+MemoryCard.displayName = "MemoryCard"

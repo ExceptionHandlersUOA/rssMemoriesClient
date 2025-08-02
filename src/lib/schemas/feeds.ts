@@ -1,5 +1,5 @@
-import { z } from 'zod'
-import { FileTypeSchema, PlatformSchema } from './enums'
+import { z } from "zod"
+import { FileTypeSchema, PlatformSchema } from "./enums"
 
 export const WebMediaSchema = z.object({
   mediaId: z.number().int(),

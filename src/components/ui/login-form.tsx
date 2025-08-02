@@ -1,29 +1,29 @@
-'use client'
+"use client"
 
-import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { useRouter } from 'next/navigation'
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { useRouter } from "next/navigation"
 
 export function LoginForm({
   className,
   ...props
-}: React.ComponentProps<'form'>) {
+}: React.ComponentProps<"form">) {
   const router = useRouter()
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault()
     // Add any login validation logic here if needed
-    router.push('/dashboard')
+    router.push("/dashboard")
   }
 
   const handleSignUp = () => {
-    router.push('/dashboard')
+    router.push("/dashboard")
   }
   return (
     <form
-      className={cn('flex flex-col gap-6', className)}
+      className={cn("flex flex-col gap-6", className)}
       onSubmit={handleLogin}
       {...props}
     >
@@ -49,7 +49,7 @@ export function LoginForm({
         </Button>
       </div>
       <div className="text-center text-sm">
-        Don&apos;t have an account?{' '}
+        Don&apos;t have an account?{" "}
         <button
           type="button"
           onClick={handleSignUp}

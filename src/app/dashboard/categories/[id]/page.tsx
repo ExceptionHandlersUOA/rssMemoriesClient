@@ -1,5 +1,5 @@
-import { notFound } from 'next/navigation'
-import { favourites } from '@/lib/data/favourites'
+import { notFound } from "next/navigation"
+import { favourites } from "@/lib/data/favourites"
 
 type Props = {
   params: Promise<{

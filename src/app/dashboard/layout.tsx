@@ -1,18 +1,18 @@
-import { SidebarLeft } from '@/components/sidebar'
+import { SidebarLeft } from "@/components/sidebar"
 import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbList,
   BreadcrumbPage,
-} from '@/components/ui/breadcrumb'
-import { Separator } from '@/components/ui/separator'
+} from "@/components/ui/breadcrumb"
+import { Separator } from "@/components/ui/separator"
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from '@/components/ui/sidebar'
+} from "@/components/ui/sidebar"
 
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic"
 
 type DashboardLayoutProps = {
   children: React.ReactNode

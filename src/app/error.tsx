@@ -1,15 +1,15 @@
-'use client'
+"use client"
 
-import { Button } from '@/components/ui/button'
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
-import { AlertTriangle, RefreshCw, Home } from 'lucide-react'
-import Link from 'next/link'
+} from "@/components/ui/card"
+import { AlertTriangle, RefreshCw, Home } from "lucide-react"
+import Link from "next/link"
 
 interface ErrorProps {
   error: Error & { digest?: string }
@@ -35,7 +35,7 @@ export default function Error({ error, reset }: ErrorProps) {
         <CardContent className="space-y-4">
           <div className="bg-muted rounded-lg p-3">
             <p className="text-muted-foreground text-sm">
-              <strong>Error:</strong> {error.message || 'Unknown error'}
+              <strong>Error:</strong> {error.message || "Unknown error"}
             </p>
             {error.digest && (
               <p className="text-muted-foreground mt-1 text-xs">

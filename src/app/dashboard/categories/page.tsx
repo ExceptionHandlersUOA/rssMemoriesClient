@@ -2,8 +2,8 @@ import {
   MemoriesHeader,
   MemoriesGrid,
   EmptyMemories,
-} from '@/components/memories'
-import { favourites } from '@/lib/data/favourites'
+} from "@/components/memories"
+import { favourites } from "@/lib/data/favourites"
 
 export default function CategoriesPage() {
   return (
