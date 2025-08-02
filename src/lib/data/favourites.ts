@@ -1,92 +1,136 @@
-export type FavouriteItem = {
-  name: string;
-  url: string;
-  emoji: string;
-  description: string;
-  category: string;
-  lastAccessed: string;
-};
+import { type Feed } from "../schemas/feeds";
 
-export const favourites: FavouriteItem[] = [
+export const favourites: Feed[] = [
   {
-    name: "First Day of School",
-    url: "/dashboard/memories/First Day of School",
-    emoji: "🎒",
+    id: "first-day-of-school",
+    title: "First Day of School",
     description:
       "The excitement and nervousness of starting a new chapter in life",
-    category: "Childhood",
-    lastAccessed: "2 hours ago",
+    sourceUrl: "/dashboard/memories/First Day of School",
+    lastUpdated: "2024-01-15T10:30:00Z",
+    publishedAt: "2024-01-15T10:30:00Z",
+    media: [],
+    platform: 3, // RSS
+    categories: ["Childhood", "Education"],
   },
   {
-    name: "Family Vacation to Disney World",
-    url: "/dashboard/memories/Family Vacation to Disney World",
-    emoji: "🏰",
+    id: "family-vacation-disney",
+    title: "Family Vacation to Disney World",
     description: "Magical memories with family at the happiest place on earth",
-    category: "Family",
-    lastAccessed: "1 day ago",
+    sourceUrl: "/dashboard/memories/Family Vacation to Disney World",
+    lastUpdated: "2024-01-14T15:45:00Z",
+    publishedAt: "2024-01-14T15:45:00Z",
+    media: [],
+    platform: 3, // RSS
+    categories: ["Family", "Travel", "Vacation"],
   },
   {
-    name: "Learning to Ride a Bike",
-    url: "/dashboard/memories/Learning to Ride a Bike",
-    emoji: "🚴",
+    id: "learning-to-ride-bike",
+    title: "Learning to Ride a Bike",
     description: "The freedom and joy of mastering a new skill",
-    category: "Childhood",
-    lastAccessed: "3 hours ago",
+    sourceUrl: "/dashboard/memories/Learning to Ride a Bike",
+    lastUpdated: "2024-01-15T08:20:00Z",
+    publishedAt: "2024-01-15T08:20:00Z",
+    media: [],
+    platform: 3, // RSS
+    categories: ["Childhood", "Learning", "Achievement"],
   },
   {
-    name: "Grandma's Sunday Dinners",
-    url: "/dashboard/memories/Grandma's Sunday Dinners",
-    emoji: "🍽️",
+    id: "grandmas-sunday-dinners",
+    title: "Grandma's Sunday Dinners",
     description: "Warm family gatherings filled with love and delicious food",
-    category: "Family",
-    lastAccessed: "5 days ago",
+    sourceUrl: "/dashboard/memories/Grandma's Sunday Dinners",
+    lastUpdated: "2024-01-10T18:00:00Z",
+    publishedAt: "2024-01-10T18:00:00Z",
+    media: [],
+    platform: 3, // RSS
+    categories: ["Family", "Food", "Traditions"],
   },
   {
-    name: "First Pet - Goldfish Named Bubbles",
-    url: "/dashboard/memories/First Pet - Goldfish Named Bubbles",
-    emoji: "🐠",
+    id: "first-pet-goldfish",
+    title: "First Pet - Goldfish Named Bubbles",
     description: "The responsibility and wonder of caring for a first pet",
-    category: "Childhood",
-    lastAccessed: "1 week ago",
+    sourceUrl: "/dashboard/memories/First Pet - Goldfish Named Bubbles",
+    lastUpdated: "2024-01-08T12:15:00Z",
+    publishedAt: "2024-01-08T12:15:00Z",
+    media: [],
+    platform: 3, // RSS
+    categories: ["Childhood", "Pets", "Responsibility"],
   },
   {
-    name: "Building a Treehouse with Dad",
-    url: "/dashboard/memories/Building a Treehouse with Dad",
-    emoji: "🌳",
+    id: "building-treehouse-dad",
+    title: "Building a Treehouse with Dad",
     description: "Quality time spent creating something special together",
-    category: "Family",
-    lastAccessed: "2 days ago",
+    sourceUrl: "/dashboard/memories/Building a Treehouse with Dad",
+    lastUpdated: "2024-01-13T14:30:00Z",
+    publishedAt: "2024-01-13T14:30:00Z",
+    media: [],
+    platform: 3, // RSS
+    categories: ["Family", "Building", "Quality Time"],
   },
   {
-    name: "First Snow Day",
-    url: "/dashboard/memories/First Snow Day",
-    emoji: "❄️",
+    id: "first-snow-day",
+    title: "First Snow Day",
     description: "The magic of waking up to a winter wonderland",
-    category: "Childhood",
-    lastAccessed: "4 days ago",
+    sourceUrl: "/dashboard/memories/First Snow Day",
+    lastUpdated: "2024-01-11T09:00:00Z",
+    publishedAt: "2024-01-11T09:00:00Z",
+    media: [],
+    platform: 3, // RSS
+    categories: ["Childhood", "Weather", "First Times"],
   },
   {
-    name: "Mom's Bedtime Stories",
-    url: "/dashboard/memories/Mom's Bedtime Stories",
-    emoji: "📖",
+    id: "moms-bedtime-stories",
+    title: "Mom's Bedtime Stories",
     description: "Cozy evenings filled with imagination and love",
-    category: "Family",
-    lastAccessed: "1 day ago",
+    sourceUrl: "/dashboard/memories/Mom's Bedtime Stories",
+    lastUpdated: "2024-01-14T20:00:00Z",
+    publishedAt: "2024-01-14T20:00:00Z",
+    media: [],
+    platform: 3, // RSS
+    categories: ["Family", "Reading", "Bedtime"],
   },
   {
-    name: "First Time Swimming in the Ocean",
-    url: "/dashboard/memories/First Time Swimming in the Ocean",
-    emoji: "🌊",
+    id: "first-time-swimming-ocean",
+    title: "First Time Swimming in the Ocean",
     description: "The vastness and wonder of the sea",
-    category: "Childhood",
-    lastAccessed: "6 hours ago",
+    sourceUrl: "/dashboard/memories/First Time Swimming in the Ocean",
+    lastUpdated: "2024-01-15T06:45:00Z",
+    publishedAt: "2024-01-15T06:45:00Z",
+    media: [],
+    platform: 3, // RSS
+    categories: ["Childhood", "Water", "First Times"],
   },
   {
-    name: "Birthday Party at the Park",
-    url: "/dashboard/memories/Birthday Party at the Park",
-    emoji: "🎉",
+    id: "birthday-party-park",
+    title: "Birthday Party at the Park",
     description: "Celebrating with friends and family in the great outdoors",
-    category: "Family",
-    lastAccessed: "1 hour ago",
+    sourceUrl: "/dashboard/memories/Birthday Party at the Park",
+    lastUpdated: "2024-01-15T16:30:00Z",
+    publishedAt: "2024-01-15T16:30:00Z",
+    media: [],
+    platform: 3, // RSS
+    categories: ["Family", "Celebration", "Outdoors"],
   },
 ];
+
+export const getCategoriesFromFavourites = () => {
+  const categoryMap = new Map<string, { count: number }>();
+
+  favourites.forEach((item) => {
+    item.categories.forEach((category) => {
+      const existing = categoryMap.get(category);
+      if (existing) {
+        existing.count += 1;
+      } else {
+        categoryMap.set(category, { count: 1 });
+      }
+    });
+  });
+
+  return Array.from(categoryMap.entries()).map(([name, data]) => ({
+    id: name.toLowerCase().replace(/\s+/g, "-"),
+    name,
+    count: data.count,
+  }));
+};

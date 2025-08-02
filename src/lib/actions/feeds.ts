@@ -1,12 +1,14 @@
 "use server";
 
 import { z } from "zod";
-import { PostsResponseSchema, type Post, type PostsResponse } from "../schemas";
+import { FeedsResponseSchema, type Feed, type FeedsResponse } from "../schemas";
 
-export async function fetchPosts(page = 1, limit = 10): Promise<PostsResponse> {
+export async function fetchFeeds(page = 1, limit = 10): Promise<FeedsResponse> {
+  "use server";
+
   try {
     const response = await fetch(
-      `https://archivebackend.feroxfoxxo.com/api/getPosts?page=${page}&limit=${limit}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/getFeeds?page=${page}&limit=${limit}`,
       {
         method: "GET",
         headers: {
@@ -20,13 +22,13 @@ export async function fetchPosts(page = 1, limit = 10): Promise<PostsResponse> {
 
     if (!response.ok) {
       throw new Error(
-        `Failed to fetch posts: ${response.status} ${response.statusText}`
+        `Failed to fetch feeds: ${response.status} ${response.statusText}`
       );
     }
 
     const data = await response.json();
 
-    const validatedData = PostsResponseSchema.parse(data);
+    const validatedData = FeedsResponseSchema.parse(data);
 
     return validatedData;
   } catch (error) {
@@ -35,16 +37,18 @@ export async function fetchPosts(page = 1, limit = 10): Promise<PostsResponse> {
     }
 
     if (error instanceof Error) {
-      throw new Error(`Failed to fetch posts: ${error.message}`);
+      throw new Error(`Failed to fetch feeds: ${error.message}`);
     }
 
-    throw new Error("An unexpected error occurred while fetching posts");
+    throw new Error("An unexpected error occurred while fetching feeds");
   }
 }
 
-export async function fetchPostById(id: string): Promise<Post> {
+export async function fetchFeedById(id: string): Promise<Feed> {
+  "use server";
+
   // Mock data for development
-  const mockPost: Post = {
+  const mockFeed: Feed = {
     id: id,
     title: "First Day of School",
     description:
@@ -59,15 +63,16 @@ export async function fetchPostById(id: string): Promise<Post> {
       },
     ],
     platform: 3, // RSS
+    categories: ["Childhood", "Education"],
   };
 
-  return mockPost;
+  return mockFeed;
 
   // TODO: Uncomment when ready to use real API
   /*
   try {
     const response = await fetch(
-      `https://archivebackend.feroxfoxxo.com/api/getPosts/${id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/getFeeds/${id}`,
       {
         method: "GET",
         headers: {
@@ -81,12 +86,12 @@ export async function fetchPostById(id: string): Promise<Post> {
 
     if (!response.ok) {
       throw new Error(
-        `Failed to fetch post: ${response.status} ${response.statusText}`
+        `Failed to fetch feed: ${response.status} ${response.statusText}`
       );
     }
 
     const data = await response.json();
-    const validatedData = PostSchema.parse(data);
+    const validatedData = FeedSchema.parse(data);
 
     return validatedData;
   } catch (error) {
@@ -95,10 +100,10 @@ export async function fetchPostById(id: string): Promise<Post> {
     }
 
     if (error instanceof Error) {
-      throw new Error(`Failed to fetch post: ${error.message}`);
+      throw new Error(`Failed to fetch feed: ${error.message}`);
     }
 
-    throw new Error("An unexpected error occurred while fetching post");
+    throw new Error("An unexpected error occurred while fetching feed");
   }
   */
 }

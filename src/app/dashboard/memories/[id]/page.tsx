@@ -13,7 +13,7 @@ type Props = {
 
 export default async function MemoryPage({ params }: Props) {
   const decodedId = decodeURIComponent((await params).id);
-  const memory = favourites.find(item => item.name === decodedId);
+  const memory = favourites.find(item => item.id === decodedId);
   
   if (!memory) {
     notFound()
@@ -30,9 +30,10 @@ export default async function MemoryPage({ params }: Props) {
             </Link>
           </Button>
           <div className="flex items-center gap-3">
-            <span className="text-4xl">{memory.emoji}</span>
+            {/* <span className="text-4xl">{memory.emoji}</span> */}
+            <span className="text-4xl">⭐</span>
             <div>
-              <h1 className="text-3xl font-bold tracking-tight">{memory.name}</h1>
+              <h1 className="text-3xl font-bold tracking-tight">{memory.title}</h1>
               <p className="text-muted-foreground">{memory.description}</p>
             </div>
           </div>
@@ -61,19 +62,19 @@ export default async function MemoryPage({ params }: Props) {
             <CardContent className="space-y-4">
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Calendar className="h-4 w-4" />
-                <span>Last accessed {memory.lastAccessed}</span>
+                <span>Last updated {memory.lastUpdated}</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <MapPin className="h-4 w-4" />
-                <span>Category: {memory.category}</span>
+                <span>Category: {memory.categories}</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Users className="h-4 w-4" />
-                <span>Shared with: Family & Friends</span>
+                <span>Shared with: {memory.categories}</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Heart className="h-4 w-4 text-red-500" />
-                <span>Favourite memory</span>
+                <span>Favourite memory: {memory.categories}</span>
               </div>
             </CardContent>
           </Card>
@@ -93,7 +94,7 @@ export default async function MemoryPage({ params }: Props) {
                   <p className="text-sm text-muted-foreground">
                     <strong>Memory Preview:</strong> This is a placeholder for the actual 
                     memory content. In a real application, this would display the 
-                    specific details, photos, and stories associated with &ldquo;{memory.name}&rdquo;.
+                    specific details, photos, and stories associated with &ldquo;{memory.title}&rdquo;.
                   </p>
                 </div>
               </div>
@@ -129,15 +130,15 @@ export default async function MemoryPage({ params }: Props) {
             <CardContent>
               <div className="space-y-3">
                 {favourites
-                  .filter(item => item.category === memory.category && item.name !== memory.name)
+                  .filter(item => item.categories.some(cat => memory.categories.includes(cat)) && item.title !== memory.title)
                   .slice(0, 3)
                   .map((item) => (
-                    <Link key={item.name} href={`/dashboard/memories/${encodeURIComponent(item.name)}`}>
+                    <Link key={item.title} href={`/dashboard/memories/${encodeURIComponent(item.title)}`}>
                       <div className="flex items-center gap-3 p-2 rounded-lg hover:bg-muted transition-colors">
-                        <span className="text-xl">{item.emoji}</span>
+                        <span className="text-xl">⭐</span>
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium line-clamp-1">{item.name}</p>
-                          <p className="text-xs text-muted-foreground">{item.category}</p>
+                          <p className="text-sm font-medium line-clamp-1">{item.title}</p>
+                          <p className="text-xs text-muted-foreground">{item.categories[0]}</p>
                         </div>
                       </div>
                     </Link>

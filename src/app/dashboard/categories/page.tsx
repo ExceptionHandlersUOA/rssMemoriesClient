@@ -1,7 +1,7 @@
 import { MemoriesHeader, MemoriesGrid, EmptyMemories } from "@/components/memories"
 import { favourites } from "@/lib/data/favourites"
 
-export default function MemoriesPage() {
+export default function CategoriesPage() {
   return (
     <>
       <MemoriesHeader count={favourites.length} />

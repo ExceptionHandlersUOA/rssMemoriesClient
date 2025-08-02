@@ -12,6 +12,8 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar"
 
+export const dynamic = 'force-dynamic'
+
 type DashboardLayoutProps = {
   children: React.ReactNode
 }
