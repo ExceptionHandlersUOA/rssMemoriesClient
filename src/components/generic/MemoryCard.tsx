@@ -16,11 +16,11 @@ import {
   DialogTitle,
 } from "../ui/dialog"
 import { FileType } from "@/lib/schemas/enums"
-import { WebPost } from "@/lib/schemas"
+import { Post } from "@/lib/schemas"
 
 dayjs.extend(relativeTime)
 
-export type MemoryCardProps = WebPost
+export type MemoryCardProps = Post
 
 export const MemoryCard: FC<MemoryCardProps> = memo(
   ({

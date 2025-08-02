@@ -5,7 +5,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+// import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
   Star,
@@ -23,10 +23,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import Link from "next/link"
-import type { WebFeed } from "@/lib/schemas/feeds"
+import type { Feed } from "@/lib/schemas/feeds"
 
 type MemoryCardProps = {
-  item: WebFeed
+  item: Feed
 }
 
 export function MemoryCard({ item }: MemoryCardProps) {
@@ -42,7 +42,7 @@ export function MemoryCard({ item }: MemoryCardProps) {
                   {item.title}
                 </Link>
               </CardTitle>
-              <div className="mt-1 flex flex-wrap gap-1">
+              {/* <div className="mt-1 flex flex-wrap gap-1">
                 {item.categories?.slice(0, 2).map(category => (
                   <Badge key={category} variant="outline" className="text-xs">
                     {category}
@@ -53,7 +53,7 @@ export function MemoryCard({ item }: MemoryCardProps) {
                     +{item.categories.length - 2}
                   </Badge>
                 )}
-              </div>
+              </div> */}
             </div>
           </div>
           <DropdownMenu>

@@ -7,7 +7,7 @@ import {
   Calendar,
   // Command,
   Home,
-  MessageCircleQuestion,
+  // MessageCircleQuestion,
   Plus,
   Search,
   Settings2,
@@ -53,7 +53,7 @@ const data = {
     },
     {
       title: "Add Feed",
-      url: "/dashboard/add",
+      url: "/add",
       icon: Plus,
     },
     {
@@ -63,7 +63,7 @@ const data = {
     },
     {
       title: "Categories",
-      url: "/dashboard/categories",
+      url: "/categories",
       icon: Star,
     },
   ],
