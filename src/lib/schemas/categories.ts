@@ -1,5 +1,5 @@
+import { PostSchema } from "./post"
 import { z } from "zod"
-import { WebPostSchema } from "./post"
 
 export const CategorySchema = z.object({
   id: z.string(),
@@ -11,7 +11,7 @@ export const CategorySchema = z.object({
 
 export const CategoriesResponseSchema = z.array(CategorySchema)
 
-export const GetCategoriesResponseSchema = z.array(WebPostSchema)
+export const GetCategoriesResponseSchema = z.array(PostSchema)
 
 export type Category = z.infer<typeof CategorySchema>
 export type CategoriesResponse = z.infer<typeof CategoriesResponseSchema>
