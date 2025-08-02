@@ -11,7 +11,7 @@ type Props = {
   }>
 }
 
-export default async function FavouriteMemoryPage({ params }: Props) {
+export default async function MemoryPage({ params }: Props) {
   const decodedId = decodeURIComponent((await params).id);
   const memory = favourites.find(item => item.name === decodedId);
   
@@ -24,9 +24,9 @@ export default async function FavouriteMemoryPage({ params }: Props) {
       <div className="flex items-start justify-between">
         <div className="flex items-center gap-4">
           <Button variant="ghost" size="sm" asChild>
-            <Link href="/dashboard/favourites">
+            <Link href="/dashboard/memories">
               <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Favourites
+              Back to Memories
             </Link>
           </Button>
           <div className="flex items-center gap-3">
@@ -132,7 +132,7 @@ export default async function FavouriteMemoryPage({ params }: Props) {
                   .filter(item => item.category === memory.category && item.name !== memory.name)
                   .slice(0, 3)
                   .map((item) => (
-                    <Link key={item.name} href={`/dashboard/favourites/${encodeURIComponent(item.name)}`}>
+                    <Link key={item.name} href={`/dashboard/memories/${encodeURIComponent(item.name)}`}>
                       <div className="flex items-center gap-3 p-2 rounded-lg hover:bg-muted transition-colors">
                         <span className="text-xl">{item.emoji}</span>
                         <div className="flex-1 min-w-0">

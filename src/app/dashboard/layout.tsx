@@ -32,7 +32,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
               <BreadcrumbList>
                 <BreadcrumbItem>
                   <BreadcrumbPage className="line-clamp-1">
-                    Favourites
+                    Memories
                   </BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>

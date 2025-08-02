@@ -87,9 +87,9 @@ export function NavFavorites({
         ))}
         <SidebarMenuItem>
           <SidebarMenuButton asChild>
-            <Link href="/dashboard/favourites" className="text-sidebar-foreground/70">
+            <Link href="/dashboard/memories" className="text-sidebar-foreground/70">
               <Star className="h-4 w-4" />
-              <span>View All Favourites</span>
+              <span>View All Memories</span>
             </Link>
           </SidebarMenuButton>
         </SidebarMenuItem>
