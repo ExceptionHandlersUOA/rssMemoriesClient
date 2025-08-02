@@ -50,7 +50,7 @@ const data = {
   navMain: [
     {
       title: "Search",
-      url: "#",
+      url: "/search",
       icon: Search,
     },
     {
