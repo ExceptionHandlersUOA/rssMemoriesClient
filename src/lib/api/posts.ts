@@ -190,3 +190,34 @@ export const deletePostCategory = async ({
     throw new Error("An unexpected error occurred while deleting category")
   }
 }
+
+export async function favouritePost(postId: string) {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/post/${postId}/favourite`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed to favourite post: ${response.status} ${response.statusText}`
+      )
+    }
+
+    return {
+      success: true,
+      message: "Post favourited successfully",
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`Failed to favourite post: ${error.message}`)
+    }
+
+    throw new Error("An unexpected error occurred while favouriting post")
+  }
+}
