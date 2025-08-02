@@ -1,5 +1,9 @@
 import { z } from "zod"
-import { GetPostResponseSchema, type GetPostResponse } from "../schemas/post"
+import {
+  CreatePostCategoryRequest,
+  GetPostResponseSchema,
+  type GetPostResponse,
+} from "../schemas/post"
 
 export const fetchPostByIdClient = async (
   id: string
@@ -35,5 +39,45 @@ export const fetchPostByIdClient = async (
     }
 
     throw new Error("An unexpected error occurred while fetching post")
+  }
+}
+
+export const createPostCategoryClient = async (
+  createPostCategoryRequest: CreatePostCategoryRequest
+) => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/getPost/${createPostCategoryRequest.id}/categories`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          category: createPostCategoryRequest.category,
+        }),
+      }
+    )
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed to create category: ${response.status} ${response.statusText}`
+      )
+    }
+
+    return {
+      success: true,
+      message: "Category created successfully",
+    }
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      throw new Error(`Invalid response format: ${error.message}`)
+    }
+
+    if (error instanceof Error) {
+      throw new Error(`Failed to create category: ${error.message}`)
+    }
+
+    throw new Error("An unexpected error occurred while creating category")
   }
 }

@@ -22,6 +22,12 @@ export const WebPostSchema = z.object({
 
 export const GetPostResponseSchema = WebPostSchema
 
+export const CreatePostCategorySchema = z.object({
+  id: z.number(),
+  category: z.string(),
+})
+
 export type WebPost = z.infer<typeof WebPostSchema>
 export type WebMedia = z.infer<typeof WebMediaSchema>
 export type GetPostResponse = z.infer<typeof GetPostResponseSchema>
+export type CreatePostCategoryRequest = z.infer<typeof CreatePostCategorySchema>
