@@ -8,12 +8,23 @@ import {
   useDeleteFeed,
 } from "@/lib/mutations/feeds"
 import { Button } from "@/components/ui/button"
+import { WebPost } from "@/lib/schemas"
+import dayjs from "dayjs"
 
 export const DashboardSection = () => {
   const { data: feedsData, isLoading, error } = useFeeds()
   const addFeedMutation = useAddFeed()
   const addCustomFeedMutation = useAddCustomFeed()
   const deleteCustomFeedMutation = useDeleteFeed()
+
+  const allPosts: WebPost[] = []
+  feedsData?.forEach(feed => {
+    if (feed.posts) {
+      allPosts.push(...feed.posts)
+    }
+  })
+  allPosts.sort((a, b) => dayjs(b.publishedAt).diff(dayjs(a.publishedAt)))
+  allPosts.forEach(post => console.log(post.publishedAt))
 
   const handleTestAddFeed = () => {
     const testFeedData = {
@@ -170,8 +181,8 @@ export const DashboardSection = () => {
           </div>
         </div>
 
-        {feedsData && feedsData.length > 0 ? (
-          feedsData.map(feed => <MemoryCard key={feed.feedId} {...feed} />)
+        {allPosts && allPosts.length > 0 ? (
+          allPosts.map(post => <MemoryCard key={post.postId} {...post} />)
         ) : (
           <div className="flex flex-col gap-4">
             <h1 className="text-2xl font-bold">No feeds found</h1>
