@@ -17,7 +17,11 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { favourites } from "@/lib/data/favourites"
+import { fetchPostById } from "@/lib/actions"
+import dayjs from "dayjs"
+import relativeTime from "dayjs/plugin/relativeTime"
+
+dayjs.extend(relativeTime)
 
 type Props = {
   params: Promise<{
@@ -27,11 +31,8 @@ type Props = {
 
 export default async function MemoryPage({ params }: Props) {
   const decodedId = decodeURIComponent((await params).id)
-  const memory = favourites.find(item => item.feedId === parseInt(decodedId))
 
-  if (!memory) {
-    notFound()
-  }
+  const post = await fetchPostById(decodedId)
 
   return (
     <>
@@ -44,13 +45,14 @@ export default async function MemoryPage({ params }: Props) {
             </Link>
           </Button>
           <div className="flex items-center gap-3">
-            {/* <span className="text-4xl">{memory.emoji}</span> */}
             <span className="text-4xl">⭐</span>
             <div>
               <h1 className="text-3xl font-bold tracking-tight">
-                {memory.title}
+                {post.title || "Untitled Post"}
               </h1>
-              <p className="text-muted-foreground">{memory.description}</p>
+              <p className="text-muted-foreground">
+                {post.description || "No description available"}
+              </p>
             </div>
           </div>
         </div>
@@ -78,19 +80,25 @@ export default async function MemoryPage({ params }: Props) {
             <CardContent className="space-y-4">
               <div className="text-muted-foreground flex items-center gap-2 text-sm">
                 <Calendar className="h-4 w-4" />
-                <span>Last updated {memory.posts?.[0]?.lastUpdated}</span>
+                <span>
+                  Last updated{" "}
+                  {post.lastUpdated && dayjs(post.lastUpdated).fromNow()}
+                </span>
+              </div>
+              <div className="text-muted-foreground flex items-center gap-2 text-sm">
+                <Calendar className="h-4 w-4" />
+                <span>
+                  Published{" "}
+                  {post.publishedAt && dayjs(post.publishedAt).fromNow()}
+                </span>
               </div>
               <div className="text-muted-foreground flex items-center gap-2 text-sm">
                 <MapPin className="h-4 w-4" />
-                <span>Category: {memory.categories}</span>
+                <span>Source: {post.sourceUrl || "No source available"}</span>
               </div>
               <div className="text-muted-foreground flex items-center gap-2 text-sm">
                 <Users className="h-4 w-4" />
-                <span>Shared with: {memory.categories}</span>
-              </div>
-              <div className="text-muted-foreground flex items-center gap-2 text-sm">
-                <Heart className="h-4 w-4 text-red-500" />
-                <span>Favourite memory: {memory.categories}</span>
+                <span>Media count: {post.media?.length || 0} items</span>
               </div>
             </CardContent>
           </Card>
@@ -102,18 +110,38 @@ export default async function MemoryPage({ params }: Props) {
             <CardContent>
               <div className="prose prose-sm max-w-none">
                 <p className="text-muted-foreground">
-                  This is where the actual memory content would be displayed. It
-                  could include photos, stories, dates, locations, and other
-                  details that make this memory special to you.
+                  {post.description || "No content available for this memory."}
                 </p>
-                <div className="bg-muted mt-4 rounded-lg p-4">
-                  <p className="text-muted-foreground text-sm">
-                    <strong>Memory Preview:</strong> This is a placeholder for
-                    the actual memory content. In a real application, this would
-                    display the specific details, photos, and stories associated
-                    with &ldquo;{memory.title}&rdquo;.
-                  </p>
-                </div>
+
+                {post.media && post.media.length > 0 && (
+                  <div className="mt-4 space-y-4">
+                    <h4 className="font-medium">Media</h4>
+                    <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
+                      {post.media.map((media, index) => (
+                        <div key={index} className="rounded-lg border p-2">
+                          <div className="text-muted-foreground mb-1 text-xs">
+                            {media.type}
+                          </div>
+                          {media.fileUrl && (
+                            <div className="bg-muted flex aspect-square items-center justify-center rounded">
+                              {media.type === "Image" ? (
+                                <img
+                                  src={media.fileUrl}
+                                  alt={`Media ${index + 1}`}
+                                  className="h-full w-full rounded object-cover"
+                                />
+                              ) : (
+                                <div className="text-muted-foreground text-sm">
+                                  {media.type} file
+                                </div>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </CardContent>
           </Card>
@@ -142,37 +170,28 @@ export default async function MemoryPage({ params }: Props) {
 
           <Card>
             <CardHeader>
-              <CardTitle>Related Memories</CardTitle>
+              <CardTitle>Post Information</CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                {favourites
-                  .filter(
-                    item =>
-                      item.categories?.some(cat =>
-                        memory.categories?.includes(cat)
-                      ) && item.title !== memory.title
-                  )
-                  .slice(0, 3)
-                  .map(item => (
-                    <Link
-                      key={item.title}
-                      href={`/dashboard/memories/${encodeURIComponent(item.title ?? "")}`}
-                    >
-                      <div className="hover:bg-muted flex items-center gap-3 rounded-lg p-2 transition-colors">
-                        <span className="text-xl">⭐</span>
-                        <div className="min-w-0 flex-1">
-                          <p className="line-clamp-1 text-sm font-medium">
-                            {item.title}
-                          </p>
-                          <p className="text-muted-foreground text-xs">
-                            {item.categories?.[0]}
-                          </p>
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
+            <CardContent className="space-y-3">
+              <div className="text-sm">
+                <div className="text-muted-foreground">Post ID</div>
+                <div className="font-medium">{post.postId}</div>
               </div>
+              {post.sourceUrl && (
+                <div className="text-sm">
+                  <div className="text-muted-foreground">Source URL</div>
+                  <div className="font-medium">
+                    <a
+                      href={post.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:underline"
+                    >
+                      View Source
+                    </a>
+                  </div>
+                </div>
+              )}
             </CardContent>
           </Card>
         </div>

@@ -26,7 +26,11 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar"
-import { favourites } from "@/lib/data/favourites"
+import type { WebFeed } from "@/lib/schemas/feeds"
+
+interface SidebarLeftProps extends React.ComponentProps<typeof Sidebar> {
+  feeds?: WebFeed[]
+}
 
 // This is sample data.
 const data = {
@@ -96,11 +100,6 @@ const data = {
       icon: MessageCircleQuestion,
     },
   ],
-  favorites: favourites.map(({ title, url }) => ({
-    name: title ?? "Untitled",
-    url: url ?? "#",
-    emoji: "⭐", // Default emoji since we don't have emoji in the new structure
-  })),
   workspaces: [
     {
       name: "Childhood Memories",
@@ -210,9 +209,13 @@ const data = {
   ],
 }
 
-export function SidebarLeft({
-  ...props
-}: React.ComponentProps<typeof Sidebar>) {
+export function SidebarLeft({ feeds = [], ...props }: SidebarLeftProps) {
+  const favorites = feeds.map(({ title, url, feedId }) => ({
+    name: title ?? "Untitled",
+    url: `/dashboard/memories/${feedId}`,
+    emoji: "⭐", // Default emoji since we don't have emoji in the new structure
+  }))
+
   return (
     <Sidebar className="border-r-0" {...props}>
       <SidebarHeader>
@@ -220,7 +223,7 @@ export function SidebarLeft({
         <NavMain items={data.navMain} />
       </SidebarHeader>
       <SidebarContent>
-        <NavFavorites favorites={data.favorites} />
+        <NavFavorites favorites={favorites} />
         <NavWorkspaces workspaces={data.workspaces} />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
