@@ -1,9 +1,44 @@
 import { z } from "zod"
 import {
+  CreateCustomPostRequest,
   CreatePostCategoryRequest,
   GetPostResponseSchema,
   type GetPostResponse,
 } from "../schemas/post"
+
+export const createCustomPostClient = async (
+  createCustomPostRequest: CreateCustomPostRequest
+) => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/feed/${createCustomPostRequest.id}/post/custom`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(createCustomPostRequest.post),
+      }
+    )
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed to create custom post: ${response.status} ${response.statusText}`
+      )
+    }
+
+    return {
+      success: true,
+      message: "Custom post created successfully",
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`Failed to create custom post: ${error.message}`)
+    }
+
+    throw new Error("An unexpected error occurred while creating custom post")
+  }
+}
 
 export const fetchPostByIdClient = async (
   id: string
