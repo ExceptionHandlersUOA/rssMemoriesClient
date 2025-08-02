@@ -1,16 +1,16 @@
-import { SidebarLeft } from "@/components/sidebar"
+import { SidebarLeft } from '@/components/sidebar'
 import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbList,
   BreadcrumbPage,
-} from "@/components/ui/breadcrumb"
-import { Separator } from "@/components/ui/separator"
+} from '@/components/ui/breadcrumb'
+import { Separator } from '@/components/ui/separator'
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from "@/components/ui/sidebar"
+} from '@/components/ui/sidebar'
 
 export const dynamic = 'force-dynamic'
 
@@ -41,10 +41,8 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             </Breadcrumb>
           </div>
         </header>
-        <div className="flex flex-1 flex-col gap-6 p-6">
-          {children}
-        </div>
+        <div className="flex flex-1 flex-col gap-6 p-6">{children}</div>
       </SidebarInset>
     </SidebarProvider>
   )
-} 
+}

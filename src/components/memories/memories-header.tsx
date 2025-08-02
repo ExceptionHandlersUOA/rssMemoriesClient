@@ -1,4 +1,4 @@
-import { Badge } from "@/components/ui/badge"
+import { Badge } from '@/components/ui/badge'
 
 type MemoriesHeaderProps = {
   count: number
@@ -20,4 +20,4 @@ export function MemoriesHeader({ count }: MemoriesHeaderProps) {
       </div>
     </div>
   )
-} 
+}

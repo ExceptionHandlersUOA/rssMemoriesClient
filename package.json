@@ -2,12 +2,18 @@
 	"name": "rss-memory-client",
 	"version": "0.1.0",
 	"private": true,
+	"engines": {
+		"node": ">=20.0.0"
+	},
+	"packageManager": "pnpm@10.13.1",
 	"scripts": {
 		"dev": "next dev --turbopack",
 		"build": "next build",
 		"start": "next start",
 		"lint": "eslint ./src --cache",
-		"prepare": "lefthook install"
+		"prepare": "lefthook install",
+		"format": "prettier \"src/**/*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}\" --cache",
+		"format:write": "prettier --write \"src/**/*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}\" --cache --list-different"
 	},
 	"dependencies": {
 		"@radix-ui/react-accordion": "^1.2.11",
@@ -66,6 +72,8 @@
 		"eslint": "^9",
 		"eslint-config-next": "15.4.5",
 		"lefthook": "^1.12.2",
+		"prettier": "3.6.2",
+		"prettier-plugin-tailwindcss": "^0.6.14",
 		"tailwindcss": "^4",
 		"tw-animate-css": "^1.3.6",
 		"typescript": "^5",

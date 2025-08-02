@@ -1,6 +1,6 @@
-import React from "react"
-import { type LucideIcon } from "lucide-react"
-import Link from "next/link"
+import React from 'react'
+import { type LucideIcon } from 'lucide-react'
+import Link from 'next/link'
 
 import {
   SidebarGroup,
@@ -9,8 +9,8 @@ import {
   SidebarMenuBadge,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
-import { useActivePath } from "@/hooks/use-active-path"
+} from '@/components/ui/sidebar'
+import { useActivePath } from '@/hooks/use-active-path'
 
 export function NavSecondary({
   items,
@@ -29,7 +29,7 @@ export function NavSecondary({
     <SidebarGroup {...props}>
       <SidebarGroupContent>
         <SidebarMenu>
-          {items.map((item) => (
+          {items.map(item => (
             <SidebarMenuItem key={item.title}>
               <SidebarMenuButton asChild isActive={isActive(item.url)}>
                 <Link href={item.url}>

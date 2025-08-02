@@ -1,28 +1,32 @@
-"use client"
+'use client'
 
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { useRouter } from "next/navigation"
+import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { useRouter } from 'next/navigation'
 
 export function LoginForm({
   className,
   ...props
-}: React.ComponentProps<"form">) {
+}: React.ComponentProps<'form'>) {
   const router = useRouter()
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault()
     // Add any login validation logic here if needed
-    router.push("/dashboard")
+    router.push('/dashboard')
   }
 
   const handleSignUp = () => {
-    router.push("/dashboard")
+    router.push('/dashboard')
   }
   return (
-    <form className={cn("flex flex-col gap-6", className)} onSubmit={handleLogin} {...props}>
+    <form
+      className={cn('flex flex-col gap-6', className)}
+      onSubmit={handleLogin}
+      {...props}
+    >
       <div className="flex flex-col items-center gap-2 text-center">
         <h1 className="text-2xl font-bold">Login to your account</h1>
         <p className="text-muted-foreground text-sm text-balance">
@@ -45,11 +49,11 @@ export function LoginForm({
         </Button>
       </div>
       <div className="text-center text-sm">
-        Don&apos;t have an account?{" "}
-        <button 
+        Don&apos;t have an account?{' '}
+        <button
           type="button"
           onClick={handleSignUp}
-          className="underline underline-offset-4 hover:text-primary cursor-pointer"
+          className="hover:text-primary cursor-pointer underline underline-offset-4"
         >
           Sign up
         </button>

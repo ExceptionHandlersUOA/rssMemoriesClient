@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import {
   ArrowUpRight,
@@ -6,8 +6,8 @@ import {
   StarOff,
   Trash2,
   Star,
-} from "lucide-react"
-import Link from "next/link"
+} from 'lucide-react'
+import Link from 'next/link'
 
 import {
   DropdownMenu,
@@ -15,7 +15,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from '@/components/ui/dropdown-menu'
 import {
   SidebarGroup,
   SidebarGroupLabel,
@@ -24,8 +24,8 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from "@/components/ui/sidebar"
-import { useActivePath } from "@/hooks/use-active-path"
+} from '@/components/ui/sidebar'
+import { useActivePath } from '@/hooks/use-active-path'
 
 export function NavFavorites({
   favorites,
@@ -43,7 +43,7 @@ export function NavFavorites({
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
       <SidebarGroupLabel>Favorites</SidebarGroupLabel>
       <SidebarMenu>
-        {favorites.map((item) => (
+        {favorites.map(item => (
           <SidebarMenuItem key={item.name}>
             <SidebarMenuButton asChild isActive={isActive(item.url)}>
               <Link href={item.url} title={item.name}>
@@ -60,8 +60,8 @@ export function NavFavorites({
               </DropdownMenuTrigger>
               <DropdownMenuContent
                 className="w-56 rounded-lg"
-                side={isMobile ? "bottom" : "right"}
-                align={isMobile ? "end" : "start"}
+                side={isMobile ? 'bottom' : 'right'}
+                align={isMobile ? 'end' : 'start'}
               >
                 <DropdownMenuItem>
                   <StarOff className="text-muted-foreground" />
@@ -87,7 +87,10 @@ export function NavFavorites({
         ))}
         <SidebarMenuItem>
           <SidebarMenuButton asChild>
-            <Link href="/dashboard/favorites" className="text-sidebar-foreground/70">
+            <Link
+              href="/dashboard/favorites"
+              className="text-sidebar-foreground/70"
+            >
               <Star className="h-4 w-4" />
               <span>View All Memories</span>
             </Link>
