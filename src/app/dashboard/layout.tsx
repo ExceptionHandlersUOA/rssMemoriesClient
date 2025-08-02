@@ -11,6 +11,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
+import { fetchFeeds } from "@/lib/actions"
 
 export const dynamic = "force-dynamic"
 
@@ -18,10 +19,14 @@ type DashboardLayoutProps = {
   children: React.ReactNode
 }
 
-export default function DashboardLayout({ children }: DashboardLayoutProps) {
+export default async function DashboardLayout({
+  children,
+}: DashboardLayoutProps) {
+  const feeds = await fetchFeeds(1, 10)
+
   return (
     <SidebarProvider>
-      <SidebarLeft />
+      <SidebarLeft feeds={feeds} />
       <SidebarInset>
         <header className="bg-background sticky top-0 flex h-14 shrink-0 items-center gap-2">
           <div className="flex flex-1 items-center gap-2 px-3">
