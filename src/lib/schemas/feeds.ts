@@ -1,26 +1,36 @@
 import { z } from "zod";
 import { FileTypeSchema, PlatformSchema } from "./enums";
 
-export const MediaSchema = z.object({
+export const WebMediaSchema = z.object({
+  mediaId: z.number().int(),
   type: FileTypeSchema,
-  fileUrl: z.url(),
+  fileUrl: z.string().nullable(),
 });
 
-export const FeedSchema = z.object({
-  id: z.string(),
-  title: z.string(),
-  description: z.string(),
-  sourceUrl: z.url(),
-  lastUpdated: z.string().datetime(),
-  emoji: z.string().optional(),
-  publishedAt: z.string().datetime(),
-  media: z.array(MediaSchema).default([]),
+export const WebPostSchema = z.object({
+  postId: z.number().int(),
+  title: z.string().nullable(),
+  description: z.string().nullable(),
+  sourceUrl: z.string().nullable(),
+  lastUpdated: z.string(),
+  publishedAt: z.string(),
+  media: z.array(WebMediaSchema).nullable(),
   platform: PlatformSchema,
-  categories: z.array(z.string()).default([]),
 });
 
-export const FeedsResponseSchema = z.array(FeedSchema);
+export const WebFeedSchema = z.object({
+  feedId: z.number().int(),
+  title: z.string().nullable(),
+  description: z.string().nullable(),
+  imageUrl: z.string().nullable(),
+  url: z.string().nullable(),
+  posts: z.array(WebPostSchema).nullable(),
+  categories: z.array(z.string()).nullable().default([]),
+});
 
-export type Feed = z.infer<typeof FeedSchema>;
+export const FeedsResponseSchema = z.array(WebFeedSchema);
+
+export type WebFeed = z.infer<typeof WebFeedSchema>;
+export type WebPost = z.infer<typeof WebPostSchema>;
+export type WebMedia = z.infer<typeof WebMediaSchema>;
 export type FeedsResponse = z.infer<typeof FeedsResponseSchema>;
-export type Media = z.infer<typeof MediaSchema>;

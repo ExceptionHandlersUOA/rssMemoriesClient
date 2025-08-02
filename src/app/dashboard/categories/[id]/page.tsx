@@ -9,7 +9,7 @@ type Props = {
 
 export default async function MemoryPage({ params }: Props) {
   const decodedId = decodeURIComponent((await params).id);
-  const memory = favourites.find(item => item.id === decodedId);
+  const memory = favourites.find(item => item.feedId === parseInt(decodedId));
   
   if (!memory) {
     notFound()

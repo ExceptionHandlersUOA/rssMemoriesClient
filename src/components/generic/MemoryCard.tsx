@@ -99,3 +99,5 @@ export const MemoryCard: FC<MemoryCardProps> = memo(({title, description, link, 
         </Card>
     )
 })
+
+MemoryCard.displayName = "MemoryCard";
