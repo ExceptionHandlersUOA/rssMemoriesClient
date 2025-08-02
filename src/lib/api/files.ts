@@ -36,3 +36,36 @@ export const addFileClient = async ({
     throw new Error("An unexpected error occurred while adding file")
   }
 }
+
+export const getFileClient = async (filename: string): Promise<string> => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/file/${filename}`,
+      {
+        method: "GET",
+      }
+    )
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch file: ${response.status} ${response.statusText}`
+      )
+    }
+
+    const blob = await response.blob()
+
+    if (!blob) {
+      throw new Error("No file data received")
+    }
+
+    const fileUrl = URL.createObjectURL(blob)
+
+    return fileUrl
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`Failed to fetch file: ${error.message}`)
+    }
+
+    throw new Error("An unexpected error occurred while fetching file")
+  }
+}
