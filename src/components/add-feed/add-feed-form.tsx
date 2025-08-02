@@ -22,7 +22,7 @@ import { cn } from "@/lib/utils"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { PlusIcon } from "lucide-react"
-import { AddFeedRequest, AddFeedRequestSchema } from "@/lib/schemas"
+import { AddFeedRequest, AddFeedUrlRequestSchema } from "@/lib/schemas"
 import { useAddFeed } from "@/lib/mutations/feeds"
 import { toast } from "sonner"
 
@@ -30,7 +30,7 @@ export const AddFeedForm = () => {
   const mutation = useAddFeed()
 
   const form = useForm<AddFeedRequest>({
-    resolver: zodResolver(AddFeedRequestSchema),
+    resolver: zodResolver(AddFeedUrlRequestSchema),
     defaultValues: {
       url: "",
     },
