@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { addFeed } from "@/lib/api/feeds"
+import { addFeed, addCustomFeed } from "@/lib/api/feeds"
 import { QueryKeys } from "../enums"
 
 export function useAddFeed() {
@@ -7,6 +7,19 @@ export function useAddFeed() {
 
   return useMutation({
     mutationFn: addFeed,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QueryKeys.FEEDS],
+      })
+    },
+  })
+}
+
+export function useAddCustomFeed() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: addCustomFeed,
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [QueryKeys.FEEDS],
