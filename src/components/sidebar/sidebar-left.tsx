@@ -53,7 +53,7 @@ const data = {
     },
     {
       title: "Add Feed",
-      url: "/dashboard/add",
+      url: "/add",
       icon: Plus,
     },
     {
