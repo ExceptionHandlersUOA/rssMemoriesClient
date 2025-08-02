@@ -1,4 +1,1 @@
-export {
-  fetchPosts,
-  fetchPostById,
-} from "./posts";
+export { fetchFeeds, fetchFeedById } from "./feeds";

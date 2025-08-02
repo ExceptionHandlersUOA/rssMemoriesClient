@@ -10,10 +10,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import Link from "next/link"
-import type { FavouriteItem } from "@/lib/data/favourites"
+import type { Feed } from "@/lib/schemas/feeds"
 
 type MemoryCardProps = {
-  item: FavouriteItem
+  item: Feed
 }
 
 export function MemoryCard({ item }: MemoryCardProps) {
@@ -21,19 +21,28 @@ export function MemoryCard({ item }: MemoryCardProps) {
     <Card className="group hover:shadow-md transition-shadow">
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
-          <div className="flex items-center gap-3">
-            <span className="text-2xl">{item.emoji}</span>
-            <div className="flex-1 min-w-0">
-              <CardTitle className="text-base line-clamp-2 leading-tight">
-                <Link href={item.url} className="hover:underline">
-                  {item.name}
-                </Link>
-              </CardTitle>
-              <Badge variant="outline" className="mt-1 text-xs">
-                {item.category}
-              </Badge>
+                      <div className="flex items-center gap-3">
+              <span className="text-2xl">⭐</span>
+              <div className="flex-1 min-w-0">
+                <CardTitle className="text-base line-clamp-2 leading-tight">
+                  <Link href={item.sourceUrl} className="hover:underline">
+                    {item.title}
+                  </Link>
+                </CardTitle>
+                <div className="flex flex-wrap gap-1 mt-1">
+                  {item.categories.slice(0, 2).map((category) => (
+                    <Badge key={category} variant="outline" className="text-xs">
+                      {category}
+                    </Badge>
+                  ))}
+                  {item.categories.length > 2 && (
+                    <Badge variant="outline" className="text-xs">
+                      +{item.categories.length - 2}
+                    </Badge>
+                  )}
+                </div>
+              </div>
             </div>
-          </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
@@ -47,7 +56,7 @@ export function MemoryCard({ item }: MemoryCardProps) {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-48">
               <DropdownMenuItem asChild>
-                <Link href={item.url}>
+                <Link href={item.sourceUrl}>
                   <ExternalLink className="mr-2 h-4 w-4" />
                   Open Memory
                 </Link>
@@ -75,7 +84,7 @@ export function MemoryCard({ item }: MemoryCardProps) {
           {item.description}
         </CardDescription>
         <div className="flex items-center justify-between text-xs text-muted-foreground">
-          <span>Last accessed {item.lastAccessed}</span>
+          <span>Last updated {new Date(item.lastUpdated).toLocaleDateString()}</span>
           <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
         </div>
       </CardContent>

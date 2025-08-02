@@ -26,6 +26,7 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar"
+import { favourites } from "@/lib/data/favourites"
 
 // This is sample data.
 const data = {
@@ -95,58 +96,11 @@ const data = {
       icon: MessageCircleQuestion,
     },
   ],
-  favorites: [
-    {
-      name: "First Day of School",
-      url: "/dashboard/memories/First Day of School",
-      emoji: "🎒",
-    },
-    {
-      name: "Family Vacation to Disney World",
-      url: "/dashboard/memories/Family Vacation to Disney World",
-      emoji: "🏰",
-    },
-    {
-      name: "Learning to Ride a Bike",
-      url: "/dashboard/memories/Learning to Ride a Bike",
-      emoji: "🚴",
-    },
-    {
-      name: "Grandma's Sunday Dinners",
-      url: "/dashboard/memories/Grandma's Sunday Dinners",
-      emoji: "🍽️",
-    },
-    {
-      name: "First Pet - Goldfish Named Bubbles",
-      url: "/dashboard/memories/First Pet - Goldfish Named Bubbles",
-      emoji: "🐠",
-    },
-    {
-      name: "Building a Treehouse with Dad",
-      url: "/dashboard/memories/Building a Treehouse with Dad",
-      emoji: "🌳",
-    },
-    {
-      name: "First Snow Day",
-      url: "/dashboard/memories/First Snow Day",
-      emoji: "❄️",
-    },
-    {
-      name: "Mom's Bedtime Stories",
-      url: "/dashboard/memories/Mom's Bedtime Stories",
-      emoji: "📖",
-    },
-    {
-      name: "First Time Swimming in the Ocean",
-      url: "/dashboard/memories/First Time Swimming in the Ocean",
-      emoji: "🌊",
-    },
-    {
-      name: "Birthday Party at the Park",
-      url: "/dashboard/memories/Birthday Party at the Park",
-      emoji: "🎉",
-    },
-  ],
+  favorites: favourites.map(({ title, sourceUrl }) => ({
+    name: title,
+    url: sourceUrl,
+    emoji: "⭐", // Default emoji since we don't have emoji in the new structure
+  })),
   workspaces: [
     {
       name: "Childhood Memories",
