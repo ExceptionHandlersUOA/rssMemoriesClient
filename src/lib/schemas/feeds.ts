@@ -33,3 +33,4 @@ export const CategoryRequestSchema = z.object({
 export type WebFeed = z.infer<typeof WebFeedSchema>
 export type FeedsResponse = z.infer<typeof FeedsResponseSchema>
 export type AddFeedRequest = z.infer<typeof AddFeedRequestSchema>
+export type AddCustomFeedRequest = z.infer<typeof CustomFeedRequestSchema>
