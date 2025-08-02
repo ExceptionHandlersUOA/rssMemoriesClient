@@ -2,6 +2,10 @@ import { z } from "zod"
 import { PlatformSchema } from "./enums"
 import { WebPostSchema } from "./post"
 
+export const AddFeedRequestSchema = z.object({
+  url: z.url(),
+})
+
 export const WebFeedSchema = z.object({
   feedId: z.number().int(),
   title: z.string().nullable(),
@@ -15,5 +19,6 @@ export const WebFeedSchema = z.object({
 
 export const FeedsResponseSchema = z.array(WebFeedSchema)
 
+export type AddFeedRequest = z.infer<typeof AddFeedRequestSchema>
 export type WebFeed = z.infer<typeof WebFeedSchema>
 export type FeedsResponse = z.infer<typeof FeedsResponseSchema>
