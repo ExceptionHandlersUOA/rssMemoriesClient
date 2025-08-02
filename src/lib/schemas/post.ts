@@ -4,17 +4,20 @@ import { FileTypeSchema } from "./enums"
 export const WebMediaSchema = z.object({
   mediaId: z.number().int(),
   type: FileTypeSchema,
-  fileUrl: z.string().nullable(),
+  fileName: z.string().nullable(),
 })
 
 export const WebPostSchema = z.object({
   postId: z.number().int(),
   title: z.string().nullable(),
   description: z.string().nullable(),
+  body: z.string().nullable(),
   sourceUrl: z.string().nullable(),
   lastUpdated: z.string(),
   publishedAt: z.string(),
   media: z.array(WebMediaSchema).nullable(),
+  categories: z.array(z.string()).nullable(),
+  favourited: z.boolean(),
 })
 
 export const GetPostResponseSchema = WebPostSchema

@@ -26,11 +26,6 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar"
-import type { WebFeed } from "@/lib/schemas/feeds"
-
-interface SidebarLeftProps extends React.ComponentProps<typeof Sidebar> {
-  feeds?: WebFeed[]
-}
 
 // This is sample data.
 const data = {
@@ -209,21 +204,15 @@ const data = {
   ],
 }
 
-export function SidebarLeft({ feeds = [], ...props }: SidebarLeftProps) {
-  const favorites = feeds.map(({ title, feedId }) => ({
-    name: title ?? "Untitled",
-    url: `/dashboard/memories/${feedId}`,
-    emoji: "⭐", // Default emoji since we don't have emoji in the new structure
-  }))
-
+export function SidebarLeft() {
   return (
-    <Sidebar className="border-r-0" {...props}>
+    <Sidebar className="border-r-0">
       <SidebarHeader>
         <TeamSwitcher teams={data.teams} />
         <NavMain items={data.navMain} />
       </SidebarHeader>
       <SidebarContent>
-        <NavFavorites favorites={favorites} />
+        <NavFavorites />
         <NavWorkspaces workspaces={data.workspaces} />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
