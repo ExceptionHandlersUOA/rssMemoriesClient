@@ -110,3 +110,31 @@ export async function addCustomFeed(
     throw new Error("An unexpected error occurred while adding custom feed")
   }
 }
+
+export async function deleteCustomFeed(feedId: string) {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/feed/custom/${feedId}`,
+      {
+        method: "DELETE",
+      }
+    )
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed to delete custom feed: ${response.status} ${response.statusText}`
+      )
+    }
+
+    return {
+      success: true,
+      message: "Custom feed deleted successfully",
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`Failed to delete custom feed: ${error.message}`)
+    }
+
+    throw new Error("An unexpected error occurred while deleting custom feed")
+  }
+}
