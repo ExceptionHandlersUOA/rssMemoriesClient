@@ -17,6 +17,7 @@ concurrency:
 jobs:
   Deploy-Production:
     runs-on: ubuntu-latest
+    environment: production
     steps:
       - uses: actions/checkout@v4
 
@@ -54,4 +55,24 @@ jobs:
         run: pnpm vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Deploy Project Artifacts to Vercel
+        id: deploy
         run: pnpm vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Get deployment URL
+        id: deployment-url
+        run: |
+          # Get the latest deployment URL from Vercel
+          DEPLOYMENT_URL=$(pnpm vercel ls --token=${{ secrets.VERCEL_TOKEN }} --scope=${{ secrets.VERCEL_ORG_ID }} | grep -o 'https://[^[:space:]]*' | head -1)
+          if [ -n "$DEPLOYMENT_URL" ]; then
+            echo "url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
+            echo "Deployment URL: $DEPLOYMENT_URL"
+          else
+            echo "url=https://${{ secrets.VERCEL_PROJECT_ID }}.vercel.app" >> $GITHUB_OUTPUT
+            echo "Deployment URL: https://${{ secrets.VERCEL_PROJECT_ID }}.vercel.app"
+          fi
+
+      - name: Update deployment status
+        run: |
+          echo "✅ Production deployment completed successfully"
+          echo "🌐 Live URL: ${{ steps.deployment-url.outputs.url }}"
+          echo "📊 View deployment status in GitHub Environments"
