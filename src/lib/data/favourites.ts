@@ -1,115 +1,95 @@
-import { type Feed } from "../schemas/feeds";
+import { type WebFeed } from "../schemas/feeds";
 
-export const favourites: Feed[] = [
+export const favourites: WebFeed[] = [
   {
-    id: "first-day-of-school",
+    feedId: 1,
     title: "First Day of School",
     description:
       "The excitement and nervousness of starting a new chapter in life",
-    sourceUrl: "/dashboard/memories/First Day of School",
-    lastUpdated: "2024-01-15T10:30:00Z",
-    publishedAt: "2024-01-15T10:30:00Z",
-    media: [],
-    platform: 3, // RSS
+    imageUrl: "https://picsum.photos/800/600?random=1",
+    url: "/dashboard/memories/First Day of School",
+    posts: [],
     categories: ["Childhood", "Education"],
   },
   {
-    id: "family-vacation-disney",
+    feedId: 2,
     title: "Family Vacation to Disney World",
     description: "Magical memories with family at the happiest place on earth",
-    sourceUrl: "/dashboard/memories/Family Vacation to Disney World",
-    lastUpdated: "2024-01-14T15:45:00Z",
-    publishedAt: "2024-01-14T15:45:00Z",
-    media: [],
-    platform: 3, // RSS
+    imageUrl: "https://picsum.photos/800/600?random=2",
+    url: "/dashboard/memories/Family Vacation to Disney World",
+    posts: [],
     categories: ["Family", "Travel", "Vacation"],
   },
   {
-    id: "learning-to-ride-bike",
+    feedId: 3,
     title: "Learning to Ride a Bike",
     description: "The freedom and joy of mastering a new skill",
-    sourceUrl: "/dashboard/memories/Learning to Ride a Bike",
-    lastUpdated: "2024-01-15T08:20:00Z",
-    publishedAt: "2024-01-15T08:20:00Z",
-    media: [],
-    platform: 3, // RSS
+    imageUrl: "https://picsum.photos/800/600?random=3",
+    url: "/dashboard/memories/Learning to Ride a Bike",
+    posts: [],
     categories: ["Childhood", "Learning", "Achievement"],
   },
   {
-    id: "grandmas-sunday-dinners",
+    feedId: 4,
     title: "Grandma's Sunday Dinners",
     description: "Warm family gatherings filled with love and delicious food",
-    sourceUrl: "/dashboard/memories/Grandma's Sunday Dinners",
-    lastUpdated: "2024-01-10T18:00:00Z",
-    publishedAt: "2024-01-10T18:00:00Z",
-    media: [],
-    platform: 3, // RSS
+    imageUrl: "https://picsum.photos/800/600?random=4",
+    url: "/dashboard/memories/Grandma's Sunday Dinners",
+    posts: [],
     categories: ["Family", "Food", "Traditions"],
   },
   {
-    id: "first-pet-goldfish",
+    feedId: 5,
     title: "First Pet - Goldfish Named Bubbles",
     description: "The responsibility and wonder of caring for a first pet",
-    sourceUrl: "/dashboard/memories/First Pet - Goldfish Named Bubbles",
-    lastUpdated: "2024-01-08T12:15:00Z",
-    publishedAt: "2024-01-08T12:15:00Z",
-    media: [],
-    platform: 3, // RSS
+    imageUrl: "https://picsum.photos/800/600?random=5",
+    url: "/dashboard/memories/First Pet - Goldfish Named Bubbles",
+    posts: [],
     categories: ["Childhood", "Pets", "Responsibility"],
   },
   {
-    id: "building-treehouse-dad",
+    feedId: 6,
     title: "Building a Treehouse with Dad",
     description: "Quality time spent creating something special together",
-    sourceUrl: "/dashboard/memories/Building a Treehouse with Dad",
-    lastUpdated: "2024-01-13T14:30:00Z",
-    publishedAt: "2024-01-13T14:30:00Z",
-    media: [],
-    platform: 3, // RSS
+    imageUrl: "https://picsum.photos/800/600?random=6",
+    url: "/dashboard/memories/Building a Treehouse with Dad",
+    posts: [],
     categories: ["Family", "Building", "Quality Time"],
   },
   {
-    id: "first-snow-day",
+    feedId: 7,
     title: "First Snow Day",
     description: "The magic of waking up to a winter wonderland",
-    sourceUrl: "/dashboard/memories/First Snow Day",
-    lastUpdated: "2024-01-11T09:00:00Z",
-    publishedAt: "2024-01-11T09:00:00Z",
-    media: [],
-    platform: 3, // RSS
+    imageUrl: "https://picsum.photos/800/600?random=7",
+    url: "/dashboard/memories/First Snow Day",
+    posts: [],
     categories: ["Childhood", "Weather", "First Times"],
   },
   {
-    id: "moms-bedtime-stories",
+    feedId: 8,
     title: "Mom's Bedtime Stories",
     description: "Cozy evenings filled with imagination and love",
-    sourceUrl: "/dashboard/memories/Mom's Bedtime Stories",
-    lastUpdated: "2024-01-14T20:00:00Z",
-    publishedAt: "2024-01-14T20:00:00Z",
-    media: [],
-    platform: 3, // RSS
+    imageUrl: "https://picsum.photos/800/600?random=8",
+    url: "/dashboard/memories/Mom's Bedtime Stories",
+    posts: [],
     categories: ["Family", "Reading", "Bedtime"],
   },
   {
-    id: "first-time-swimming-ocean",
+    feedId: 9,
     title: "First Time Swimming in the Ocean",
     description: "The vastness and wonder of the sea",
-    sourceUrl: "/dashboard/memories/First Time Swimming in the Ocean",
-    lastUpdated: "2024-01-15T06:45:00Z",
-    publishedAt: "2024-01-15T06:45:00Z",
-    media: [],
-    platform: 3, // RSS
+    imageUrl: "https://picsum.photos/800/600?random=9",
+    url: "/dashboard/memories/First Time Swimming in the Ocean",
+    posts: [],
     categories: ["Childhood", "Water", "First Times"],
   },
   {
-    id: "birthday-party-park",
+    feedId: 10,
     title: "Birthday Party at the Park",
     description: "Celebrating with friends and family in the great outdoors",
-    sourceUrl: "/dashboard/memories/Birthday Party at the Park",
-    lastUpdated: "2024-01-15T16:30:00Z",
-    publishedAt: "2024-01-15T16:30:00Z",
-    media: [],
-    platform: 3, // RSS
+    imageUrl: "https://picsum.photos/800/600?random=10",
+    url: "/dashboard/memories/Birthday Party at the Park",
+    posts: [],
     categories: ["Family", "Celebration", "Outdoors"],
   },
 ];
@@ -118,7 +98,7 @@ export const getCategoriesFromFavourites = () => {
   const categoryMap = new Map<string, { count: number }>();
 
   favourites.forEach((item) => {
-    item.categories.forEach((category) => {
+    item.categories?.forEach((category) => {
       const existing = categoryMap.get(category);
       if (existing) {
         existing.count += 1;
