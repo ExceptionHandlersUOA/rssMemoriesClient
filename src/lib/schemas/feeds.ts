@@ -1,6 +1,12 @@
 import { z } from "zod"
-import { PlatformSchema } from "./enums"
+import { FileTypeSchema, PlatformSchema } from "./enums"
 import { WebPostSchema } from "./post"
+
+export const WebMediaSchema = z.object({
+  mediaId: z.number().int(),
+  type: FileTypeSchema,
+  fileUrl: z.string().nullable(),
+})
 
 export const WebFeedSchema = z.object({
   feedId: z.number().int(),
@@ -33,5 +39,3 @@ export const CategoryRequestSchema = z.object({
 export type WebFeed = z.infer<typeof WebFeedSchema>
 export type FeedsResponse = z.infer<typeof FeedsResponseSchema>
 export type AddFeedRequest = z.infer<typeof AddFeedRequestSchema>
-export type CustomFeedRequest = z.infer<typeof CustomFeedRequestSchema>
-export type CategoryRequest = z.infer<typeof CategoryRequestSchema>
