@@ -9,7 +9,12 @@ import {
 } from "@/lib/mutations/feeds"
 import { Button } from "@/components/ui/button"
 import { WebPost } from "@/lib/schemas"
+import { Platform } from "@/lib/schemas/enums"
 import dayjs from "dayjs"
+
+type WebPostWithPlatform = WebPost & {
+  platform: Platform
+}
 
 export const DashboardSection = () => {
   const { data: feedsData, isLoading, error } = useFeeds()
@@ -17,10 +22,14 @@ export const DashboardSection = () => {
   const addCustomFeedMutation = useAddCustomFeed()
   const deleteCustomFeedMutation = useDeleteFeed()
 
-  const allPosts: WebPost[] = []
+  const allPosts: WebPostWithPlatform[] = []
   feedsData?.forEach(feed => {
     if (feed.posts) {
-      allPosts.push(...feed.posts)
+      const postsWithPlatform = feed.posts.map(post => ({
+        ...post,
+        platform: feed.platform || "Unknown Platform",
+      }))
+      allPosts.push(...postsWithPlatform)
     }
   })
   allPosts.sort((a, b) => dayjs(b.publishedAt).diff(dayjs(a.publishedAt)))

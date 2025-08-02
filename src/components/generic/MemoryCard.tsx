@@ -15,12 +15,14 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../ui/dialog"
-import { FileType } from "@/lib/schemas/enums"
+import { FileType, Platform } from "@/lib/schemas/enums"
 import { WebPost } from "@/lib/schemas"
 
 dayjs.extend(relativeTime)
 
-export type MemoryCardProps = WebPost
+export interface MemoryCardProps extends WebPost {
+  platform: Platform
+}
 
 export const MemoryCard: FC<MemoryCardProps> = memo(
   ({
@@ -32,9 +34,8 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
     media,
     categories,
     favourited,
+    platform,
   }) => {
-    const platform = "somewhere"
-
     // const imageUrl = firstPost?.media?.[0]?.fileName
     //   ? `${process.env.NEXT_PUBLIC_API_URL}/api/getFile/${firstPost?.media?.[0]?.fileName}`
     //   : undefined

@@ -53,7 +53,9 @@ export const AddFeedForm = () => {
             Add your Memories from a feed on the Web
           </CardTitle>
           <CardDescription>
-            A description so audience can better understand what this does
+            <span>
+              Supported Platforms: YouTube, Instagram, RSS, Reddit and GitHub
+            </span>
           </CardDescription>
         </CardHeader>
         <Form {...form}>
