@@ -1,9 +1,8 @@
-export const addFileClient = async (file: string /*Binary*/) => {
+export const addFileClient = async (file: File | Blob) => {
   try {
     const formData = new FormData()
 
-    const blob = new Blob([file])
-    formData.append("file", blob)
+    formData.append("file", file)
 
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/file`,
