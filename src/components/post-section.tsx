@@ -21,6 +21,7 @@ import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
+import { motion } from 'framer-motion'
 
 type PostFormData = {
   title: string
@@ -152,23 +153,41 @@ export const PostSection = () => {
 
         <div className="flex flex-wrap items-center gap-2">
           {tags.map((tag, index) => (
-            <Badge key={tag} className="flex items-center gap-1">
-              <span>{tag}</span>
-              <button
-                type="button"
-                onClick={() => removeTag(index)}
-                className="hover:text-destructive transition-colors"
-              >
-                <X className="size-3" />
-              </button>
-            </Badge>
+            <motion.div
+              key={tag}
+              transition={{ type: 'spring', bounce: 0.3, visualDuration: 0.3 }}
+              layout
+            >
+              <Badge className="flex items-center gap-1">
+                <span>{tag}</span>
+                <button
+                  type="button"
+                  onClick={() => removeTag(index)}
+                  className="hover:text-destructive transition-colors"
+                >
+                  <X className="size-3" />
+                </button>
+              </Badge>
+            </motion.div>
           ))}
           <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
             <PopoverTrigger asChild>
-              <Badge className="cursor-pointer" variant="secondary">
-                <PlusIcon className="size-3" />
-                <span>Add Tag</span>
-              </Badge>
+              <motion.div
+                transition={{
+                  type: 'spring',
+                  bounce: 0.3,
+                  visualDuration: 0.3,
+                }}
+                layout
+              >
+                <Badge
+                  className="hover:bg-muted hover:text-foreground cursor-pointer transition-colors"
+                  variant="secondary"
+                >
+                  <PlusIcon className="size-3" />
+                  <span>Add Tag</span>
+                </Badge>
+              </motion.div>
             </PopoverTrigger>
             <PopoverContent className="w-64">
               <Command>
