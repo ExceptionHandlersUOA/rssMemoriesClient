@@ -36,6 +36,7 @@ export function NavFavorites({
     emoji: string
   }[]
 }) {
+  console.log("favorites", favorites)
   const { isMobile } = useSidebar()
   const { isActive } = useActivePath()
 
