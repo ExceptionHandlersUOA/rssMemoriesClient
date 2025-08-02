@@ -26,6 +26,10 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
   ({ title, description, url, posts, platform }) => {
     const firstPost = posts?.[0]
 
+    const imageUrl = firstPost?.media?.[0]?.fileName
+      ? `${process.env.NEXT_PUBLIC_API_URL}/api/getFile/${firstPost?.media?.[0]?.fileName}`
+      : undefined
+
     return (
       <Card className="py-4">
         <CardHeader>
@@ -59,7 +63,7 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
                     {/* TODO: placeholder for video*/}
                     <img
                       className="h-40 max-h-full w-fit flex-shrink-0 cursor-pointer rounded"
-                      src="public/mask-shape-1.svg"
+                      src="/mask-shape-1.svg"
                       alt="Video"
                     />
                   </DialogTrigger>
@@ -76,7 +80,10 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
                       height="160"
                       preload="none"
                     >
-                      <source src={video.fileUrl || ""} type="video/mp4" />
+                      <source
+                        src={`${process.env.NEXT_PUBLIC_API_URL}/api/getFile/${video.fileName}`}
+                        type="video/mp4"
+                      />
                       Your browser does not support the video tag.
                     </video>
                   </DialogContent>
@@ -94,7 +101,7 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
                     <DialogTrigger className="max-h-full w-fit flex-shrink-0 odd:hidden">
                       <img
                         className="h-40 max-h-full w-fit flex-shrink-0 cursor-pointer rounded"
-                        src={image.fileUrl || ""}
+                        src={`${process.env.NEXT_PUBLIC_API_URL}/api/getFile/${image.fileName}`}
                         alt={`Image ${index + 1}`}
                       />
                     </DialogTrigger>
@@ -103,7 +110,7 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
                         <DialogTitle>Image</DialogTitle>
                       </DialogHeader>
                       <img
-                        src={image.fileUrl || ""}
+                        src={`${process.env.NEXT_PUBLIC_API_URL}/api/getFile/${image.fileName}`}
                         alt={`Image ${index + 1}`}
                         key={index}
                         className="h-80 max-w-5xl rounded object-cover"
@@ -120,7 +127,7 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
                     <DialogTrigger className="max-h-full w-fit flex-shrink-0 even:hidden">
                       <img
                         className="h-40 max-h-full w-fit flex-shrink-0 cursor-pointer rounded"
-                        src={image.fileUrl || ""}
+                        src={`${process.env.NEXT_PUBLIC_API_URL}/api/getFile/${image.fileName}`}
                         alt={`Image ${index + 1}`}
                       />
                     </DialogTrigger>
@@ -129,7 +136,7 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
                         <DialogTitle>Image</DialogTitle>
                       </DialogHeader>
                       <img
-                        src={image.fileUrl || ""}
+                        src={`${process.env.NEXT_PUBLIC_API_URL}/api/getFile/${image.fileName}`}
                         alt={`Image ${index + 1}`}
                         key={index}
                         className="h-80 max-w-5xl rounded object-cover"

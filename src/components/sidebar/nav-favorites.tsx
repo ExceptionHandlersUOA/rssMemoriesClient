@@ -26,16 +26,16 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar"
 import { useActivePath } from "@/hooks/use-active-path"
+import { useFeeds } from "@/query/feeds"
 
-export function NavFavorites({
-  favorites,
-}: {
-  favorites: {
-    name: string
-    url: string
-    emoji: string
-  }[]
-}) {
+export function NavFavorites() {
+  const { data: feeds } = useFeeds()
+  const favorites = feeds?.map(({ title, feedId }) => ({
+    id: feedId,
+    name: title ?? "Untitled",
+    url: `/dashboard/memories/${feedId}`,
+    emoji: "⭐",
+  }))
   const { isMobile } = useSidebar()
   const { isActive } = useActivePath()
 
@@ -43,8 +43,8 @@ export function NavFavorites({
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
       <SidebarGroupLabel>Favorites</SidebarGroupLabel>
       <SidebarMenu>
-        {favorites.map(item => (
-          <SidebarMenuItem key={item.name}>
+        {favorites?.map(item => (
+          <SidebarMenuItem key={item.id}>
             <SidebarMenuButton asChild isActive={isActive(item.url)}>
               <Link href={item.url} title={item.name}>
                 <span>{item.emoji}</span>

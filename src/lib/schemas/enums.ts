@@ -14,7 +14,7 @@ export enum FileType {
 
 /**
  * Platform enum from Swagger specification
- * Unknown, YouTube, Instagram, Facebook, RSS, LinkedIn, Twitter
+ * Unknown, YouTube, Instagram, Facebook, RSS, LinkedIn, Twitter, Reddit, Custom
  */
 export enum Platform {
   Unknown = "Unknown",
@@ -24,6 +24,8 @@ export enum Platform {
   RSS = "RSS",
   LinkedIn = "LinkedIn",
   Twitter = "Twitter",
+  Reddit = "Reddit",
+  Custom = "Custom",
 }
 
 /**
