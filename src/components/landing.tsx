@@ -93,13 +93,24 @@ export function Landing() {
                     </p>
                 </div>
             </div>
-            <div className="flex-1 flex flex-col justify-center items-center" >
-                <div className="return-box">
-                    <p className="main-text text-xl md:text-3xl mb-8">
-                        Your memories deserve a special place. Sign in to keep writing your story and revisit the memories that matter most.
-                    </p>
-                    <button type="button" className="login-button cursor-pointer" onClick={handleLoginClick}>
-                        Login
+            <div className="flex-1 flex flex-col" style={{paddingTop: '10%', paddingBottom: '10%'}}>
+                <div className="content-divider mb-8 opacity-0"></div>
+                <div className="flex items-start justify-center" style={{paddingTop: '5%', paddingBottom: '5%'}}>
+                    <div className="welcome-text-container">
+                        <h2 className="welcome-text text-1xl md:text-2xl font-bold">
+                            Your memories deserve a special place. 
+                        </h2>
+                        <br></br>
+                        <h2 className="welcome-text text-1xl md:text-2xl font-bold">
+                            Sign in to keep writing your story and revisit the memories that matter most.
+                        </h2>
+                        <br></br>
+                    </div>
+                </div>
+                <div className="content-divider mb-8"></div>
+                <div className="flex items-end justify-center" style={{paddingTop: '5%'}}>
+                    <button type="button" className="get-started-button cursor-pointer" onClick={handleLoginClick}>
+                        Get Started
                     </button>
                 </div>
             </div>
@@ -164,7 +175,7 @@ export function Landing() {
         @keyframes fadeInText {
           0% { 
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(10vh);
           }
           100% { 
             opacity: 1;
@@ -174,10 +185,13 @@ export function Landing() {
         
         .animate-shake {
           animation: rotationalShake 3s ease-in-out infinite;
+          transition: all 0.3s ease;
         }
         
         .animate-shake:hover {
           animation: none;
+          transform: scale(1.1);
+          filter: drop-shadow(0 16px 20px rgba(0, 0, 0, 0.4)) drop-shadow(0 6px 6px rgba(139, 69, 19, 0.3));
         }
 
         .book-fly-up {
@@ -202,13 +216,14 @@ export function Landing() {
         }
 
         .book-content {
-          animation: fadeInText 0.8s ease-in 1.2s forwards;
+          animation: fadeInText 0.6s ease-in 0.6s forwards;
           opacity: 0;
           z-index: 20;
           pointer-events: none;
         }
 
         .book-title {
+          text-size: 4rem;
           font-family: 'Times New Roman', 'Georgia', serif;
           color: #2c1810;
           text-shadow: 1px 1px 2px rgba(139, 69, 19, 0.3);
@@ -247,6 +262,57 @@ export function Landing() {
           max-width: 90%;
           background: rgba(245, 245, 220, 0.1);
           box-shadow: 0 2px 4px rgba(139, 69, 19, 0.2);
+        }
+
+        .welcome-text-container {
+          text-align: center;
+          max-width: 85%;
+        }
+
+        .welcome-title {
+          font-family: 'Times New Roman', 'Georgia', serif;
+          color: #2c1810;
+          text-shadow: 1px 1px 2px rgba(139, 69, 19, 0.3);
+          letter-spacing: 0.5px;
+          line-height: 1.2;
+          text-align: center;
+          margin-bottom: 0;
+        }
+
+        .welcome-text {
+          font-family: 'Times New Roman', 'Georgia', serif;
+          color: #3a2317;
+          text-shadow: 0.5px 0.5px 1px rgba(139, 69, 19, 0.2);
+          line-height: 1.6;
+          letter-spacing: 0.3px;
+          text-align: center;
+          margin-bottom: 0;
+        }
+
+        .get-started-button {
+          background: #8B4513;
+          color: white;
+          border: none;
+          padding: 12px 24px;
+          border-radius: 6px;
+          font-family: 'Times New Roman', 'Georgia', serif;
+          font-size: 16px;
+          font-weight: bold;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          letter-spacing: 0.5px;
+          pointer-events: auto;
+          min-width: 150px;
+        }
+
+        .get-started-button:hover {
+          background: #A0522D;
+          transform: translateY(-2px);
+          box-shadow: 0 4px 8px rgba(139, 69, 19, 0.3);
+        }
+
+        .flex-2 {
+          flex: 2;
         }
 
         .main-text {
