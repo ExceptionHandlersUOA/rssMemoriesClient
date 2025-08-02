@@ -4,7 +4,6 @@ import {
   BreadcrumbItem,
   BreadcrumbList,
   BreadcrumbPage,
-  BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
 import { Separator } from "@/components/ui/separator"
 import {
@@ -33,7 +32,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
               <BreadcrumbList>
                 <BreadcrumbItem>
                   <BreadcrumbPage className="line-clamp-1">
-                    Favourites
+                    Memories
                   </BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>

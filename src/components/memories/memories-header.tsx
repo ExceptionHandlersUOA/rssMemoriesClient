@@ -1,16 +1,16 @@
 import { Badge } from "@/components/ui/badge"
 
-type FavouritesHeaderProps = {
+type MemoriesHeaderProps = {
   count: number
 }
 
-export function FavouritesHeader({ count }: FavouritesHeaderProps) {
+export function MemoriesHeader({ count }: MemoriesHeaderProps) {
   return (
     <div className="flex items-center justify-between">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">Favourites</h1>
+        <h1 className="text-3xl font-bold tracking-tight">Memories</h1>
         <p className="text-muted-foreground">
-          Your most important and frequently used pages
+          Your cherished memories and important moments
         </p>
       </div>
       <div className="flex items-center gap-2">
