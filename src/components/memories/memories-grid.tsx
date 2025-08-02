@@ -1,8 +1,8 @@
 import { MemoryCard } from "./memory-card"
-import type { WebFeed } from "@/lib/schemas/feeds"
+import type { Feed } from "@/lib/schemas/feeds"
 
 type MemoriesGridProps = {
-  favourites: WebFeed[]
+  favourites: Feed[]
 }
 
 export function MemoriesGrid({ favourites }: MemoriesGridProps) {

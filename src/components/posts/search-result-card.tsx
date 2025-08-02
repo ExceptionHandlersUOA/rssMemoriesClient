@@ -1,0 +1,77 @@
+"use client"
+
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { ExternalLink, Heart } from "lucide-react"
+import { type Post } from "@/lib/schemas/post"
+import { format } from "date-fns"
+
+type SearchResultCardProps = {
+  post: Post
+}
+
+export const SearchResultCard = ({ post }: SearchResultCardProps) => {
+  const formatDate = (dateString: string) => {
+    try {
+      return format(new Date(dateString), "MMM dd, yyyy")
+    } catch {
+      return "Invalid date"
+    }
+  }
+
+  return (
+    <Card className="transition-shadow hover:shadow-md">
+      <CardHeader>
+        <div className="flex items-start justify-between">
+          <CardTitle className="line-clamp-2 text-lg">
+            {post.title || "Untitled Post"}
+          </CardTitle>
+          {post.favourited && (
+            <Heart className="h-5 w-5 fill-current text-red-500" />
+          )}
+        </div>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        {post.description && (
+          <p className="text-muted-foreground line-clamp-3 text-sm">
+            {post.description}
+          </p>
+        )}
+
+        <div className="text-muted-foreground flex items-center justify-between text-xs">
+          <div className="flex items-center gap-2">
+            <span>Published: {formatDate(post.publishedAt)}</span>
+            {post.lastUpdated !== post.publishedAt && (
+              <span>Updated: {formatDate(post.lastUpdated)}</span>
+            )}
+          </div>
+        </div>
+
+        {post.categories && post.categories.length > 0 && (
+          <div className="flex flex-wrap gap-1">
+            {post.categories.map(category => (
+              <Badge key={category} variant="secondary" className="text-xs">
+                {category}
+              </Badge>
+            ))}
+          </div>
+        )}
+
+        {post.sourceUrl && (
+          <Button variant="outline" size="sm" asChild className="w-fit">
+            <a
+              href={post.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2"
+            >
+              <ExternalLink className="h-4 w-4" />
+              View Source
+            </a>
+          </Button>
+        )}
+      </CardContent>
+    </Card>
+  )
+}
