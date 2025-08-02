@@ -237,7 +237,7 @@ export const PostSection = () => {
 					<Button type="button" onClick={handleImageClick} variant="ghost">
 						<ImageIcon className="size-6 cursor-pointer hover:text-primary transition-colors" />
 					</Button>
-					<div className="flex-grow overflow-x-scroll">
+					<div className="flex-grow overflow-x-auto">
 						{uploadedFiles.length > 0 && (
 							<div className="flex gap-2">
 								{uploadedFiles.map((file, index) => (
