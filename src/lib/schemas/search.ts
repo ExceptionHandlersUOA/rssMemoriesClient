@@ -1,6 +1,6 @@
+import { PostSchema } from "./post"
 import { z } from "zod"
-import { WebPostSchema } from "./post"
 
-export const SearchResponseSchema = z.array(WebPostSchema)
+export const SearchResponseSchema = z.array(PostSchema)
 
 export type SearchResponse = z.infer<typeof SearchResponseSchema>

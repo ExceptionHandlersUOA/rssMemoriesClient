@@ -4,11 +4,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ExternalLink, Heart } from "lucide-react"
-import { type WebPost } from "@/lib/schemas/post"
+import { type Post } from "@/lib/schemas/post"
 import { format } from "date-fns"
 
 type SearchResultCardProps = {
-  post: WebPost
+  post: Post
 }
 
 export const SearchResultCard = ({ post }: SearchResultCardProps) => {
