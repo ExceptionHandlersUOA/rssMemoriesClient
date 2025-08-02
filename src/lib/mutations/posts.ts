@@ -3,6 +3,7 @@ import {
   createCustomPostClient,
   deleteCustomPostClient,
   favouritePost,
+  unfavouritePost,
 } from "../api/posts"
 import { QueryKeys } from "../enums"
 
@@ -37,6 +38,19 @@ export function useFavouritePost() {
 
   return useMutation({
     mutationFn: favouritePost,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QueryKeys.POST],
+      })
+    },
+  })
+}
+
+export function useUnfavouritePost() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: unfavouritePost,
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [QueryKeys.POST],
