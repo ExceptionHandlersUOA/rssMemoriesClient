@@ -11,8 +11,10 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
+import { FavouritesHeader, FavouritesGrid, EmptyFavourites } from "@/components/favourites"
+import { favourites } from "@/lib/data/favourites"
 
-export default function Page() {
+export default function FavouritesPage() {
   return (
     <SidebarProvider>
       <SidebarLeft />
@@ -28,19 +30,23 @@ export default function Page() {
               <BreadcrumbList>
                 <BreadcrumbItem>
                   <BreadcrumbPage className="line-clamp-1">
-                    Project Management & Task Tracking
+                    Favourites
                   </BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
           </div>
         </header>
-        <div className="flex flex-1 flex-col gap-4 p-4">
-          {/* HOME PAGE SECTION */}
-          <div className="bg-muted/50 mx-auto h-24 w-full max-w-3xl rounded-xl" />
-          <div className="bg-muted/50 mx-auto h-[100vh] w-full max-w-3xl rounded-xl" />
+        <div className="flex flex-1 flex-col gap-6 p-6">
+          <FavouritesHeader count={favourites.length} />
+          
+          {favourites.length > 0 ? (
+            <FavouritesGrid favourites={favourites} />
+          ) : (
+            <EmptyFavourites />
+          )}
         </div>
       </SidebarInset>
     </SidebarProvider>
   )
-}
+} 

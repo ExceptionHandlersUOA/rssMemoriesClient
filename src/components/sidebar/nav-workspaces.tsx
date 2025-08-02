@@ -1,4 +1,5 @@
 import { ChevronRight, MoreHorizontal, Plus } from "lucide-react"
+import Link from "next/link"
 
 import {
   Collapsible,
@@ -17,6 +18,7 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar"
+import { useActivePath } from "@/hooks/use-active-path"
 
 export function NavWorkspaces({
   workspaces,
@@ -26,10 +28,13 @@ export function NavWorkspaces({
     emoji: React.ReactNode
     pages: {
       name: string
+      url: string
       emoji: React.ReactNode
     }[]
   }[]
 }) {
+  const { isActive } = useActivePath()
+
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Workspaces</SidebarGroupLabel>
@@ -39,10 +44,10 @@ export function NavWorkspaces({
             <Collapsible key={workspace.name}>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <a href="#">
+                  <Link href="#">
                     <span>{workspace.emoji}</span>
                     <span>{workspace.name}</span>
-                  </a>
+                  </Link>
                 </SidebarMenuButton>
                 <CollapsibleTrigger asChild>
                   <SidebarMenuAction
@@ -59,11 +64,11 @@ export function NavWorkspaces({
                   <SidebarMenuSub>
                     {workspace.pages.map((page) => (
                       <SidebarMenuSubItem key={page.name}>
-                        <SidebarMenuSubButton asChild>
-                          <a href="#">
+                        <SidebarMenuSubButton asChild isActive={isActive(page.url)}>
+                          <Link href={page.url}>
                             <span>{page.emoji}</span>
                             <span>{page.name}</span>
-                          </a>
+                          </Link>
                         </SidebarMenuSubButton>
                       </SidebarMenuSubItem>
                     ))}
