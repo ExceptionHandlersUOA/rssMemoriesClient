@@ -38,6 +38,10 @@ export type GetPostResponse = z.infer<typeof GetPostResponseSchema>
 export type CreateCustomPostRequest = z.infer<
   typeof CreateCustomPostRequestSchema
 >
+export type DeleteCustomPostRequest = {
+  feedId: string
+  postId: string
+}
 export type CreatePostCategoryRequest = z.infer<
   typeof CreatePostCategoryRequestSchema
 >
