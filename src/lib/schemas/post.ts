@@ -28,7 +28,7 @@ export const CreateCustomPostRequestSchema = z.object({
 })
 
 export const CreatePostCategoryRequestSchema = z.object({
-  id: z.number(),
+  id: z.number().int(),
   category: z.string(),
 })
 
