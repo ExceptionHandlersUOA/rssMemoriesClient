@@ -153,7 +153,11 @@ export const PostSection = () => {
 
 				<div className="flex items-center flex-wrap gap-2">
 					{tags.map((tag, index) => (
-						<motion.div key={tag} layout>
+						<motion.div
+							key={tag}
+							transition={{ type: "spring", bounce: 0.3, visualDuration: 0.3 }}
+							layout
+						>
 							<Badge className="flex items-center gap-1">
 								<span>{tag}</span>
 								<button
@@ -168,7 +172,14 @@ export const PostSection = () => {
 					))}
 					<Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
 						<PopoverTrigger asChild>
-							<motion.div layout>
+							<motion.div
+								transition={{
+									type: "spring",
+									bounce: 0.3,
+									visualDuration: 0.3,
+								}}
+								layout
+							>
 								<Badge
 									className="cursor-pointer hover:bg-muted hover:text-foreground transition-colors"
 									variant="secondary"
