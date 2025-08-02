@@ -12,11 +12,11 @@ import {
 import Link from "next/link"
 import type { FavouriteItem } from "@/lib/data/favourites"
 
-type FavouriteCardProps = {
+type MemoryCardProps = {
   item: FavouriteItem
 }
 
-export function FavouriteCard({ item }: FavouriteCardProps) {
+export function MemoryCard({ item }: MemoryCardProps) {
   return (
     <Card className="group hover:shadow-md transition-shadow">
       <CardHeader className="pb-3">
@@ -59,7 +59,7 @@ export function FavouriteCard({ item }: FavouriteCardProps) {
               <DropdownMenuSeparator />
               <DropdownMenuItem>
                 <StarOff className="mr-2 h-4 w-4" />
-                Remove from favourites
+                Remove from memories
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem className="text-destructive">

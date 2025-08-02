@@ -10,7 +10,7 @@ export type FavouriteItem = {
 export const favourites: FavouriteItem[] = [
   {
     name: "First Day of School",
-    url: "/dashboard/favourites/First Day of School",
+    url: "/dashboard/memories/First Day of School",
     emoji: "🎒",
     description:
       "The excitement and nervousness of starting a new chapter in life",
@@ -19,7 +19,7 @@ export const favourites: FavouriteItem[] = [
   },
   {
     name: "Family Vacation to Disney World",
-    url: "/dashboard/favourites/Family Vacation to Disney World",
+    url: "/dashboard/memories/Family Vacation to Disney World",
     emoji: "🏰",
     description: "Magical memories with family at the happiest place on earth",
     category: "Family",
@@ -27,7 +27,7 @@ export const favourites: FavouriteItem[] = [
   },
   {
     name: "Learning to Ride a Bike",
-    url: "/dashboard/favourites/Learning to Ride a Bike",
+    url: "/dashboard/memories/Learning to Ride a Bike",
     emoji: "🚴",
     description: "The freedom and joy of mastering a new skill",
     category: "Childhood",
@@ -35,7 +35,7 @@ export const favourites: FavouriteItem[] = [
   },
   {
     name: "Grandma's Sunday Dinners",
-    url: "/dashboard/favourites/Grandma's Sunday Dinners",
+    url: "/dashboard/memories/Grandma's Sunday Dinners",
     emoji: "🍽️",
     description: "Warm family gatherings filled with love and delicious food",
     category: "Family",
@@ -43,7 +43,7 @@ export const favourites: FavouriteItem[] = [
   },
   {
     name: "First Pet - Goldfish Named Bubbles",
-    url: "/dashboard/favourites/First Pet - Goldfish Named Bubbles",
+    url: "/dashboard/memories/First Pet - Goldfish Named Bubbles",
     emoji: "🐠",
     description: "The responsibility and wonder of caring for a first pet",
     category: "Childhood",
@@ -51,7 +51,7 @@ export const favourites: FavouriteItem[] = [
   },
   {
     name: "Building a Treehouse with Dad",
-    url: "/dashboard/favourites/Building a Treehouse with Dad",
+    url: "/dashboard/memories/Building a Treehouse with Dad",
     emoji: "🌳",
     description: "Quality time spent creating something special together",
     category: "Family",
@@ -59,7 +59,7 @@ export const favourites: FavouriteItem[] = [
   },
   {
     name: "First Snow Day",
-    url: "/dashboard/favourites/First Snow Day",
+    url: "/dashboard/memories/First Snow Day",
     emoji: "❄️",
     description: "The magic of waking up to a winter wonderland",
     category: "Childhood",
@@ -67,7 +67,7 @@ export const favourites: FavouriteItem[] = [
   },
   {
     name: "Mom's Bedtime Stories",
-    url: "/dashboard/favourites/Mom's Bedtime Stories",
+    url: "/dashboard/memories/Mom's Bedtime Stories",
     emoji: "📖",
     description: "Cozy evenings filled with imagination and love",
     category: "Family",
@@ -75,7 +75,7 @@ export const favourites: FavouriteItem[] = [
   },
   {
     name: "First Time Swimming in the Ocean",
-    url: "/dashboard/favourites/First Time Swimming in the Ocean",
+    url: "/dashboard/memories/First Time Swimming in the Ocean",
     emoji: "🌊",
     description: "The vastness and wonder of the sea",
     category: "Childhood",
@@ -83,7 +83,7 @@ export const favourites: FavouriteItem[] = [
   },
   {
     name: "Birthday Party at the Park",
-    url: "/dashboard/favourites/Birthday Party at the Park",
+    url: "/dashboard/memories/Birthday Party at the Park",
     emoji: "🎉",
     description: "Celebrating with friends and family in the great outdoors",
     category: "Family",
