@@ -246,11 +246,11 @@ export const PostSection = () => {
 					</Button>
 				</div>
 				{uploadedFiles.length > 0 && (
-					<div className="flex gap-2">
+					<div className="flex gap-2 overflow-auto">
 						{uploadedFiles.map((file, index) => (
 							<div
 								key={`${file.name}-${file.size}-${index}`}
-								className="flex flex-col bg-muted justify-center items-center space-y-2 rounded-md p-2"
+								className="flex flex-col bg-muted justify-center items-center space-y-2 rounded-md p-2 pt-4"
 							>
 								{file.type.startsWith("image/") && filePreviewUrls[index] && (
 									<div className="relative w-32 h-32">
