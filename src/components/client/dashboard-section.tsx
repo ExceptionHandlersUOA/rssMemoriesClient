@@ -8,11 +8,11 @@ import {
   useDeleteFeed,
 } from "@/lib/mutations/feeds"
 import { Button } from "@/components/ui/button"
-import { WebPost } from "@/lib/schemas"
+import { Post } from "@/lib/schemas"
 import { Platform } from "@/lib/schemas/enums"
 import dayjs from "dayjs"
 
-type WebPostWithPlatform = WebPost & {
+type PostWithPlatform = Post & {
   platform: Platform
 }
 
@@ -22,7 +22,7 @@ export const DashboardSection = () => {
   const addCustomFeedMutation = useAddCustomFeed()
   const deleteCustomFeedMutation = useDeleteFeed()
 
-  const allPosts: WebPostWithPlatform[] = []
+  const allPosts: PostWithPlatform[] = []
   feedsData?.forEach(feed => {
     if (feed.posts) {
       const postsWithPlatform = feed.posts.map(post => ({
