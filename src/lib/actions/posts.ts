@@ -1,12 +1,7 @@
 "use server";
 
 import { z } from "zod";
-import {
-  PostSchema,
-  PostsResponseSchema,
-  type Post,
-  type PostsResponse,
-} from "../schemas";
+import { PostsResponseSchema, type Post, type PostsResponse } from "../schemas";
 
 export async function fetchPosts(page = 1, limit = 10): Promise<PostsResponse> {
   try {
@@ -48,6 +43,28 @@ export async function fetchPosts(page = 1, limit = 10): Promise<PostsResponse> {
 }
 
 export async function fetchPostById(id: string): Promise<Post> {
+  // Mock data for development
+  const mockPost: Post = {
+    id: id,
+    title: "First Day of School",
+    description:
+      "The excitement and nervousness of starting a new chapter in life. Walking through those school doors for the first time, backpack filled with fresh supplies and dreams of new friendships.",
+    sourceUrl: "https://example.com/posts/first-day-of-school",
+    lastUpdated: new Date().toISOString(),
+    publishedAt: new Date(Date.now() - 86400000).toISOString(), // 1 day ago
+    media: [
+      {
+        type: 1, // Image
+        fileUrl: "https://picsum.photos/800/600?random=1",
+      },
+    ],
+    platform: 3, // RSS
+  };
+
+  return mockPost;
+
+  // TODO: Uncomment when ready to use real API
+  /*
   try {
     const response = await fetch(
       `https://archivebackend.feroxfoxxo.com/api/getPosts/${id}`,
@@ -83,4 +100,5 @@ export async function fetchPostById(id: string): Promise<Post> {
 
     throw new Error("An unexpected error occurred while fetching post");
   }
+  */
 }
