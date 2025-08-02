@@ -4,13 +4,20 @@ import Image from "next/image";
 export default function Home() {
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">        
+      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
+        Card with random dummy data:      
         <MemoryCard
           title={"Visit to Dinosaur Museum peanuts peanuts pie"}
+          description={"Visiting the dinosaur museum was awesome. I took some images that look suspiciously like Wikipedia images but trust me I totally visited the museum for real!"}
           link={"https://www.facebook.com/doubledutchfries/"}
           date={"2 Aug 2025"}
           location="Facebook"
           text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+          videos={[
+            {
+                src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+            }
+          ]}
           images={[
             {
               src: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Frenguellisaurus_ischigualastensis_DSC_6185.jpg/330px-Frenguellisaurus_ischigualastensis_DSC_6185.jpg",  
