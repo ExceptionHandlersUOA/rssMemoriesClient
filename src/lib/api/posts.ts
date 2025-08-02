@@ -47,7 +47,7 @@ export const createPostCategoryClient = async (
 ) => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/getPost/${createPostCategoryRequest.id}/categories`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/post/${createPostCategoryRequest.id}/categories`,
       {
         method: "POST",
         headers: {
