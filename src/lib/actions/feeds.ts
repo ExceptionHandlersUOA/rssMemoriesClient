@@ -1,7 +1,12 @@
 "use server";
 
 import { z } from "zod";
-import { FeedsResponseSchema, type Feed, type FeedsResponse } from "../schemas";
+import {
+  FeedsResponseSchema,
+  type WebFeed,
+  type FeedsResponse,
+} from "../schemas";
+import { FileType, Platform } from "../schemas/enums";
 
 export async function fetchFeeds(page = 1, limit = 10): Promise<FeedsResponse> {
   "use server";
@@ -44,25 +49,36 @@ export async function fetchFeeds(page = 1, limit = 10): Promise<FeedsResponse> {
   }
 }
 
-export async function fetchFeedById(id: string): Promise<Feed> {
+export async function fetchFeedById(): Promise<WebFeed> {
   "use server";
 
   // Mock data for development
-  const mockFeed: Feed = {
-    id: id,
+  const mockFeed: WebFeed = {
+    feedId: 1,
     title: "First Day of School",
     description:
       "The excitement and nervousness of starting a new chapter in life. Walking through those school doors for the first time, backpack filled with fresh supplies and dreams of new friendships.",
-    sourceUrl: "https://example.com/posts/first-day-of-school",
-    lastUpdated: new Date().toISOString(),
-    publishedAt: new Date(Date.now() - 86400000).toISOString(), // 1 day ago
-    media: [
+    imageUrl: "https://picsum.photos/800/600?random=1",
+    url: "https://example.com/posts/first-day-of-school",
+    posts: [
       {
-        type: 1, // Image
-        fileUrl: "https://picsum.photos/800/600?random=1",
+        postId: 1,
+        title: "First Day of School",
+        description:
+          "The excitement and nervousness of starting a new chapter in life. Walking through those school doors for the first time, backpack filled with fresh supplies and dreams of new friendships.",
+        sourceUrl: "https://example.com/posts/first-day-of-school",
+        lastUpdated: new Date().toISOString(),
+        publishedAt: new Date(Date.now() - 86400000).toISOString(), // 1 day ago
+        media: [
+          {
+            mediaId: 1,
+            type: FileType.Image,
+            fileUrl: "https://picsum.photos/800/600?random=1",
+          },
+        ],
+        platform: Platform.RSS,
       },
     ],
-    platform: 3, // RSS
     categories: ["Childhood", "Education"],
   };
 

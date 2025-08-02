@@ -64,8 +64,8 @@ const data = {
       icon: Home,
     },
     {
-      title: "Memories",
-      url: "/dashboard/memories",
+      title: "Categories",
+      url: "/dashboard/categories",
       icon: Star,
     },
   ],
@@ -96,9 +96,9 @@ const data = {
       icon: MessageCircleQuestion,
     },
   ],
-  favorites: favourites.map(({ title, sourceUrl }) => ({
-    name: title,
-    url: sourceUrl,
+  favorites: favourites.map(({ title, url }) => ({
+    name: title ?? "Untitled",
+    url: url ?? "#",
     emoji: "⭐", // Default emoji since we don't have emoji in the new structure
   })),
   workspaces: [

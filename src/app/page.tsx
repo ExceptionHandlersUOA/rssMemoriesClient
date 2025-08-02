@@ -1,4 +1,3 @@
-import { MemoryCard } from "@/components/generic/MemoryCard";
 import Image from "next/image";
 
 export default function Home() {

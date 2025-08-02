@@ -13,7 +13,7 @@ type Props = {
 
 export default async function MemoryPage({ params }: Props) {
   const decodedId = decodeURIComponent((await params).id);
-  const memory = favourites.find(item => item.id === decodedId);
+  const memory = favourites.find(item => item.feedId === parseInt(decodedId));
   
   if (!memory) {
     notFound()
@@ -24,7 +24,7 @@ export default async function MemoryPage({ params }: Props) {
       <div className="flex items-start justify-between">
         <div className="flex items-center gap-4">
           <Button variant="ghost" size="sm" asChild>
-            <Link href="/dashboard/memories">
+            <Link href="/dashboard">
               <ArrowLeft className="h-4 w-4 mr-2" />
               Back to Memories
             </Link>
@@ -62,7 +62,7 @@ export default async function MemoryPage({ params }: Props) {
             <CardContent className="space-y-4">
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Calendar className="h-4 w-4" />
-                <span>Last updated {memory.lastUpdated}</span>
+                <span>Last updated {memory.posts?.[0]?.lastUpdated}</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <MapPin className="h-4 w-4" />
@@ -130,15 +130,15 @@ export default async function MemoryPage({ params }: Props) {
             <CardContent>
               <div className="space-y-3">
                 {favourites
-                  .filter(item => item.categories.some(cat => memory.categories.includes(cat)) && item.title !== memory.title)
+                  .filter(item => item.categories?.some(cat => memory.categories?.includes(cat)) && item.title !== memory.title)
                   .slice(0, 3)
                   .map((item) => (
-                    <Link key={item.title} href={`/dashboard/memories/${encodeURIComponent(item.title)}`}>
+                    <Link key={item.title} href={`/dashboard/memories/${encodeURIComponent(item.title ?? "")}`}>
                       <div className="flex items-center gap-3 p-2 rounded-lg hover:bg-muted transition-colors">
                         <span className="text-xl">⭐</span>
                         <div className="flex-1 min-w-0">
                           <p className="text-sm font-medium line-clamp-1">{item.title}</p>
-                          <p className="text-xs text-muted-foreground">{item.categories[0]}</p>
+                          <p className="text-xs text-muted-foreground">{item.categories?.[0]}</p>
                         </div>
                       </div>
                     </Link>

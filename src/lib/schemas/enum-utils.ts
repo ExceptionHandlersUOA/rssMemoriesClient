@@ -41,13 +41,13 @@ export function getPlatformOptions() {
 /**
  * Check if a value is a valid file type
  */
-export function isValidFileType(value: number): value is FileType {
-  return Object.values(FileType).includes(value);
+export function isValidFileType(value: string): value is FileType {
+  return Object.values(FileType).includes(value as FileType);
 }
 
 /**
  * Check if a value is a valid platform
  */
-export function isValidPlatform(value: number): value is Platform {
-  return Object.values(Platform).includes(value);
+export function isValidPlatform(value: string): value is Platform {
+  return Object.values(Platform).includes(value as Platform);
 }

@@ -1,46 +1,36 @@
 import { z } from "zod";
 
 /**
- * C# FileType enum indices (0-based)
- * Audio = 0, Image = 1, Video = 2, Document = 3
+ * FileType enum from Swagger specification
+ * Unknown, Audio, Image, Video, Document
  */
 export enum FileType {
-  Audio = 0,
-  Image = 1,
-  Video = 2,
-  Document = 3,
+  Unknown = "Unknown",
+  Audio = "Audio",
+  Image = "Image",
+  Video = "Video",
+  Document = "Document",
 }
 
 /**
- * C# Platform enum indices (0-based)
- * YouTube = 0, Instagram = 1, Facebook = 2, RSS = 3, LinkedIn = 4, Twitter = 5
+ * Platform enum from Swagger specification
+ * Unknown, YouTube, Instagram, Facebook, RSS, LinkedIn, Twitter
  */
 export enum Platform {
-  YouTube = 0,
-  Instagram = 1,
-  Facebook = 2,
-  RSS = 3,
-  LinkedIn = 4,
-  Twitter = 5,
+  Unknown = "Unknown",
+  YouTube = "YouTube",
+  Instagram = "Instagram",
+  Facebook = "Facebook",
+  RSS = "RSS",
+  LinkedIn = "LinkedIn",
+  Twitter = "Twitter",
 }
 
 /**
  * Zod schemas for runtime validation
  */
-export const FileTypeSchema = z.union([
-  z.literal(FileType.Audio),
-  z.literal(FileType.Image),
-  z.literal(FileType.Video),
-  z.literal(FileType.Document),
-]);
-export const PlatformSchema = z.union([
-  z.literal(Platform.YouTube),
-  z.literal(Platform.Instagram),
-  z.literal(Platform.Facebook),
-  z.literal(Platform.RSS),
-  z.literal(Platform.LinkedIn),
-  z.literal(Platform.Twitter),
-]);
+export const FileTypeSchema = z.nativeEnum(FileType);
+export const PlatformSchema = z.nativeEnum(Platform);
 
 export type FileTypeValue = z.infer<typeof FileTypeSchema>;
 export type PlatformValue = z.infer<typeof PlatformSchema>;
