@@ -1,5 +1,5 @@
 pre-commit:
-  parallel: true
+  piped: true
   exclude:
     - "pnpm-lock.yaml"
   commands:
@@ -7,4 +7,9 @@ pre-commit:
       glob: "src/**/*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
       run: |
         pnpm lint --fix {staged_files} --cache
+      stage_fixed: true
+    prettier:
+      glob: "src/**/*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
+      run: |
+        pnpm format --write {staged_files} --list-different --cache
       stage_fixed: true

@@ -12,7 +12,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar"
 
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic"
 
 type DashboardLayoutProps = {
   children: React.ReactNode
@@ -41,10 +41,8 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             </Breadcrumb>
           </div>
         </header>
-        <div className="flex flex-1 flex-col gap-6 p-6">
-          {children}
-        </div>
+        <div className="flex flex-1 flex-col gap-6 p-6">{children}</div>
       </SidebarInset>
     </SidebarProvider>
   )
-} 
+}

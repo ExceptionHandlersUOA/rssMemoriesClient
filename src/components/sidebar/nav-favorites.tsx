@@ -43,7 +43,7 @@ export function NavFavorites({
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
       <SidebarGroupLabel>Favorites</SidebarGroupLabel>
       <SidebarMenu>
-        {favorites.map((item) => (
+        {favorites.map(item => (
           <SidebarMenuItem key={item.name}>
             <SidebarMenuButton asChild isActive={isActive(item.url)}>
               <Link href={item.url} title={item.name}>
@@ -87,7 +87,10 @@ export function NavFavorites({
         ))}
         <SidebarMenuItem>
           <SidebarMenuButton asChild>
-            <Link href="/dashboard/favorites" className="text-sidebar-foreground/70">
+            <Link
+              href="/dashboard/favorites"
+              className="text-sidebar-foreground/70"
+            >
               <Star className="h-4 w-4" />
               <span>View All Memories</span>
             </Link>

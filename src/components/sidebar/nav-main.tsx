@@ -24,14 +24,14 @@ export function NavMain({
 
   return (
     <SidebarMenu>
-      {items.map((item) => (
+      {items.map(item => (
         <SidebarMenuItem key={item.title}>
           <SidebarMenuButton asChild isActive={isActive(item.url)}>
             <Link href={item.url}>
               <item.icon />
               <span>{item.title}</span>
               {item.badge && (
-                <span className="ml-auto bg-primary text-primary-foreground text-xs rounded-full px-2 py-0.5">
+                <span className="bg-primary text-primary-foreground ml-auto rounded-full px-2 py-0.5 text-xs">
                   {item.badge}
                 </span>
               )}

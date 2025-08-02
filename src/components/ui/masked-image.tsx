@@ -1,6 +1,6 @@
-import React from "react";
-import Image from "next/image";
-import { cn } from "@/lib/utils";
+import React from "react"
+import Image from "next/image"
+import { cn } from "@/lib/utils"
 
 export type MaskedImageVariant =
   | "shape1"
@@ -8,15 +8,15 @@ export type MaskedImageVariant =
   | "shape3"
   | "shape4"
   | "shape5"
-  | "shape6";
+  | "shape6"
 
 interface MaskedImageProps {
-  src: string;
-  alt: string;
-  width: number;
-  height: number;
-  variant?: MaskedImageVariant;
-  className?: string;
+  src: string
+  alt: string
+  width: number
+  height: number
+  variant?: MaskedImageVariant
+  className?: string
 }
 
 const getMaskUrl = (variant: MaskedImageVariant): string => {
@@ -27,10 +27,10 @@ const getMaskUrl = (variant: MaskedImageVariant): string => {
     shape4: "/mask-shape-4.svg",
     shape5: "/mask-shape-5.svg",
     shape6: "/mask-shape-6.svg",
-  };
+  }
 
-  return maskMap[variant];
-};
+  return maskMap[variant]
+}
 
 export const MaskedImage: React.FC<MaskedImageProps> = ({
   src,
@@ -40,12 +40,12 @@ export const MaskedImage: React.FC<MaskedImageProps> = ({
   variant = "shape1",
   className,
 }) => {
-  const maskUrl = getMaskUrl(variant);
+  const maskUrl = getMaskUrl(variant)
 
   return (
     <Image
       className={cn(
-        "mask-no-repeat object-cover mask-size-[100%_100%] mask-center",
+        "mask-size-[100%_100%] mask-center mask-no-repeat object-cover",
         className
       )}
       style={{ maskImage: `url(${maskUrl})` }}
@@ -54,5 +54,5 @@ export const MaskedImage: React.FC<MaskedImageProps> = ({
       width={width}
       height={height}
     />
-  );
-};
+  )
+}
