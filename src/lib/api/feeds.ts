@@ -11,7 +11,7 @@ export const fetchFeedsClient = async (
 ): Promise<FeedsResponse> => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/getFeeds?page=${page}&limit=${limit}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/feeds?page=${page}&limit=${limit}`,
       {
         method: "GET",
         headers: {
@@ -47,7 +47,7 @@ export const fetchFeedsClient = async (
 export async function addFeed(addFeedRequestData: AddFeedRequest) {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/addFeed`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/feed`,
       {
         method: "POST",
         headers: {
