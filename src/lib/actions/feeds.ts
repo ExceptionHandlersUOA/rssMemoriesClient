@@ -76,10 +76,10 @@ export async function fetchFeedById(): Promise<WebFeed> {
             fileUrl: "https://picsum.photos/800/600?random=1",
           },
         ],
-        platform: Platform.RSS,
       },
     ],
     categories: ["Childhood", "Education"],
+    platform: Platform.RSS,
   }
 
   return mockFeed

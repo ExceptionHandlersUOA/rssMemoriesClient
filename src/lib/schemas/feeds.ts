@@ -15,7 +15,6 @@ export const WebPostSchema = z.object({
   lastUpdated: z.string(),
   publishedAt: z.string(),
   media: z.array(WebMediaSchema).nullable(),
-  platform: PlatformSchema,
 })
 
 export const WebFeedSchema = z.object({
@@ -25,7 +24,8 @@ export const WebFeedSchema = z.object({
   imageUrl: z.string().nullable(),
   url: z.string().nullable(),
   posts: z.array(WebPostSchema).nullable(),
-  categories: z.array(z.string()).nullable().default([]),
+  categories: z.array(z.string()).nullable().default([]), // always keep even if not in backend schema
+  platform: PlatformSchema,
 })
 
 export const FeedsResponseSchema = z.array(WebFeedSchema)

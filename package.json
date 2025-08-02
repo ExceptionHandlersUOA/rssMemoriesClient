@@ -11,6 +11,7 @@
 		"build": "next build",
 		"start": "next start",
 		"lint": "eslint ./src --cache",
+		"check-types": "tsc --noEmit",
 		"prepare": "lefthook install",
 		"format": "prettier \"src/**/*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}\" --cache",
 		"format:write": "prettier --write \"src/**/*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}\" --cache --list-different"
