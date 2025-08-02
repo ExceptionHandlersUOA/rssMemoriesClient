@@ -3,6 +3,7 @@ import {
   type AddFeedRequest,
   FeedsResponseSchema,
   type FeedsResponse,
+  type AddCustomFeedRequest,
 } from "../schemas"
 
 export const fetchFeedsClient = async (
@@ -73,5 +74,39 @@ export async function addFeed(addFeedRequestData: AddFeedRequest) {
     }
 
     throw new Error("An unexpected error occurred while adding feed")
+  }
+}
+
+export async function addCustomFeed(
+  addCustomFeedRequestData: AddCustomFeedRequest
+) {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/feed/custom`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(addCustomFeedRequestData),
+      }
+    )
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed to add custom feed: ${response.status} ${response.statusText}`
+      )
+    }
+
+    return {
+      success: true,
+      message: "Custom feed added successfully",
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`Failed to add custom feed: ${error.message}`)
+    }
+
+    throw new Error("An unexpected error occurred while adding custom feed")
   }
 }
