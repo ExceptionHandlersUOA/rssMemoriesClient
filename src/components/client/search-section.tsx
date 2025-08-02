@@ -7,7 +7,81 @@ import { useQueryState, parseAsString } from "nuqs"
 import { useDebounce } from "@/hooks/use-debounce"
 import { useSearch } from "@/query/search"
 import { SearchResultCard } from "@/components/posts/search-result-card"
-import { SearchResultsSkeleton } from "@/components/skeletons/search-results-skeleton"
+import { Suspense } from "react"
+import { ErrorBoundary } from "@/components/error-boundary"
+
+const SearchResults = ({ query }: { query: string }) => {
+  const { data: searchResults } = useSearch(query)
+  const hasResults = searchResults && searchResults.length > 0
+
+  if (!hasResults) {
+    return (
+      <div className="py-12 text-center">
+        <h3 className="mb-2 text-lg font-semibold">No results found</h3>
+        <p className="text-muted-foreground">Try adjusting your search terms</p>
+      </div>
+    )
+  }
+
+  return (
+    <div>
+      <div className="mb-4">
+        <p className="text-muted-foreground text-sm">
+          Found {searchResults.length} result
+          {searchResults.length !== 1 ? "s" : ""}
+        </p>
+      </div>
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {searchResults.map(post => (
+          <SearchResultCard key={post.postId} post={post} />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+const SearchResultsSuspense = ({ query }: { query: string }) => {
+  if (!query) {
+    return (
+      <div className="py-12 text-center">
+        <Search className="text-muted-foreground mx-auto mb-4 h-12 w-12" />
+        <h3 className="mb-2 text-lg font-semibold">Start searching</h3>
+        <p className="text-muted-foreground">
+          Enter a search term to find posts
+        </p>
+      </div>
+    )
+  }
+
+  const searchErrorFallback = (
+    <div className="py-12 text-center">
+      <h3 className="text-destructive mb-2 text-lg font-semibold">
+        Error loading results
+      </h3>
+      <p className="text-muted-foreground">
+        Failed to load search results. Please try again.
+      </p>
+    </div>
+  )
+
+  return (
+    <ErrorBoundary fallback={searchErrorFallback}>
+      <Suspense
+        fallback={
+          <div className="py-12 text-center">
+            <Search className="text-muted-foreground mx-auto mb-4 h-12 w-12 animate-pulse" />
+            <h3 className="mb-2 text-lg font-semibold">Searching...</h3>
+            <p className="text-muted-foreground">
+              Looking for posts matching your query
+            </p>
+          </div>
+        }
+      >
+        <SearchResults query={query} />
+      </Suspense>
+    </ErrorBoundary>
+  )
+}
 
 export const SearchSection = () => {
   const [searchQuery, setSearchQuery] = useQueryState(
@@ -16,7 +90,6 @@ export const SearchSection = () => {
   )
 
   const debouncedQuery = useDebounce(searchQuery || "", 500)
-  const { data: searchResults, isLoading, error } = useSearch(debouncedQuery)
 
   const handleClearSearch = () => {
     setSearchQuery("")
@@ -28,12 +101,10 @@ export const SearchSection = () => {
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
+      // Send immediate update on Enter
       setSearchQuery(e.currentTarget.value)
     }
   }
-
-  const hasResults = searchResults && searchResults.length > 0
-  const hasQuery = (searchQuery || "").length > 0
 
   return (
     <div className="space-y-6">
@@ -62,53 +133,7 @@ export const SearchSection = () => {
       </div>
 
       <div className="space-y-6">
-        {!hasQuery && (
-          <div className="py-12 text-center">
-            <Search className="text-muted-foreground mx-auto mb-4 h-12 w-12" />
-            <h3 className="mb-2 text-lg font-semibold">Start searching</h3>
-            <p className="text-muted-foreground">
-              Enter a search term to find posts
-            </p>
-          </div>
-        )}
-
-        {hasQuery && isLoading && <SearchResultsSkeleton />}
-
-        {hasQuery && !isLoading && error && (
-          <div className="py-12 text-center">
-            <h3 className="text-destructive mb-2 text-lg font-semibold">
-              Error loading results
-            </h3>
-            <p className="text-muted-foreground">
-              {error instanceof Error ? error.message : "An error occurred"}
-            </p>
-          </div>
-        )}
-
-        {hasQuery && !isLoading && !error && !hasResults && (
-          <div className="py-12 text-center">
-            <h3 className="mb-2 text-lg font-semibold">No results found</h3>
-            <p className="text-muted-foreground">
-              Try adjusting your search terms
-            </p>
-          </div>
-        )}
-
-        {hasQuery && !isLoading && !error && hasResults && (
-          <div>
-            <div className="mb-4">
-              <p className="text-muted-foreground text-sm">
-                Found {searchResults.length} result
-                {searchResults.length !== 1 ? "s" : ""}
-              </p>
-            </div>
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {searchResults.map(post => (
-                <SearchResultCard key={post.postId} post={post} />
-              ))}
-            </div>
-          </div>
-        )}
+        <SearchResultsSuspense query={debouncedQuery} />
       </div>
     </div>
   )
