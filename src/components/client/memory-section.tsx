@@ -139,11 +139,11 @@ export const MemorySection = ({ postId }: MemorySectionProps) => {
                         <div className="text-muted-foreground mb-1 text-xs">
                           {media.type}
                         </div>
-                        {media.fileUrl && (
+                        {media.fileName && (
                           <div className="bg-muted flex aspect-square items-center justify-center rounded">
                             {media.type === "Image" ? (
                               <img
-                                src={media.fileUrl}
+                                src={`${process.env.NEXT_PUBLIC_API_URL}/api/getFile/${media.fileName}`}
                                 alt={`Media ${index + 1}`}
                                 className="h-full w-full rounded object-cover"
                               />

@@ -15,5 +15,23 @@ export const WebFeedSchema = z.object({
 
 export const FeedsResponseSchema = z.array(WebFeedSchema)
 
+export const AddFeedRequestSchema = z.object({
+  url: z.string().url().min(1),
+})
+
+export const CustomFeedRequestSchema = z.object({
+  title: z.string().min(1),
+  description: z.string().min(1),
+  imageUrl: z.string().url().nullable().optional(),
+  url: z.string().url().nullable().optional(),
+})
+
+export const CategoryRequestSchema = z.object({
+  category: z.string().min(1),
+})
+
 export type WebFeed = z.infer<typeof WebFeedSchema>
 export type FeedsResponse = z.infer<typeof FeedsResponseSchema>
+export type AddFeedRequest = z.infer<typeof AddFeedRequestSchema>
+export type CustomFeedRequest = z.infer<typeof CustomFeedRequestSchema>
+export type CategoryRequest = z.infer<typeof CategoryRequestSchema>
