@@ -15,7 +15,7 @@ export const createCustomPostClient = async (
       {
         method: "POST",
         headers: {
-          "content-Type": "application/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(createCustomPostRequest.post),
       }
@@ -32,10 +32,6 @@ export const createCustomPostClient = async (
       message: "Custom post created successfully",
     }
   } catch (error) {
-    if (error instanceof z.ZodError) {
-      throw new Error(`Invalid response format: ${error.message}`)
-    }
-
     if (error instanceof Error) {
       throw new Error(`Failed to create custom post: ${error.message}`)
     }
