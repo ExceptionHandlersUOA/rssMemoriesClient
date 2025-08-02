@@ -1,26 +1,15 @@
-import { SidebarLeft } from "@/components/sidebar"
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbList,
-  BreadcrumbPage,
-} from "@/components/ui/breadcrumb"
-import { Separator } from "@/components/ui/separator"
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar"
-import { fetchPosts } from "@/lib/actions"
+import { PostSection } from "@/components/post-section";
+import { fetchPosts } from "@/lib/actions";
 
 export default async function Page() {
-  const postsData = await fetchPosts(1, 10)
+	const postsData = await fetchPosts(1, 10);
 
   return (
         <>
           {/* HOME PAGE SECTION */}
           <div className="text-sm text-muted-foreground">
-            Fetched {postsData.length} posts
+            <PostSection />
+            <div className="max-w-3xl mx-auto"><p>Fetched {postsData.length} posts</p></div>
           </div>
         </>
   )
