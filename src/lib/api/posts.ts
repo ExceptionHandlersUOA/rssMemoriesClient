@@ -6,7 +6,7 @@ export const fetchPostByIdClient = async (
 ): Promise<GetPostResponse> => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/feed/post/${id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/post/${id}`,
       {
         method: "GET",
         headers: {
