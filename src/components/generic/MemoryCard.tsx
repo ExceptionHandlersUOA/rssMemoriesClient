@@ -26,6 +26,10 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
   ({ title, description, url, posts, platform }) => {
     const firstPost = posts?.[0]
 
+    const imageUrl = firstPost?.media?.[0]?.fileUrl?.startsWith("http")
+      ? firstPost?.media?.[0]?.fileUrl
+      : `/${firstPost?.media?.[0]?.fileUrl}`
+
     return (
       <Card className="py-4">
         <CardHeader>
@@ -59,7 +63,7 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
                     {/* TODO: placeholder for video*/}
                     <img
                       className="h-40 max-h-full w-fit flex-shrink-0 cursor-pointer rounded"
-                      src="public/mask-shape-1.svg"
+                      src="/mask-shape-1.svg"
                       alt="Video"
                     />
                   </DialogTrigger>

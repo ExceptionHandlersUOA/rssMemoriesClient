@@ -210,7 +210,7 @@ const data = {
 }
 
 export function SidebarLeft({ feeds = [], ...props }: SidebarLeftProps) {
-  const favorites = feeds.map(({ title, url, feedId }) => ({
+  const favorites = feeds.map(({ title, feedId }) => ({
     name: title ?? "Untitled",
     url: `/dashboard/memories/${feedId}`,
     emoji: "⭐", // Default emoji since we don't have emoji in the new structure

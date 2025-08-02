@@ -9,19 +9,19 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import {
-	Command,
-	CommandEmpty,
-	CommandGroup,
-	CommandInput,
-	CommandItem,
-	CommandList,
-} from "@/components/ui/command";
-import { Check, ImageIcon, PlusIcon, X } from "lucide-react";
-import { useForm } from "react-hook-form";
-import { useState } from "react";
-import { cn } from "@/lib/utils";
-import Image from "next/image";
-import { motion } from "framer-motion";
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command"
+import { Check, ImageIcon, PlusIcon, X } from "lucide-react"
+import { useForm } from "react-hook-form"
+import { useState } from "react"
+import { cn } from "@/lib/utils"
+import Image from "next/image"
+import { motion } from "framer-motion"
 
 type PostFormData = {
   title: string
@@ -151,97 +151,97 @@ export const PostSection = () => {
           </p>
         )}
 
-				<div className="flex items-center flex-wrap gap-2">
-					{tags.map((tag, index) => (
-						<motion.div
-							key={tag}
-							transition={{ type: "spring", bounce: 0.3, visualDuration: 0.3 }}
-							layout
-						>
-							<Badge className="flex items-center gap-1">
-								<span>{tag}</span>
-								<button
-									type="button"
-									onClick={() => removeTag(index)}
-									className="hover:text-destructive transition-colors"
-								>
-									<X className="size-3" />
-								</button>
-							</Badge>
-						</motion.div>
-					))}
-					<Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
-						<PopoverTrigger asChild>
-							<motion.div
-								transition={{
-									type: "spring",
-									bounce: 0.3,
-									visualDuration: 0.3,
-								}}
-								layout
-							>
-								<Badge
-									className="cursor-pointer hover:bg-muted hover:text-foreground transition-colors"
-									variant="secondary"
-								>
-									<PlusIcon className="size-3" />
-									<span>Add Tag</span>
-								</Badge>
-							</motion.div>
-						</PopoverTrigger>
-						<PopoverContent className="w-64">
-							<Command>
-								<CommandInput
-									placeholder="Add a tag..."
-									value={commandInputValue}
-									onValueChange={setCommandInputValue}
-								/>
-								<CommandList>
-									<CommandEmpty>No results found.</CommandEmpty>
-									<CommandGroup>
-										{defaultTags.map((tag) => {
-											const isSelected = tags.includes(tag);
-											return (
-												<CommandItem
-													key={tag}
-													value={tag}
-													onSelect={(value: string) => {
-														if (!isSelected) {
-															addTag(value);
-															setIsPopoverOpen(false);
-														} else {
-															removeTag(tags.indexOf(value));
-															setIsPopoverOpen(false);
-														}
-													}}
-												>
-													{isSelected && <Check />}
-													<span className="flex-1">{tag}</span>
-												</CommandItem>
-											);
-										})}
-									</CommandGroup>
-								</CommandList>
-								<CommandGroup className="border-t">
-									{commandInputValue.trim() && (
-										<CommandItem
-											value={commandInputValue}
-											onSelect={(value: string) => {
-												addTag(value);
-												setCommandInputValue("");
-												setIsPopoverOpen(false);
-												defaultTags.push(value);
-											}}
-											className="cursor-pointer"
-										>
-											{`Add "${commandInputValue}"`}
-										</CommandItem>
-									)}
-								</CommandGroup>
-							</Command>
-						</PopoverContent>
-					</Popover>
-				</div>
+        <div className="flex flex-wrap items-center gap-2">
+          {tags.map((tag, index) => (
+            <motion.div
+              key={tag}
+              transition={{ type: "spring", bounce: 0.3, visualDuration: 0.3 }}
+              layout
+            >
+              <Badge className="flex items-center gap-1">
+                <span>{tag}</span>
+                <button
+                  type="button"
+                  onClick={() => removeTag(index)}
+                  className="hover:text-destructive transition-colors"
+                >
+                  <X className="size-3" />
+                </button>
+              </Badge>
+            </motion.div>
+          ))}
+          <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
+            <PopoverTrigger asChild>
+              <motion.div
+                transition={{
+                  type: "spring",
+                  bounce: 0.3,
+                  visualDuration: 0.3,
+                }}
+                layout
+              >
+                <Badge
+                  className="hover:bg-muted hover:text-foreground cursor-pointer transition-colors"
+                  variant="secondary"
+                >
+                  <PlusIcon className="size-3" />
+                  <span>Add Tag</span>
+                </Badge>
+              </motion.div>
+            </PopoverTrigger>
+            <PopoverContent className="w-64">
+              <Command>
+                <CommandInput
+                  placeholder="Add a tag..."
+                  value={commandInputValue}
+                  onValueChange={setCommandInputValue}
+                />
+                <CommandList>
+                  <CommandEmpty>No results found.</CommandEmpty>
+                  <CommandGroup>
+                    {defaultTags.map(tag => {
+                      const isSelected = tags.includes(tag)
+                      return (
+                        <CommandItem
+                          key={tag}
+                          value={tag}
+                          onSelect={(value: string) => {
+                            if (!isSelected) {
+                              addTag(value)
+                              setIsPopoverOpen(false)
+                            } else {
+                              removeTag(tags.indexOf(value))
+                              setIsPopoverOpen(false)
+                            }
+                          }}
+                        >
+                          {isSelected && <Check />}
+                          <span className="flex-1">{tag}</span>
+                        </CommandItem>
+                      )
+                    })}
+                  </CommandGroup>
+                </CommandList>
+                <CommandGroup className="border-t">
+                  {commandInputValue.trim() && (
+                    <CommandItem
+                      value={commandInputValue}
+                      onSelect={(value: string) => {
+                        addTag(value)
+                        setCommandInputValue("")
+                        setIsPopoverOpen(false)
+                        defaultTags.push(value)
+                      }}
+                      className="cursor-pointer"
+                    >
+                      {`Add "${commandInputValue}"`}
+                    </CommandItem>
+                  )}
+                </CommandGroup>
+              </Command>
+            </PopoverContent>
+          </Popover>
+        </div>
 
         <Textarea
           {...register("description", {
