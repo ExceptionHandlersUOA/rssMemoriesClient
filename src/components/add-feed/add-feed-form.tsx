@@ -21,10 +21,14 @@ import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { PlusIcon, SearchIcon } from "lucide-react"
+import { PlusIcon } from "lucide-react"
 import { AddFeedRequest, AddFeedRequestSchema } from "@/lib/schemas"
+import { useAddFeed } from "@/lib/mutations/feeds"
+import { toast } from "sonner"
 
-export const SearchForm = () => {
+export const AddFeedForm = () => {
+  const mutation = useAddFeed()
+
   const form = useForm<AddFeedRequest>({
     resolver: zodResolver(AddFeedRequestSchema),
     defaultValues: {
@@ -32,8 +36,13 @@ export const SearchForm = () => {
     },
   })
 
-  const onSubmit = async (searchDetails: AddFeedRequest) => {
-    console.log("pressed")
+  const onSubmit = async (addFeedDetails: AddFeedRequest) => {
+    try {
+      mutation.mutate(addFeedDetails)
+      toast("Feed was added successfully!")
+    } catch (error) {
+      toast("Feed was not added :(")
+    }
   }
 
   return (

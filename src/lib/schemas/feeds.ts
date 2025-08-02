@@ -2,10 +2,6 @@ import { z } from "zod"
 import { PlatformSchema } from "./enums"
 import { WebPostSchema } from "./post"
 
-export const AddFeedRequestSchema = z.object({
-  url: z.url(),
-})
-
 export const WebFeedSchema = z.object({
   feedId: z.number().int(),
   title: z.string().nullable(),
@@ -20,7 +16,7 @@ export const WebFeedSchema = z.object({
 export const FeedsResponseSchema = z.array(WebFeedSchema)
 
 export const AddFeedRequestSchema = z.object({
-  url: z.string().url().min(1),
+  url: z.url().min(1),
 })
 
 export const CustomFeedRequestSchema = z.object({
