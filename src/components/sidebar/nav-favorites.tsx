@@ -31,6 +31,7 @@ import { useFeeds } from "@/query/feeds"
 export function NavFavorites() {
   const { data: feeds } = useFeeds()
   const favorites = feeds?.map(({ title, feedId }) => ({
+    id: feedId,
     name: title ?? "Untitled",
     url: `/dashboard/memories/${feedId}`,
     emoji: "⭐",
@@ -43,7 +44,7 @@ export function NavFavorites() {
       <SidebarGroupLabel>Favorites</SidebarGroupLabel>
       <SidebarMenu>
         {favorites?.map(item => (
-          <SidebarMenuItem key={item.name}>
+          <SidebarMenuItem key={item.id}>
             <SidebarMenuButton asChild isActive={isActive(item.url)}>
               <Link href={item.url} title={item.name}>
                 <span>{item.emoji}</span>
