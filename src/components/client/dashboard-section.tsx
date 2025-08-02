@@ -2,13 +2,18 @@
 
 import { MemoryCard } from "@/components/generic/MemoryCard"
 import { useFeeds } from "@/query/feeds"
-import { useAddFeed, useAddCustomFeed } from "@/lib/mutations/feeds"
+import {
+  useAddFeed,
+  useAddCustomFeed,
+  useDeleteFeed,
+} from "@/lib/mutations/feeds"
 import { Button } from "@/components/ui/button"
 
 export const DashboardSection = () => {
   const { data: feedsData, isLoading, error } = useFeeds()
   const addFeedMutation = useAddFeed()
   const addCustomFeedMutation = useAddCustomFeed()
+  const deleteCustomFeedMutation = useDeleteFeed()
 
   const handleTestAddFeed = () => {
     const testFeedData = {
@@ -41,6 +46,21 @@ export const DashboardSection = () => {
       },
       onError: error => {
         console.error("Failed to add custom feed:", error)
+      },
+    })
+  }
+
+  const handleTestDeleteCustomFeed = () => {
+    // Use a test feed ID - replace with actual ID from your feeds
+    const testFeedId = "2"
+
+    deleteCustomFeedMutation.mutate(testFeedId, {
+      onSuccess: () => {
+        console.log("Custom feed deleted successfully!")
+        // Optionally reload feeds here
+      },
+      onError: error => {
+        console.error("Failed to delete custom feed:", error)
       },
     })
   }
@@ -118,6 +138,33 @@ export const DashboardSection = () => {
             {addCustomFeedMutation.isSuccess && (
               <div className="mb-2 rounded bg-green-100 p-2 text-green-800">
                 Custom feed added successfully!
+              </div>
+            )}
+          </div>
+
+          <div>
+            <Button
+              onClick={handleTestDeleteCustomFeed}
+              disabled={deleteCustomFeedMutation.isPending}
+              variant="destructive"
+              className="mb-2"
+            >
+              {deleteCustomFeedMutation.isPending
+                ? "Deleting Custom Feed..."
+                : "Test Delete Custom Feed"}
+            </Button>
+
+            {deleteCustomFeedMutation.isError && (
+              <div className="bg-destructive/10 text-destructive mb-2 rounded p-2">
+                Error:{" "}
+                {deleteCustomFeedMutation.error?.message ||
+                  "Failed to delete custom feed"}
+              </div>
+            )}
+
+            {deleteCustomFeedMutation.isSuccess && (
+              <div className="mb-2 rounded bg-green-100 p-2 text-green-800">
+                Custom feed deleted successfully!
               </div>
             )}
           </div>

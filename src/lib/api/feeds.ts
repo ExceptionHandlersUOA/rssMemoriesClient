@@ -77,6 +77,34 @@ export async function addFeed(addFeedRequestData: AddFeedRequest) {
   }
 }
 
+export async function deleteFeed(feedId: string) {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/feed/${feedId}`,
+      {
+        method: "DELETE",
+      }
+    )
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed to delete feed: ${response.status} ${response.statusText}`
+      )
+    }
+
+    return {
+      success: true,
+      message: "Feed deleted successfully",
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`Failed to delete feed: ${error.message}, ${error}`)
+    }
+
+    throw new Error("An unexpected error occurred while deleting feed")
+  }
+}
+
 export async function addCustomFeed(
   addCustomFeedRequestData: AddCustomFeedRequest
 ) {
