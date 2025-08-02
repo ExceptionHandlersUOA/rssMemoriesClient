@@ -69,3 +69,31 @@ export const getFileClient = async (filename: string): Promise<string> => {
     throw new Error("An unexpected error occurred while fetching file")
   }
 }
+
+export const deleteFileClient = async (filename: string) => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/file/${filename}`,
+      {
+        method: "DELETE",
+      }
+    )
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed to delete file: ${response.status} ${response.statusText}`
+      )
+    }
+
+    return {
+      success: true,
+      message: "File deleted successfully",
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`Failed to delete file: ${error.message}`)
+    }
+
+    throw new Error("An unexpected error occurred while deleting file")
+  }
+}
