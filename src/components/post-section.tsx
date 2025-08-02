@@ -16,7 +16,7 @@ import {
 	CommandItem,
 	CommandList,
 } from "@/components/ui/command";
-import { ImageIcon, PlusIcon, X } from "lucide-react";
+import { Check, ImageIcon, PlusIcon, X } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
@@ -199,18 +199,27 @@ export const PostSection = () => {
 								<CommandList>
 									<CommandEmpty>No results found.</CommandEmpty>
 									<CommandGroup>
-										{defaultTags.map((tag) => (
-											<CommandItem
-												key={tag}
-												value={tag}
-												onSelect={(value: string) => {
-													addTag(value);
-													setIsPopoverOpen(false);
-												}}
-											>
-												{tag}
-											</CommandItem>
-										))}
+										{defaultTags.map((tag) => {
+											const isSelected = tags.includes(tag);
+											return (
+												<CommandItem
+													key={tag}
+													value={tag}
+													onSelect={(value: string) => {
+														if (!isSelected) {
+															addTag(value);
+															setIsPopoverOpen(false);
+														} else {
+															removeTag(tags.indexOf(value));
+															setIsPopoverOpen(false);
+														}
+													}}
+												>
+													{isSelected && <Check />}
+													<span className="flex-1">{tag}</span>
+												</CommandItem>
+											);
+										})}
 									</CommandGroup>
 								</CommandList>
 								<CommandGroup className="border-t">
