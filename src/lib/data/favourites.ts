@@ -1,92 +1,126 @@
-export type FavouriteItem = {
-  name: string;
-  url: string;
-  emoji: string;
-  description: string;
-  category: string;
-  lastAccessed: string;
-};
+import { type WebFeed } from "../schemas/feeds"
+import { Platform } from "../schemas/enums"
 
-export const favourites: FavouriteItem[] = [
+export const favourites: WebFeed[] = [
   {
-    name: "First Day of School",
-    url: "/dashboard/favourites/First Day of School",
-    emoji: "🎒",
+    feedId: 1,
+    title: "First Day of School",
     description:
       "The excitement and nervousness of starting a new chapter in life",
-    category: "Childhood",
-    lastAccessed: "2 hours ago",
+    imageUrl: "https://picsum.photos/800/600?random=1",
+    url: "/dashboard/memories/1",
+    posts: [],
+    categories: ["Childhood", "Education"],
+    platform: Platform.RSS,
   },
   {
-    name: "Family Vacation to Disney World",
-    url: "/dashboard/favourites/Family Vacation to Disney World",
-    emoji: "🏰",
+    feedId: 2,
+    title: "Family Vacation to Disney World",
     description: "Magical memories with family at the happiest place on earth",
-    category: "Family",
-    lastAccessed: "1 day ago",
+    imageUrl: "https://picsum.photos/800/600?random=2",
+    url: "/dashboard/memories/2",
+    posts: [],
+    categories: ["Family", "Vacation"],
+    platform: Platform.RSS,
   },
   {
-    name: "Learning to Ride a Bike",
-    url: "/dashboard/favourites/Learning to Ride a Bike",
-    emoji: "🚴",
+    feedId: 3,
+    title: "Learning to Ride a Bike",
     description: "The freedom and joy of mastering a new skill",
-    category: "Childhood",
-    lastAccessed: "3 hours ago",
+    imageUrl: "https://picsum.photos/800/600?random=3",
+    url: "/dashboard/memories/3",
+    posts: [],
+    categories: ["Childhood", "Education"],
+    platform: Platform.RSS,
   },
   {
-    name: "Grandma's Sunday Dinners",
-    url: "/dashboard/favourites/Grandma's Sunday Dinners",
-    emoji: "🍽️",
+    feedId: 4,
+    title: "Grandma's Sunday Dinners",
     description: "Warm family gatherings filled with love and delicious food",
-    category: "Family",
-    lastAccessed: "5 days ago",
+    imageUrl: "https://picsum.photos/800/600?random=4",
+    url: "/dashboard/memories/4",
+    posts: [],
+    categories: ["Family", "Vacation"],
+    platform: Platform.RSS,
   },
   {
-    name: "First Pet - Goldfish Named Bubbles",
-    url: "/dashboard/favourites/First Pet - Goldfish Named Bubbles",
-    emoji: "🐠",
+    feedId: 5,
+    title: "First Pet - Goldfish Named Bubbles",
     description: "The responsibility and wonder of caring for a first pet",
-    category: "Childhood",
-    lastAccessed: "1 week ago",
+    imageUrl: "https://picsum.photos/800/600?random=5",
+    url: "/dashboard/memories/5",
+    posts: [],
+    categories: ["Family", "Vacation"],
+    platform: Platform.RSS,
   },
   {
-    name: "Building a Treehouse with Dad",
-    url: "/dashboard/favourites/Building a Treehouse with Dad",
-    emoji: "🌳",
+    feedId: 6,
+    title: "Building a Treehouse with Dad",
     description: "Quality time spent creating something special together",
-    category: "Family",
-    lastAccessed: "2 days ago",
+    imageUrl: "https://picsum.photos/800/600?random=6",
+    url: "/dashboard/memories/6",
+    posts: [],
+    categories: ["Family", "Vacation"],
+    platform: Platform.RSS,
   },
   {
-    name: "First Snow Day",
-    url: "/dashboard/favourites/First Snow Day",
-    emoji: "❄️",
+    feedId: 7,
+    title: "First Snow Day",
     description: "The magic of waking up to a winter wonderland",
-    category: "Childhood",
-    lastAccessed: "4 days ago",
+    imageUrl: "https://picsum.photos/800/600?random=7",
+    url: "/dashboard/memories/7",
+    posts: [],
+    categories: ["Family", "Vacation"],
+    platform: Platform.RSS,
   },
   {
-    name: "Mom's Bedtime Stories",
-    url: "/dashboard/favourites/Mom's Bedtime Stories",
-    emoji: "📖",
+    feedId: 8,
+    title: "Mom's Bedtime Stories",
     description: "Cozy evenings filled with imagination and love",
-    category: "Family",
-    lastAccessed: "1 day ago",
+    imageUrl: "https://picsum.photos/800/600?random=8",
+    url: "/dashboard/memories/8",
+    posts: [],
+    categories: ["Family", "Vacation"],
+    platform: Platform.RSS,
   },
   {
-    name: "First Time Swimming in the Ocean",
-    url: "/dashboard/favourites/First Time Swimming in the Ocean",
-    emoji: "🌊",
+    feedId: 9,
+    title: "First Time Swimming in the Ocean",
     description: "The vastness and wonder of the sea",
-    category: "Childhood",
-    lastAccessed: "6 hours ago",
+    imageUrl: "https://picsum.photos/800/600?random=9",
+    url: "/dashboard/memories/9",
+    posts: [],
+    categories: ["Family", "Vacation"],
+    platform: Platform.RSS,
   },
   {
-    name: "Birthday Party at the Park",
-    url: "/dashboard/favourites/Birthday Party at the Park",
-    emoji: "🎉",
+    feedId: 10,
+    title: "Birthday Party at the Park",
     description: "Celebrating with friends and family in the great outdoors",
-    category: "Family",
-    lastAccessed: "1 hour ago",
+    imageUrl: "https://picsum.photos/800/600?random=10",
+    url: "/dashboard/memories/10",
+    posts: [],
+    categories: ["Family", "Vacation"],
+    platform: Platform.RSS,
   },
-];
+]
+
+export const getPlatformsFromFavourites = () => {
+  const platformMap = new Map<string, { count: number }>()
+
+  favourites.forEach(item => {
+    const platform = item.platform
+    const existing = platformMap.get(platform)
+    if (existing) {
+      existing.count += 1
+    } else {
+      platformMap.set(platform, { count: 1 })
+    }
+  })
+
+  return Array.from(platformMap.entries()).map(([name, data]) => ({
+    id: name.toLowerCase().replace(/\s+/g, "-"),
+    name,
+    count: data.count,
+  }))
+}

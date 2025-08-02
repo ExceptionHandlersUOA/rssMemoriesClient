@@ -1,0 +1,7 @@
+export enum QueryKeys {
+  FEEDS = "feeds",
+  POST = "post",
+  FILES = "files",
+  CATEGORIES = "categories",
+  SEARCH = "search",
+}
