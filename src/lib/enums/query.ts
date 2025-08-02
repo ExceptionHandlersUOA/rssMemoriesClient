@@ -3,4 +3,5 @@ export enum QueryKeys {
   POST = "post",
   FILES = "files",
   CATEGORIES = "categories",
+  SEARCH = "search",
 }
