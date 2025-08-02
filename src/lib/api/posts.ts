@@ -1,10 +1,11 @@
-import { z } from "zod"
 import {
-  CreateCustomPostRequest,
-  CreatePostCategoryRequest,
+  type CreateCustomPostRequest,
+  type CreatePostCategoryRequest,
   GetPostResponseSchema,
   type GetPostResponse,
+  type DeletePostCategoryRequestData,
 } from "../schemas/post"
+import { z } from "zod"
 
 export const createCustomPostClient = async (
   createCustomPostRequest: CreateCustomPostRequest
@@ -114,5 +115,42 @@ export const createPostCategoryClient = async (
     }
 
     throw new Error("An unexpected error occurred while creating category")
+  }
+}
+
+export const deletePostCategory = async ({
+  postId,
+  category,
+}: DeletePostCategoryRequestData) => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/post/${postId}/categories`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          category,
+        }),
+      }
+    )
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed to delete category: ${response.status} ${response.statusText}`
+      )
+    }
+
+    return {
+      success: true,
+      message: "Category deleted successfully",
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`Failed to delete category: ${error.message}`)
+    }
+
+    throw new Error("An unexpected error occurred while deleting category")
   }
 }

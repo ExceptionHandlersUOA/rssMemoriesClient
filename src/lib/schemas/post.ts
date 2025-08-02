@@ -41,3 +41,7 @@ export type CreateCustomPostRequest = z.infer<
 export type CreatePostCategoryRequest = z.infer<
   typeof CreatePostCategoryRequestSchema
 >
+export type DeletePostCategoryRequestData = {
+  postId: number
+  category: string
+}
