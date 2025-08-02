@@ -4,6 +4,7 @@ import { PT_Sans } from "next/font/google"
 import "./globals.css"
 import Providers from "./providers"
 import { Toaster } from "@/components/ui/sonner"
+import { NuqsAdapter } from "nuqs/adapters/next/app"
 
 const nunito = Nunito({
   variable: "--font-nunito",
@@ -31,11 +32,13 @@ export default function RootLayout({
       <body
         className={`${nunito.variable} ${ptSans.variable} relative antialiased`}
       >
-        <Providers>
-          <div className="texture" />
-          {children}
-          <Toaster />
-        </Providers>
+        <NuqsAdapter>
+          <Providers>
+            <div className="texture" />
+            {children}
+            <Toaster />
+          </Providers>
+        </NuqsAdapter>
       </body>
     </html>
   )
