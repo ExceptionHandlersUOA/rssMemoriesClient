@@ -7,10 +7,10 @@ import {
   Calendar,
   // Command,
   Home,
-  // MessageCircleQuestion,
+  MessageCircleQuestion,
+  Plus,
   Search,
   Settings2,
-  Sparkles,
   Star,
   Trash2,
 } from "lucide-react"
@@ -48,13 +48,13 @@ const data = {
   navMain: [
     {
       title: "Search",
-      url: "#",
+      url: "/search",
       icon: Search,
     },
     {
-      title: "Ask AI",
-      url: "#",
-      icon: Sparkles,
+      title: "Add Feed",
+      url: "/dashboard/add",
+      icon: Plus,
     },
     {
       title: "Home",

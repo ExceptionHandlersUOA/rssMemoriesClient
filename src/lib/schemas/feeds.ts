@@ -16,7 +16,7 @@ export const WebFeedSchema = z.object({
 export const FeedsResponseSchema = z.array(WebFeedSchema)
 
 export const AddFeedRequestSchema = z.object({
-  url: z.string().url().min(1),
+  url: z.url().min(1),
 })
 
 export const CustomFeedRequestSchema = z.object({
