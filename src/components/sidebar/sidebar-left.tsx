@@ -68,12 +68,6 @@ const data = {
       url: "/dashboard/favourites",
       icon: Star,
     },
-    {
-      title: "Inbox",
-      url: "#",
-      icon: Inbox,
-      badge: "10",
-    },
   ],
   navSecondary: [
     {
