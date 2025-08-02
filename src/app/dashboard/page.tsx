@@ -11,8 +11,11 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
+import { fetchPosts } from "@/lib/actions"
 
-export default function Page() {
+export default async function Page() {
+  const postsData = await fetchPosts(1, 10)
+
   return (
     <SidebarProvider>
       <SidebarLeft />
@@ -39,6 +42,9 @@ export default function Page() {
           {/* HOME PAGE SECTION */}
           <div className="bg-muted/50 mx-auto h-24 w-full max-w-3xl rounded-xl" />
           <div className="bg-muted/50 mx-auto h-[100vh] w-full max-w-3xl rounded-xl" />
+          <div className="text-sm text-muted-foreground">
+            Fetched {postsData.length} posts
+          </div>
         </div>
       </SidebarInset>
     </SidebarProvider>
