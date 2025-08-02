@@ -3,6 +3,7 @@ import { Nunito } from "next/font/google"
 import { PT_Sans } from "next/font/google"
 import "./globals.css"
 import Providers from "./providers"
+import { Toaster } from "@/components/ui/sonner"
 
 const nunito = Nunito({
   variable: "--font-nunito",
@@ -33,6 +34,7 @@ export default function RootLayout({
         <Providers>
           <div className="texture" />
           {children}
+          <Toaster />
         </Providers>
       </body>
     </html>

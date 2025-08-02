@@ -17,6 +17,7 @@
 		"format:write": "prettier --write \"src/**/*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}\" --cache --list-different"
 	},
 	"dependencies": {
+		"@hookform/resolvers": "^5.2.1",
 		"@radix-ui/react-accordion": "^1.2.11",
 		"@radix-ui/react-alert-dialog": "^1.1.14",
 		"@radix-ui/react-aspect-ratio": "^1.1.7",
