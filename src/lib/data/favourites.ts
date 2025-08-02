@@ -1,4 +1,5 @@
 import { type WebFeed } from "../schemas/feeds"
+import { Platform } from "../schemas/enums"
 
 export const favourites: WebFeed[] = [
   {
@@ -10,6 +11,7 @@ export const favourites: WebFeed[] = [
     url: "/dashboard/memories/1",
     posts: [],
     categories: ["Childhood", "Education"],
+    platform: Platform.RSS,
   },
   {
     feedId: 2,
@@ -18,7 +20,8 @@ export const favourites: WebFeed[] = [
     imageUrl: "https://picsum.photos/800/600?random=2",
     url: "/dashboard/memories/2",
     posts: [],
-    categories: ["Family", "Travel", "Vacation"],
+    categories: ["Family", "Vacation"],
+    platform: Platform.RSS,
   },
   {
     feedId: 3,
@@ -27,7 +30,8 @@ export const favourites: WebFeed[] = [
     imageUrl: "https://picsum.photos/800/600?random=3",
     url: "/dashboard/memories/3",
     posts: [],
-    categories: ["Childhood", "Learning", "Achievement"],
+    categories: ["Childhood", "Education"],
+    platform: Platform.RSS,
   },
   {
     feedId: 4,
@@ -36,7 +40,8 @@ export const favourites: WebFeed[] = [
     imageUrl: "https://picsum.photos/800/600?random=4",
     url: "/dashboard/memories/4",
     posts: [],
-    categories: ["Family", "Food", "Traditions"],
+    categories: ["Family", "Vacation"],
+    platform: Platform.RSS,
   },
   {
     feedId: 5,
@@ -45,7 +50,8 @@ export const favourites: WebFeed[] = [
     imageUrl: "https://picsum.photos/800/600?random=5",
     url: "/dashboard/memories/5",
     posts: [],
-    categories: ["Childhood", "Pets", "Responsibility"],
+    categories: ["Family", "Vacation"],
+    platform: Platform.RSS,
   },
   {
     feedId: 6,
@@ -54,7 +60,8 @@ export const favourites: WebFeed[] = [
     imageUrl: "https://picsum.photos/800/600?random=6",
     url: "/dashboard/memories/6",
     posts: [],
-    categories: ["Family", "Building", "Quality Time"],
+    categories: ["Family", "Vacation"],
+    platform: Platform.RSS,
   },
   {
     feedId: 7,
@@ -63,7 +70,8 @@ export const favourites: WebFeed[] = [
     imageUrl: "https://picsum.photos/800/600?random=7",
     url: "/dashboard/memories/7",
     posts: [],
-    categories: ["Childhood", "Weather", "First Times"],
+    categories: ["Family", "Vacation"],
+    platform: Platform.RSS,
   },
   {
     feedId: 8,
@@ -72,7 +80,8 @@ export const favourites: WebFeed[] = [
     imageUrl: "https://picsum.photos/800/600?random=8",
     url: "/dashboard/memories/8",
     posts: [],
-    categories: ["Family", "Reading", "Bedtime"],
+    categories: ["Family", "Vacation"],
+    platform: Platform.RSS,
   },
   {
     feedId: 9,
@@ -81,7 +90,8 @@ export const favourites: WebFeed[] = [
     imageUrl: "https://picsum.photos/800/600?random=9",
     url: "/dashboard/memories/9",
     posts: [],
-    categories: ["Childhood", "Water", "First Times"],
+    categories: ["Family", "Vacation"],
+    platform: Platform.RSS,
   },
   {
     feedId: 10,
@@ -90,25 +100,25 @@ export const favourites: WebFeed[] = [
     imageUrl: "https://picsum.photos/800/600?random=10",
     url: "/dashboard/memories/10",
     posts: [],
-    categories: ["Family", "Celebration", "Outdoors"],
+    categories: ["Family", "Vacation"],
+    platform: Platform.RSS,
   },
 ]
 
-export const getCategoriesFromFavourites = () => {
-  const categoryMap = new Map<string, { count: number }>()
+export const getPlatformsFromFavourites = () => {
+  const platformMap = new Map<string, { count: number }>()
 
   favourites.forEach(item => {
-    item.categories?.forEach(category => {
-      const existing = categoryMap.get(category)
-      if (existing) {
-        existing.count += 1
-      } else {
-        categoryMap.set(category, { count: 1 })
-      }
-    })
+    const platform = item.platform
+    const existing = platformMap.get(platform)
+    if (existing) {
+      existing.count += 1
+    } else {
+      platformMap.set(platform, { count: 1 })
+    }
   })
 
-  return Array.from(categoryMap.entries()).map(([name, data]) => ({
+  return Array.from(platformMap.entries()).map(([name, data]) => ({
     id: name.toLowerCase().replace(/\s+/g, "-"),
     name,
     count: data.count,
