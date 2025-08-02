@@ -108,17 +108,17 @@ const data = {
       pages: [
         {
           name: "First Steps & Milestones",
-          url: "/dashboard/memories/First Steps & Milestones",
+          url: "/dashboard/memories/1",
           emoji: "👣",
         },
         {
           name: "School Days & Friends",
-          url: "/dashboard/memories/School Days & Friends",
+          url: "/dashboard/memories/2",
           emoji: "🎒",
         },
         {
           name: "Holiday Traditions",
-          url: "/dashboard/memories/Holiday Traditions",
+          url: "/dashboard/memories/3",
           emoji: "🎄",
         },
       ],
@@ -129,17 +129,17 @@ const data = {
       pages: [
         {
           name: "Family Vacations",
-          url: "/dashboard/memories/Family Vacations",
+          url: "/dashboard/memories/4",
           emoji: "🏖️",
         },
         {
           name: "Sunday Dinners",
-          url: "/dashboard/memories/Sunday Dinners",
+          url: "/dashboard/memories/5",
           emoji: "🍽️",
         },
         {
           name: "Game Nights",
-          url: "/dashboard/memories/Game Nights",
+          url: "/dashboard/memories/6",
           emoji: "🎲",
         },
       ],
@@ -150,17 +150,17 @@ const data = {
       pages: [
         {
           name: "Birthday Celebrations",
-          url: "/dashboard/memories/Birthday Celebrations",
+          url: "/dashboard/memories/7",
           emoji: "🎂",
         },
         {
           name: "Graduation Day",
-          url: "/dashboard/memories/Graduation Day",
+          url: "/dashboard/memories/8",
           emoji: "🎓",
         },
         {
           name: "First Job",
-          url: "/dashboard/memories/First Job",
+          url: "/dashboard/memories/9",
           emoji: "💼",
         },
       ],
@@ -171,17 +171,17 @@ const data = {
       pages: [
         {
           name: "First Time Flying",
-          url: "/dashboard/memories/First Time Flying",
+          url: "/dashboard/memories/10",
           emoji: "✈️",
         },
         {
           name: "Learning to Drive",
-          url: "/dashboard/memories/Learning to Drive",
+          url: "/dashboard/memories/11",
           emoji: "🚗",
         },
         {
           name: "Moving to a New City",
-          url: "/dashboard/memories/Moving to a New City",
+          url: "/dashboard/memories/12",
           emoji: "🏠",
         },
       ],
@@ -192,17 +192,17 @@ const data = {
       pages: [
         {
           name: "First Pet",
-          url: "/dashboard/memories/First Pet",
+          url: "/dashboard/memories/13",
           emoji: "🐕",
         },
         {
           name: "Pet Adventures",
-          url: "/dashboard/memories/Pet Adventures",
+          url: "/dashboard/memories/14",
           emoji: "🐾",
         },
         {
           name: "Saying Goodbye",
-          url: "/dashboard/memories/Saying Goodbye",
+          url: "/dashboard/memories/15",
           emoji: "💔",
         },
       ],

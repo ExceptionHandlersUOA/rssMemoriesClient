@@ -1,15 +1,15 @@
-"use server";
+"use server"
 
-import { z } from "zod";
+import { z } from "zod"
 import {
   FeedsResponseSchema,
   type WebFeed,
   type FeedsResponse,
-} from "../schemas";
-import { FileType, Platform } from "../schemas/enums";
+} from "../schemas"
+import { FileType, Platform } from "../schemas/enums"
 
 export async function fetchFeeds(page = 1, limit = 10): Promise<FeedsResponse> {
-  "use server";
+  "use server"
 
   try {
     const response = await fetch(
@@ -23,34 +23,34 @@ export async function fetchFeeds(page = 1, limit = 10): Promise<FeedsResponse> {
           revalidate: 300, // Cache for 5 minutes
         },
       }
-    );
+    )
 
     if (!response.ok) {
       throw new Error(
         `Failed to fetch feeds: ${response.status} ${response.statusText}`
-      );
+      )
     }
 
-    const data = await response.json();
+    const data = await response.json()
 
-    const validatedData = FeedsResponseSchema.parse(data);
+    const validatedData = FeedsResponseSchema.parse(data)
 
-    return validatedData;
+    return validatedData
   } catch (error) {
     if (error instanceof z.ZodError) {
-      throw new Error(`Invalid response format: ${error.message}`);
+      throw new Error(`Invalid response format: ${error.message}`)
     }
 
     if (error instanceof Error) {
-      throw new Error(`Failed to fetch feeds: ${error.message}`);
+      throw new Error(`Failed to fetch feeds: ${error.message}`)
     }
 
-    throw new Error("An unexpected error occurred while fetching feeds");
+    throw new Error("An unexpected error occurred while fetching feeds")
   }
 }
 
 export async function fetchFeedById(): Promise<WebFeed> {
-  "use server";
+  "use server"
 
   // Mock data for development
   const mockFeed: WebFeed = {
@@ -80,9 +80,9 @@ export async function fetchFeedById(): Promise<WebFeed> {
       },
     ],
     categories: ["Childhood", "Education"],
-  };
+  }
 
-  return mockFeed;
+  return mockFeed
 
   // TODO: Uncomment when ready to use real API
   /*

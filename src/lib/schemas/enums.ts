@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "zod"
 
 /**
  * FileType enum from Swagger specification
@@ -29,8 +29,8 @@ export enum Platform {
 /**
  * Zod schemas for runtime validation
  */
-export const FileTypeSchema = z.nativeEnum(FileType);
-export const PlatformSchema = z.nativeEnum(Platform);
+export const FileTypeSchema = z.nativeEnum(FileType)
+export const PlatformSchema = z.nativeEnum(Platform)
 
-export type FileTypeValue = z.infer<typeof FileTypeSchema>;
-export type PlatformValue = z.infer<typeof PlatformSchema>;
+export type FileTypeValue = z.infer<typeof FileTypeSchema>
+export type PlatformValue = z.infer<typeof PlatformSchema>

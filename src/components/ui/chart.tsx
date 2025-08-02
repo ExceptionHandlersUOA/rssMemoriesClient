@@ -201,13 +201,19 @@ function ChartTooltipContent({
               )}
             >
               {formatter && item?.value !== undefined && item.name ? (
-                formatter(item.value, item.name, item, index, (item.payload as unknown as Array<{
-                  dataKey?: string
-                  name?: string
-                  value?: number
-                  color?: string
-                  payload?: Record<string, unknown>
-                }>) || [])
+                formatter(
+                  item.value,
+                  item.name,
+                  item,
+                  index,
+                  (item.payload as unknown as Array<{
+                    dataKey?: string
+                    name?: string
+                    value?: number
+                    color?: string
+                    payload?: Record<string, unknown>
+                  }>) || []
+                )
               ) : (
                 <>
                   {itemConfig?.icon ? (
@@ -296,7 +302,7 @@ function ChartLegendContent({
         className
       )}
     >
-      {payload.map((item) => {
+      {payload.map(item => {
         const key = `${nameKey || item.dataKey || "value"}`
         const itemConfig = getPayloadConfigFromPayload(config, item, key)
 

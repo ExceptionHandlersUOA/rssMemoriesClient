@@ -20,4 +20,4 @@ export function MemoriesHeader({ count }: MemoriesHeaderProps) {
       </div>
     </div>
   )
-} 
+}

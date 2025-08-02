@@ -1,4 +1,4 @@
-import { type WebFeed } from "../schemas/feeds";
+import { type WebFeed } from "../schemas/feeds"
 
 export const favourites: WebFeed[] = [
   {
@@ -92,25 +92,25 @@ export const favourites: WebFeed[] = [
     posts: [],
     categories: ["Family", "Celebration", "Outdoors"],
   },
-];
+]
 
 export const getCategoriesFromFavourites = () => {
-  const categoryMap = new Map<string, { count: number }>();
+  const categoryMap = new Map<string, { count: number }>()
 
-  favourites.forEach((item) => {
-    item.categories?.forEach((category) => {
-      const existing = categoryMap.get(category);
+  favourites.forEach(item => {
+    item.categories?.forEach(category => {
+      const existing = categoryMap.get(category)
       if (existing) {
-        existing.count += 1;
+        existing.count += 1
       } else {
-        categoryMap.set(category, { count: 1 });
+        categoryMap.set(category, { count: 1 })
       }
-    });
-  });
+    })
+  })
 
   return Array.from(categoryMap.entries()).map(([name, data]) => ({
     id: name.toLowerCase().replace(/\s+/g, "-"),
     name,
     count: data.count,
-  }));
-};
+  }))
+}
