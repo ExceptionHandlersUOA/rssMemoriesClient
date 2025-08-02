@@ -2,11 +2,12 @@
 
 import {
   ArrowUpRight,
-  Link,
   MoreHorizontal,
   StarOff,
   Trash2,
+  Star,
 } from "lucide-react"
+import Link from "next/link"
 
 import {
   DropdownMenu,
@@ -24,6 +25,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
+import { useActivePath } from "@/hooks/use-active-path"
 
 export function NavFavorites({
   favorites,
@@ -35,6 +37,7 @@ export function NavFavorites({
   }[]
 }) {
   const { isMobile } = useSidebar()
+  const { isActive } = useActivePath()
 
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
@@ -42,11 +45,11 @@ export function NavFavorites({
       <SidebarMenu>
         {favorites.map((item) => (
           <SidebarMenuItem key={item.name}>
-            <SidebarMenuButton asChild>
-              <a href={item.url} title={item.name}>
+            <SidebarMenuButton asChild isActive={isActive(item.url)}>
+              <Link href={item.url} title={item.name}>
                 <span>{item.emoji}</span>
                 <span>{item.name}</span>
-              </a>
+              </Link>
             </SidebarMenuButton>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -66,7 +69,7 @@ export function NavFavorites({
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
-                  <Link className="text-muted-foreground" />
+                  <ArrowUpRight className="text-muted-foreground" />
                   <span>Copy Link</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
@@ -83,9 +86,11 @@ export function NavFavorites({
           </SidebarMenuItem>
         ))}
         <SidebarMenuItem>
-          <SidebarMenuButton className="text-sidebar-foreground/70">
-            <MoreHorizontal />
-            <span>More</span>
+          <SidebarMenuButton asChild>
+            <Link href="/dashboard/favourites" className="text-sidebar-foreground/70">
+              <Star className="h-4 w-4" />
+              <span>View All Favourites</span>
+            </Link>
           </SidebarMenuButton>
         </SidebarMenuItem>
       </SidebarMenu>
