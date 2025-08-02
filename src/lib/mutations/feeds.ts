@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { addFeed } from "../actions/feeds"
+import { addFeed } from "@/lib/api/feeds"
 import { QueryKeys } from "../enums"
 
 export function useAddFeed() {
