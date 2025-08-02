@@ -20,6 +20,7 @@ import { ImageIcon, PlusIcon, X } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 type PostFormData = {
 	title: string;
@@ -30,17 +31,6 @@ type PostFormData = {
 
 const defaultTags: string[] = [
 	"Memories",
-	"m",
-	"me",
-	"mem",
-	"memp",
-	"memo",
-	"memm",
-	"memmm",
-	"memmmmm",
-	"memor",
-	"memorie",
-	"memory",
 	"Childhood",
 	"Family",
 	"Friends",
@@ -58,6 +48,7 @@ export const PostSection = () => {
 	const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
 	const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 	const [commandInputValue, setCommandInputValue] = useState("");
+	const [filePreviewUrls, setFilePreviewUrls] = useState<string[]>([]);
 
 	const {
 		register,
@@ -100,11 +91,20 @@ export const PostSection = () => {
 			const newFiles = Array.from(files);
 			setUploadedFiles((prev) => [...prev, ...newFiles]);
 			setValue("files", files);
+
+			const newPreviewUrls = newFiles.map((file) => URL.createObjectURL(file));
+			setFilePreviewUrls((prev) => [...prev, ...newPreviewUrls]);
 		}
 	};
 
 	const removeFile = (index: number) => {
+		if (filePreviewUrls[index]) {
+			URL.revokeObjectURL(filePreviewUrls[index]);
+		}
+
 		setUploadedFiles((prev) => prev.filter((_, i) => i !== index));
+		setFilePreviewUrls((prev) => prev.filter((_, i) => i !== index));
+
 		const updatedFiles = uploadedFiles.filter((_, i) => i !== index);
 		if (updatedFiles.length === 0) {
 			setValue("files", null);
@@ -117,8 +117,11 @@ export const PostSection = () => {
 			console.log("Form data:", data);
 			console.log("Uploaded files:", uploadedFiles);
 
+			filePreviewUrls.forEach((url) => URL.revokeObjectURL(url));
+
 			// Reset form after successful submission
 			setUploadedFiles([]);
+			setFilePreviewUrls([]);
 			setValue("title", "");
 			setValue("description", "");
 			setValue("tags", []);
@@ -130,7 +133,7 @@ export const PostSection = () => {
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
-			<section className="w-full max-w-3xl flex-col space-y-2 bg-card justify-center mx-auto p-4 shadow-md rounded-lg">
+			<section className="flex w-full max-w-3xl flex-col space-y-2 bg-card justify-center mx-auto p-4 shadow-md rounded-lg">
 				<Input
 					{...register("title", {
 						required: "Please enter a title",
@@ -237,35 +240,64 @@ export const PostSection = () => {
 					<Button type="button" onClick={handleImageClick} variant="ghost">
 						<ImageIcon className="size-6 cursor-pointer hover:text-primary transition-colors" />
 					</Button>
-					<div className="flex-grow overflow-x-auto">
-						{uploadedFiles.length > 0 && (
-							<div className="flex gap-2">
-								{uploadedFiles.map((file, index) => (
-									<div
-										key={`${file.name}-${file.size}-${index}`}
-										className="relative group"
-									>
-										<div className="flex items-center space-x-2 bg-muted px-3 py-2 rounded-md">
-											<span className="text-sm truncate max-w-[150px]">
-												{file.name}
-											</span>
-											<button
-												type="button"
-												onClick={() => removeFile(index)}
-												className="text-muted-foreground hover:text-destructive transition-colors"
-											>
-												<X className="size-4" />
-											</button>
-										</div>
-									</div>
-								))}
-							</div>
-						)}
-					</div>
+					<div className="flex-grow" />
 					<Button type="submit" disabled={isSubmitting}>
 						{isSubmitting ? "Posting..." : "Post"}
 					</Button>
 				</div>
+				{uploadedFiles.length > 0 && (
+					<div className="flex gap-2 overflow-auto">
+						{uploadedFiles.map((file, index) => (
+							<div
+								key={`${file.name}-${file.size}-${index}`}
+								className="flex flex-col bg-muted justify-center items-center space-y-2 rounded-md p-2 pt-4"
+							>
+								{file.type.startsWith("image/") && filePreviewUrls[index] && (
+									<div className="relative w-32 h-32">
+										<Image
+											src={filePreviewUrls[index]}
+											alt={file.name}
+											fill
+											className="object-cover rounded-md"
+										/>
+									</div>
+								)}
+								{file.type.startsWith("video/") && filePreviewUrls[index] && (
+									<div className="relative w-32 h-32 overflow-hidden rounded-md">
+										<video
+											src={filePreviewUrls[index]}
+											className="w-full h-full object-cover"
+											preload="metadata"
+											muted
+											playsInline
+											aria-label={`Video thumbnail for ${file.name}`}
+											style={{
+												pointerEvents: "none",
+												display: "block",
+											}}
+											onLoadedMetadata={(e) => {
+												// Set to first frame
+												e.currentTarget.currentTime = 0.1;
+											}}
+										/>
+									</div>
+								)}
+								<div className="flex items-center space-x-2 px-3 py-2 rounded-md">
+									<span className="text-sm truncate max-w-[150px]">
+										{file.name}
+									</span>
+									<button
+										type="button"
+										onClick={() => removeFile(index)}
+										className="text-muted-foreground hover:text-destructive transition-colors"
+									>
+										<X className="size-4" />
+									</button>
+								</div>
+							</div>
+						))}
+					</div>
+				)}
 			</section>
 		</form>
 	);
