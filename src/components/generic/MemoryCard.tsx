@@ -15,12 +15,12 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../ui/dialog"
-import type { WebFeed } from "@/lib/schemas/feeds"
+import type { Feed } from "@/lib/schemas/feeds"
 import { FileType } from "@/lib/schemas/enums"
 
 dayjs.extend(relativeTime)
 
-export type MemoryCardProps = WebFeed
+export type MemoryCardProps = Feed
 
 export const MemoryCard: FC<MemoryCardProps> = memo(
   ({ title, description, url, posts, platform }) => {
