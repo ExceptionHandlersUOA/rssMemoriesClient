@@ -2,10 +2,10 @@
 
 import * as React from "react"
 import {
-  AudioWaveform,
-  Blocks,
+  // AudioWaveform,
+  // Blocks,
   Calendar,
-  Command,
+  // Command,
   Home,
   MessageCircleQuestion,
   Plus,
@@ -18,7 +18,7 @@ import {
 import { NavFavorites } from "./nav-favorites"
 import { NavMain } from "./nav-main"
 import { NavSecondary } from "./nav-secondary"
-import { TeamSwitcher } from "./team-switcher"
+// import { TeamSwitcher } from "./team-switcher"
 import {
   Sidebar,
   SidebarContent,
@@ -28,23 +28,23 @@ import {
 
 // This is sample data.
 const data = {
-  teams: [
-    {
-      name: "Acme Inc",
-      logo: Command,
-      plan: "Enterprise",
-    },
-    {
-      name: "Acme Corp.",
-      logo: AudioWaveform,
-      plan: "Startup",
-    },
-    {
-      name: "Evil Corp.",
-      logo: Command,
-      plan: "Free",
-    },
-  ],
+  // teams: [
+  //   {
+  //     name: "Acme Inc",
+  //     logo: Command,
+  //     plan: "Enterprise",
+  //   },
+  //   {
+  //     name: "Acme Corp.",
+  //     logo: AudioWaveform,
+  //     plan: "Startup",
+  //   },
+  //   {
+  //     name: "Evil Corp.",
+  //     logo: Command,
+  //     plan: "Free",
+  //   },
+  // ],
   navMain: [
     {
       title: "Search",
@@ -78,21 +78,21 @@ const data = {
       url: "#",
       icon: Settings2,
     },
-    {
-      title: "Templates",
-      url: "#",
-      icon: Blocks,
-    },
+    // {
+    //   title: "Templates",
+    //   url: "#",
+    //   icon: Blocks,
+    // },
     {
       title: "Trash",
       url: "#",
       icon: Trash2,
     },
-    {
-      title: "Help",
-      url: "#",
-      icon: MessageCircleQuestion,
-    },
+    // {
+    //   title: "Help",
+    //   url: "#",
+    //   icon: MessageCircleQuestion,
+    // },
   ],
 }
 
@@ -100,7 +100,7 @@ export function SidebarLeft() {
   return (
     <Sidebar className="border-r-0">
       <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
+        {/* <TeamSwitcher teams={data.teams} /> */}
         <NavMain items={data.navMain} />
       </SidebarHeader>
       <SidebarContent>

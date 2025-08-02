@@ -105,6 +105,37 @@ export async function deleteFeed(feedId: string) {
   }
 }
 
+export async function updateFeed(feedId: string) {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/feed/${feedId}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed to update feed: ${response.status} ${response.statusText}`
+      )
+    }
+
+    return {
+      success: true,
+      message: "Feed updated successfully",
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`Failed to update feed: ${error.message}`)
+    }
+
+    throw new Error("An unexpected error occurred while updating feed")
+  }
+}
+
 export async function addCustomFeed(
   addCustomFeedRequestData: AddCustomFeedRequest
 ) {

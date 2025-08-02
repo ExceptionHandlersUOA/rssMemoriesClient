@@ -4,6 +4,7 @@ import {
   addCustomFeed,
   deleteCustomFeed,
   deleteFeed,
+  updateFeed,
 } from "@/lib/api/feeds"
 import { QueryKeys } from "../enums"
 
@@ -25,6 +26,19 @@ export function useDeleteFeed() {
 
   return useMutation({
     mutationFn: deleteFeed,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QueryKeys.FEEDS],
+      })
+    },
+  })
+}
+
+export function useUpdateFeed() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: updateFeed,
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [QueryKeys.FEEDS],
