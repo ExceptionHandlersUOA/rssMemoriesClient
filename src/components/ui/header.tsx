@@ -8,7 +8,7 @@ export function Header() {
       <div className="mx-auto flex max-w-[1200px] items-center justify-between">
         <div className="flex items-center">
           <h1 className="font-times m-0 text-2xl font-bold tracking-[0.5px] text-[#2c1810] drop-shadow-[1px_1px_2px_rgba(139,69,19,0.2)]">
-            RSS Memories
+            Web Memories
           </h1>
         </div>
         <nav className="flex items-center gap-6">
