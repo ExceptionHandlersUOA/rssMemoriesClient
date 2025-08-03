@@ -133,7 +133,7 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
                         height={125}
                       />
                     </DialogTrigger>
-                    <DialogContent className="flex w-fit min-w-5xl flex-col items-center">
+                    <DialogContent className="flex max-h-[80vh] w-fit min-w-5xl flex-col items-center">
                       <DialogHeader>
                         <DialogTitle>Image</DialogTitle>
                       </DialogHeader>
@@ -156,14 +156,14 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
                   <Dialog key={index}>
                     <DialogTrigger className="max-h-full w-fit flex-shrink-0 even:hidden">
                       <Image
-                        className="h-40 max-h-full w-fit flex-shrink-0 cursor-pointer rounded"
+                        className="max-h-full w-fit flex-shrink-0 cursor-pointer rounded"
                         src={`${process.env.NEXT_PUBLIC_API_URL}/api/file/${image.fileName}`}
                         alt={`Image ${index + 1}`}
                         width={200}
                         height={125}
                       />
                     </DialogTrigger>
-                    <DialogContent className="flex w-fit min-w-5xl flex-col items-center">
+                    <DialogContent className="flex max-h-[80vh] w-fit min-w-5xl flex-col items-center overflow-scroll">
                       <DialogHeader>
                         <DialogTitle>Image</DialogTitle>
                       </DialogHeader>
@@ -171,7 +171,7 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
                         src={`${process.env.NEXT_PUBLIC_API_URL}/api/file/${image.fileName}`}
                         alt={`Image ${index + 1}`}
                         key={index}
-                        className="h-80 max-w-5xl rounded object-cover"
+                        className="max-w-5xl rounded object-cover"
                         width={800}
                         height={600}
                       />

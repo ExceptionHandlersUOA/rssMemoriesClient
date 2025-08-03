@@ -15,6 +15,7 @@ import {
 } from "lucide-react"
 import {
   Dialog,
+  DialogTitle,
   DialogContent,
   DialogTrigger,
   DialogClose,
@@ -52,6 +53,9 @@ export const MemoryContentCard = ({ postId }: MemoryContentCardProps) => {
               </button>
             </DialogTrigger>
             <DialogContent className="max-h-[90vh] max-w-[90vw] overflow-clip p-0">
+              <DialogTitle className="block w-full p-2 text-center">
+                Media
+              </DialogTitle>
               <Image
                 src={fileUrl}
                 alt={`Image ${index + 1}`}
