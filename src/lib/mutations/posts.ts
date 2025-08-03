@@ -16,6 +16,9 @@ export function useCreateCustomPost() {
       queryClient.invalidateQueries({
         queryKey: [QueryKeys.POST],
       })
+      queryClient.invalidateQueries({
+        queryKey: [QueryKeys.FEEDS],
+      })
     },
   })
 }
@@ -28,6 +31,9 @@ export function useDeleteCustomPost() {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [QueryKeys.POST],
+      })
+      queryClient.invalidateQueries({
+        queryKey: [QueryKeys.FEEDS],
       })
     },
   })
@@ -42,6 +48,9 @@ export function useFavouritePost() {
       queryClient.invalidateQueries({
         queryKey: [QueryKeys.POST],
       })
+      queryClient.invalidateQueries({
+        queryKey: [QueryKeys.FEEDS],
+      })
     },
   })
 }
@@ -54,6 +63,9 @@ export function useUnfavouritePost() {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [QueryKeys.POST],
+      })
+      queryClient.invalidateQueries({
+        queryKey: [QueryKeys.FEEDS],
       })
     },
   })
