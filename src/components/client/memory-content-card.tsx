@@ -15,11 +15,13 @@ import {
 } from "lucide-react"
 import {
   Dialog,
+  DialogTitle,
   DialogContent,
   DialogTrigger,
   DialogClose,
 } from "@/components/ui/dialog"
 import { useState } from "react"
+import Image from "next/image"
 
 type MemoryContentCardProps = {
   postId: string
@@ -41,18 +43,25 @@ export const MemoryContentCard = ({ postId }: MemoryContentCardProps) => {
                 className="focus:ring-primary h-full w-full rounded object-cover transition-transform hover:scale-105 focus:ring-2 focus:outline-none"
                 onClick={() => setSelectedImage(fileUrl)}
               >
-                <img
+                <Image
                   src={fileUrl}
                   alt={`Image ${index + 1}`}
                   className="h-full w-full rounded object-cover"
+                  width={400}
+                  height={250}
                 />
               </button>
             </DialogTrigger>
             <DialogContent className="max-h-[90vh] max-w-[90vw] overflow-clip p-0">
-              <img
+              <DialogTitle className="block w-full p-2 text-center">
+                Media
+              </DialogTitle>
+              <Image
                 src={fileUrl}
                 alt={`Image ${index + 1}`}
                 className="h-full w-full object-contain"
+                width={800}
+                height={600}
               />
             </DialogContent>
           </Dialog>
