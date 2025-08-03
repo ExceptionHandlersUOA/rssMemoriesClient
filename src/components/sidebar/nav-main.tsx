@@ -40,7 +40,7 @@ export function NavMain({
           {item.isButton ? (
             <SidebarMenuButton
               onClick={() => {
-                if (item.title === "Add Feed") {
+                if (item.title === "Add") {
                   setIsAddFeedOpen(true)
                 }
               }}

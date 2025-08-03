@@ -52,7 +52,7 @@ const data = {
       icon: Search,
     },
     {
-      title: "Add Feed",
+      title: "Add",
       url: "/dashboard?tab=feed",
       icon: Plus,
       isButton: true,
