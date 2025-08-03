@@ -6,21 +6,27 @@ interface HeaderProps {
 
 export function Header({ onLoginClick }: HeaderProps) {
   return (
-    <header className="header absolute top-0 left-0 right-0">
+    <header className="header absolute top-0 right-0 left-0">
       <div className="header-content">
         <div className="header-logo">
           <h1 className="logo-text">RSS Memories</h1>
         </div>
         <nav className="header-nav">
-          <a href="#" className="nav-link">About</a>
-          <a href="#" className="nav-link">Features</a>
-          <a href="#" className="nav-link">Help</a>
+          <a href="#" className="nav-link">
+            About
+          </a>
+          <a href="#" className="nav-link">
+            Features
+          </a>
+          <a href="#" className="nav-link">
+            Help
+          </a>
           <button className="header-login-btn" onClick={onLoginClick}>
             Login
           </button>
         </nav>
       </div>
-      
+
       <style jsx>{`
         .header {
           background: rgba(245, 245, 220, 0.05);
@@ -44,7 +50,7 @@ export function Header({ onLoginClick }: HeaderProps) {
         }
 
         .logo-text {
-          font-family: 'Times New Roman', 'Georgia', serif;
+          font-family: "Times New Roman", "Georgia", serif;
           color: #2c1810;
           font-size: 24px;
           font-weight: bold;
@@ -60,8 +66,8 @@ export function Header({ onLoginClick }: HeaderProps) {
         }
 
         .nav-link {
-          font-family: 'Times New Roman', 'Georgia', serif;
-          color: #8B4513;
+          font-family: "Times New Roman", "Georgia", serif;
+          color: #8b4513;
           font-size: 16px;
           text-decoration: none;
           letter-spacing: 0.3px;
@@ -70,17 +76,17 @@ export function Header({ onLoginClick }: HeaderProps) {
         }
 
         .nav-link:hover {
-          color: #A0522D;
+          color: #a0522d;
           text-decoration: underline;
         }
 
         .header-login-btn {
-          background: #8B4513;
+          background: #8b4513;
           color: white;
           border: none;
           padding: 8px 16px;
           border-radius: 4px;
-          font-family: 'Times New Roman', 'Georgia', serif;
+          font-family: "Times New Roman", "Georgia", serif;
           font-size: 14px;
           font-weight: bold;
           cursor: pointer;
@@ -89,7 +95,7 @@ export function Header({ onLoginClick }: HeaderProps) {
         }
 
         .header-login-btn:hover {
-          background: #A0522D;
+          background: #a0522d;
           transform: translateY(-1px);
           box-shadow: 0 2px 4px rgba(139, 69, 19, 0.3);
         }
@@ -99,15 +105,15 @@ export function Header({ onLoginClick }: HeaderProps) {
             flex-direction: column;
             gap: 12px;
           }
-          
+
           .header-nav {
             gap: 16px;
           }
-          
+
           .nav-link {
             font-size: 14px;
           }
-          
+
           .logo-text {
             font-size: 20px;
           }

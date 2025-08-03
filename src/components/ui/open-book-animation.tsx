@@ -1,24 +1,23 @@
-'use client'
-
+"use client"
 
 export function OpenBookAnimation() {
-  return ( 
+  return (
     <div className="open-book-animation absolute">
-        <img
+      <img
         src="/open_book.png"
         alt="Open Book"
-        className="w-48 h-48 md:w-64 md:h-64 object-contain"
-        />
-        <style jsx>{`
+        className="h-48 w-48 object-contain md:h-64 md:w-64"
+      />
+      <style jsx>{`
         @keyframes openBookSlideUp {
-          0% { 
+          0% {
             transform: translateY(100vh);
             opacity: 0;
           }
           50% {
             opacity: 0.5;
           }
-          100% { 
+          100% {
             transform: translateY(0);
             opacity: 1;
           }
@@ -35,7 +34,7 @@ export function OpenBookAnimation() {
           height: auto;
           z-index: 1;
         }
-        `}</style>
+      `}</style>
     </div>
-    )
+  )
 }
