@@ -1,7 +1,6 @@
 "use client"
 
 import { useQueryState } from "nuqs"
-import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
