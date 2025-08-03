@@ -10,6 +10,13 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog"
+import {
   Command,
   CommandEmpty,
   CommandGroup,
@@ -18,17 +25,30 @@ import {
   CommandList,
 } from "@/components/ui/command"
 import { Check, ImageIcon, PlusIcon, X } from "lucide-react"
-import { useForm } from "react-hook-form"
+import { useForm, Controller } from "react-hook-form"
 import { useState } from "react"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
 import { motion } from "framer-motion"
+import { useCreateCustomPost } from "@/lib/mutations/posts"
+import { useAddFile } from "@/lib/mutations/files"
+import { useAddCustomFeed } from "@/lib/mutations/feeds"
+import { useFeeds } from "@/query/feeds"
+import { FileType } from "@/lib/schemas/enums"
+import {
+  Select,
+  SelectTrigger,
+  SelectContent,
+  SelectItem,
+  SelectValue,
+} from "./ui/select"
 
 type PostFormData = {
   title: string
   description: string
   tags: string[]
   files: FileList | null
+  feedId: string
 }
 
 const defaultTags: string[] = [
@@ -51,12 +71,21 @@ export const PostSection = () => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false)
   const [commandInputValue, setCommandInputValue] = useState("")
   const [filePreviewUrls, setFilePreviewUrls] = useState<string[]>([])
+  const [showCreateFeedDialog, setShowCreateFeedDialog] = useState(false)
+  const [newFeedTitle, setNewFeedTitle] = useState("")
+
+  const { data: feeds, isLoading } = useFeeds()
+
+  const addFileMutation = useAddFile()
+  const createPostMutation = useCreateCustomPost()
+  const addCustomFeedMutation = useAddCustomFeed()
 
   const {
     register,
     handleSubmit,
     setValue,
     watch,
+    control,
     formState: { errors, isSubmitting },
   } = useForm<PostFormData>({
     defaultValues: {
@@ -64,6 +93,7 @@ export const PostSection = () => {
       description: "",
       tags: [],
       files: null,
+      feedId: "",
     },
   })
 
@@ -113,11 +143,93 @@ export const PostSection = () => {
     }
   }
 
+  const handleCreateNewFeed = async () => {
+    if (!newFeedTitle.trim()) {
+      alert("Please enter a feed title")
+      return
+    }
+
+    try {
+      await addCustomFeedMutation.mutateAsync({
+        title: newFeedTitle.trim(),
+        description: `Personal feed: ${newFeedTitle.trim()}`,
+        imageUrl: null,
+        url: `https://personal-feed/${newFeedTitle.toLowerCase().replace(/\s+/g, "-")}`,
+      })
+
+      // Since the mutation returns { success: boolean, message: string },
+      // we'll use a generated ID or let the user select from the refreshed list
+      const generatedId = (
+        feeds && feeds.length > 0 ? feeds[feeds.length - 1].feedId + 1 : 1
+      ).toString()
+
+      setValue("feedId", generatedId)
+      setShowCreateFeedDialog(false)
+      setNewFeedTitle("")
+    } catch (error) {
+      console.error("Error creating new feed:", error)
+      alert("Failed to create new feed. Please try again.")
+    }
+  }
+
+  const handleFeedSelection = (value: string) => {
+    const addPersonalFeedValue = (
+      feeds && feeds.length > 0 ? feeds[feeds.length - 1].feedId + 1 : 1
+    ).toString()
+
+    if (value === addPersonalFeedValue) {
+      setShowCreateFeedDialog(true)
+    } else {
+      setValue("feedId", value)
+    }
+  }
+
   const onSubmit = async (data: PostFormData) => {
     try {
+      // const filesToUpload = [];
+
+      // Upload files and collect their information
+      // for (const file of Array.from(data.files || [])) {
+      // 	await addFileMutation.mutateAsync({
+      // 		file,
+      // 		filename: file.name,
+      // 	});
+
+      // 	// Add file info to the array with proper FileType enum
+      // 	filesToUpload.push({
+      // 		type: file.type.startsWith("image/")
+      // 			? FileType.Image
+      // 			: FileType.Video,
+      // 		fileName: file.name,
+      // 	});
+      // }
+
+      if (data.feedId === "") {
+        throw new Error("Please select a feed")
+      }
+
+      await createPostMutation.mutateAsync({
+        feedId: data.feedId,
+        createCustomPostRequest: {
+          post: {
+            title: data.title,
+            description: data.description,
+            media: [],
+            body: null,
+            sourceUrl: null,
+            categories: data.tags,
+            favourited: false,
+            lastUpdated: new Date().toISOString(),
+            publishedAt: new Date().toISOString(),
+          },
+        },
+      })
+
       // Handle form submission here
       console.log("Form data:", data)
       console.log("Uploaded files:", uploadedFiles)
+      // console.log("Files to upload:", filesToUpload);
+      console.log("Selected feed ID:", data.feedId)
 
       filePreviewUrls.forEach(url => URL.revokeObjectURL(url))
 
@@ -128,6 +240,7 @@ export const PostSection = () => {
       setValue("description", "")
       setValue("tags", [])
       setValue("files", null)
+      setValue("feedId", "")
     } catch (error) {
       console.error("Error submitting post:", error)
     }
@@ -135,9 +248,9 @@ export const PostSection = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Card className="py-4">
+      <Card className={cn("gap-4")}>
         <CardHeader>
-          <CardTitle>
+          <CardTitle className={cn("flex flex-row space-x-2")}>
             <Input
               {...register("title", {
                 required: "Please enter a title",
@@ -146,12 +259,62 @@ export const PostSection = () => {
               placeholder="Title"
               className={cn("text-xl font-semibold md:text-xl")}
             />
+            <Controller
+              name="feedId"
+              control={control}
+              rules={{ required: "Please select a feed" }}
+              render={({ field }) => (
+                <Select onValueChange={handleFeedSelection} value={field.value}>
+                  <SelectTrigger className="w-[148px]">
+                    <SelectValue placeholder="Select Feed" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {isLoading ? (
+                      <SelectItem value="loading" disabled>
+                        Loading feeds...
+                      </SelectItem>
+                    ) : (
+                      <>
+                        {feeds
+                          ?.filter(feed => feed.platform === "Custom")
+                          .map(feed => (
+                            <SelectItem
+                              key={feed.feedId}
+                              value={feed.feedId.toString()}
+                            >
+                              {feed.title}
+                            </SelectItem>
+                          ))}
+                        <SelectItem
+                          value={(feeds && feeds.length > 0
+                            ? feeds[feeds.length - 1].feedId + 1
+                            : 1
+                          ).toString()}
+                        >
+                          Add Personal Feed
+                        </SelectItem>
+                      </>
+                    )}
+                  </SelectContent>
+                </Select>
+              )}
+            />
           </CardTitle>
-          {errors.title && (
-            <p className="text-destructive text-sm">{errors.title.message}</p>
+          {(errors.feedId || errors.title) && (
+            <div className="flex flex-row items-center justify-between">
+              {errors.title && (
+                <p className="text-destructive text-sm">
+                  {errors.title.message}
+                </p>
+              )}
+              {errors.feedId && (
+                <p className="text-destructive text-sm">
+                  {errors.feedId.message}
+                </p>
+              )}
+            </div>
           )}
         </CardHeader>
-
         <CardContent className="flex flex-col gap-4">
           <div className="flex flex-wrap items-center gap-2">
             {tags.map((tag, index) => (
@@ -334,6 +497,51 @@ export const PostSection = () => {
           )}
         </CardContent>
       </Card>
+
+      {/* Create New Feed Dialog */}
+      <Dialog
+        open={showCreateFeedDialog}
+        onOpenChange={setShowCreateFeedDialog}
+      >
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Create New Personal Feed</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div>
+              <label htmlFor="feed-title" className="text-sm font-medium">
+                Feed Title
+              </label>
+              <Input
+                id="feed-title"
+                value={newFeedTitle}
+                onChange={e => setNewFeedTitle(e.target.value)}
+                placeholder="Enter feed title"
+                className="mt-1"
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => {
+                setShowCreateFeedDialog(false)
+                setNewFeedTitle("")
+              }}
+            >
+              Cancel
+            </Button>
+            <Button
+              type="button"
+              onClick={handleCreateNewFeed}
+              disabled={addCustomFeedMutation.isPending}
+            >
+              {addCustomFeedMutation.isPending ? "Creating..." : "Create Feed"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </form>
   )
 }

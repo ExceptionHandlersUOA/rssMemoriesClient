@@ -53,8 +53,9 @@ export type Post = z.infer<typeof PostSchema>
 export type Media = z.infer<typeof MediaSchema>
 export type GetPostResponse = z.infer<typeof GetPostResponseSchema>
 export type AddCustomPostRequest = z.infer<typeof AddCustomPostRequestSchema>
-export type CreateCustomPostRequest = z.infer<
-  typeof CreateCustomPostRequestSchema
+export type CreateCustomPostRequest = Omit<
+  z.infer<typeof CreateCustomPostRequestSchema>,
+  "id"
 >
 export type DeleteCustomPostRequest = {
   feedId: string
