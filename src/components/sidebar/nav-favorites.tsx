@@ -30,6 +30,8 @@ import { useActivePath } from "@/hooks/use-active-path"
 import { useFeeds } from "@/query/feeds"
 import { NavFavoritesSkeleton } from "@/components/skeletons"
 
+// THIS IS ACTUALLY supposed to be NavFeeds and has a list of all feeds, but decided to play safe
+// and leave all names the same to avoid any import problems
 export function NavFavorites() {
   const { data: feeds, isLoading } = useFeeds()
   const favorites = feeds?.map(({ title, feedId }) => ({
@@ -47,7 +49,7 @@ export function NavFavorites() {
 
   return (
     <SidebarGroup className="flex flex-col group-data-[collapsible=icon]:hidden">
-      <SidebarGroupLabel>Favorites</SidebarGroupLabel>
+      <SidebarGroupLabel>Feeds</SidebarGroupLabel>
       <div className="flex min-h-0 flex-1 flex-col">
         <ScrollArea className="max-h-48 flex-1">
           <SidebarMenu>

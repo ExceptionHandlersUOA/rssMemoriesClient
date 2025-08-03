@@ -17,6 +17,8 @@ import {
 } from "../ui/dialog"
 import { FileType, Platform } from "@/lib/schemas/enums"
 import { Post } from "@/lib/schemas"
+import { Button } from "../ui/button"
+import { ExternalLink } from "lucide-react"
 
 dayjs.extend(relativeTime)
 
@@ -53,7 +55,7 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
             {platform && ` · ${platform}`}
           </CardDescription>
           <CardDescription
-            className="prose prose-h2:mt-1 prose-h2:text-foreground prose-a:text-foreground line-clamp-5"
+            className="prose prose-h2:mt-1 prose-h2:text-foreground prose-a:text-foreground line-clamp-4 w-full max-w-none text-wrap"
             dangerouslySetInnerHTML={{
               __html: description ?? "",
             }}
@@ -61,7 +63,7 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
         </CardHeader>
 
         <CardContent className="flex flex-col gap-4">
-          {body && (
+          {body && body.length >= 0 && (
             <p className="line-clamp-5 whitespace-break-spaces">{body}</p>
           )}
 
@@ -159,6 +161,20 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
                 ))}
             </div>
           </div>
+
+          {sourceUrl && (
+            <Button variant="outline" size="sm" asChild className="w-fit">
+              <a
+                href={sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2"
+              >
+                <ExternalLink className="h-4 w-4" />
+                View Source
+              </a>
+            </Button>
+          )}
         </CardContent>
       </Card>
     )
