@@ -31,7 +31,7 @@ import { cn } from "@/lib/utils"
 import Image from "next/image"
 import { motion } from "framer-motion"
 import { useCreateCustomPost } from "@/lib/mutations/posts"
-import { useAddFile } from "@/lib/mutations/files"
+// import { useAddFile } from "@/lib/mutations/files"
 import { useAddCustomFeed } from "@/lib/mutations/feeds"
 import { useFeeds } from "@/query/feeds"
 import {
@@ -75,7 +75,7 @@ export const PostSection = () => {
 
   const { data: feeds, isLoading } = useFeeds()
 
-  const addFileMutation = useAddFile()
+  // const addFileMutation = useAddFile()
   const createPostMutation = useCreateCustomPost()
   const addCustomFeedMutation = useAddCustomFeed()
 
