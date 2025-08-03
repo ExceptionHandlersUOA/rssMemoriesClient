@@ -4,20 +4,20 @@ import * as React from "react"
 import {
   // AudioWaveform,
   // Blocks,
-  Calendar,
+  // Calendar,
   // Command,
   Home,
   // MessageCircleQuestion,
   Plus,
   Search,
-  Settings2,
+  // Settings2,
   Star,
-  Trash2,
+  // Trash2,
 } from "lucide-react"
 
 import { NavFavorites } from "./nav-favorites"
 import { NavMain } from "./nav-main"
-import { NavSecondary } from "./nav-secondary"
+// import { NavSecondary } from "./nav-secondary"
 // import { TeamSwitcher } from "./team-switcher"
 import {
   Sidebar,
@@ -69,33 +69,33 @@ const data = {
       icon: Star,
     },
   ],
-  navSecondary: [
-    {
-      title: "Calendar",
-      url: "#",
-      icon: Calendar,
-    },
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-    },
-    // {
-    //   title: "Templates",
-    //   url: "#",
-    //   icon: Blocks,
-    // },
-    {
-      title: "Trash",
-      url: "#",
-      icon: Trash2,
-    },
-    // {
-    //   title: "Help",
-    //   url: "#",
-    //   icon: MessageCircleQuestion,
-    // },
-  ],
+  // navSecondary: [
+  // {
+  //   title: "Calendar",
+  //   url: "#",
+  //   icon: Calendar,
+  // },
+  // {
+  //   title: "Settings",
+  //   url: "#",
+  //   icon: Settings2,
+  // },
+  // {
+  //   title: "Templates",
+  //   url: "#",
+  //   icon: Blocks,
+  // },
+  // {
+  //   title: "Trash",
+  //   url: "#",
+  //   icon: Trash2,
+  // },
+  // {
+  //   title: "Help",
+  //   url: "#",
+  //   icon: MessageCircleQuestion,
+  // },
+  // ],
 }
 
 export function SidebarLeft() {
@@ -108,7 +108,7 @@ export function SidebarLeft() {
       <SidebarContent>
         <NavRecent />
         <NavFavorites />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
+        {/* <NavSecondary items={data.navSecondary} className="mt-auto" /> */}
       </SidebarContent>
       <SidebarRail />
     </Sidebar>

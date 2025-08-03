@@ -8,7 +8,6 @@ export function useActivePath() {
   return {
     pathname,
     isActive: (href: string) => {
-      console.log(pathname, href)
       return pathname === href
     },
   }
