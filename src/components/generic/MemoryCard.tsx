@@ -44,7 +44,6 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
     publishedAt,
     media,
     platform,
-    favourited,
   }) => {
     const [localFavourited, setLocalFavourited] = useState(favourited)
     // const imageUrl = firstPost?.media?.[0]?.fileName
