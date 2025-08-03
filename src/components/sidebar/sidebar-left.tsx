@@ -63,11 +63,11 @@ const data = {
       url: "/dashboard",
       icon: Home,
     },
-    {
-      title: "Categories",
-      url: "/categories",
-      icon: Star,
-    },
+    // {
+    //   title: "Categories",
+    //   url: "/categories",
+    //   icon: Star,
+    // },
   ],
   // navSecondary: [
   // {
