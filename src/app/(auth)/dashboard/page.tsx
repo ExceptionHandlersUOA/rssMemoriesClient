@@ -5,8 +5,14 @@ import { getQueryClient } from "@/utils/query"
 import { feedsOptions } from "@/query/feeds"
 import { Suspense } from "react"
 import { ContentTabsSkeleton } from "@/components/skeletons"
+import { Metadata } from "next"
 
 export const dynamic = "force-static"
+
+export const metadata: Metadata = {
+  title: "Dashboard",
+  description: "Dashboard of your memories",
+}
 
 export default async function Page() {
   const queryClient = getQueryClient()
