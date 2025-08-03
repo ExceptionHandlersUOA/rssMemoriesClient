@@ -32,9 +32,13 @@ export const MemoryHeader = ({ postId }: MemoryHeaderProps) => {
             <h1 className="text-3xl font-bold tracking-tight">
               {isLoading ? <Skeleton className="h-9 w-48" /> : title}
             </h1>
-            <p className="text-muted-foreground max-w-md truncate">
-              {isLoading ? <Skeleton className="h-5 w-64" /> : description}
-            </p>
+            {isLoading ? (
+              <Skeleton className="h-5 w-64" />
+            ) : (
+              <p className="text-muted-foreground max-w-md truncate">
+                {description}
+              </p>
+            )}
           </div>
         </div>
       </div>
