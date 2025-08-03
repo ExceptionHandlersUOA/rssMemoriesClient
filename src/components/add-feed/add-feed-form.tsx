@@ -56,8 +56,8 @@ export const AddFeedForm = () => {
   }
 
   return (
-    <div className="flex flex-col items-center gap-4">
-      <Card>
+    <div className="flex w-full flex-col items-center gap-4">
+      <Card className="w-full">
         <CardHeader>
           <CardTitle className="text-2xl">
             Add your Memories from a feed on the Web
