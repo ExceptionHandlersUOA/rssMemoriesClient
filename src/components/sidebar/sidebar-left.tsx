@@ -25,6 +25,7 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar"
+import { NavRecent } from "./nav-recent"
 
 // This is sample data.
 const data = {
@@ -105,6 +106,7 @@ export function SidebarLeft() {
         <NavMain items={data.navMain} />
       </SidebarHeader>
       <SidebarContent>
+        <NavRecent />
         <NavFavorites />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>

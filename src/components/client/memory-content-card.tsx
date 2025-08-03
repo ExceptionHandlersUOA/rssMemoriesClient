@@ -3,6 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { usePost } from "@/query/posts"
 import { Skeleton } from "@/components/ui/skeleton"
+import { FileType } from "@/lib/schemas"
 
 type MemoryContentCardProps = {
   postId: string
@@ -25,9 +26,7 @@ export const MemoryContentCard = ({ postId }: MemoryContentCardProps) => {
               <Skeleton className="h-4 w-1/2" />
             </div>
           ) : (
-            <p className="text-muted-foreground">
-              {post?.description || "No content available for this memory."}
-            </p>
+            <p className="text-muted-foreground">{post?.description || ""}</p>
           )}
 
           {isLoading ? (
@@ -49,20 +48,26 @@ export const MemoryContentCard = ({ postId }: MemoryContentCardProps) => {
             post.media.length > 0 && (
               <div className="mt-4 space-y-4">
                 <h4 className="font-medium">Media</h4>
-                <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
+                <div className="">
                   {post.media.map((media, index) => (
                     <div key={index} className="rounded-lg border p-2">
                       <div className="text-muted-foreground mb-1 text-xs">
                         {media.type}
                       </div>
                       {media.fileName && (
-                        <div className="bg-muted flex aspect-square items-center justify-center rounded">
-                          {media.type === "Image" ? (
+                        <div className="flex items-center justify-center rounded">
+                          {media.type === FileType.Image ? (
                             <img
-                              src={`${process.env.NEXT_PUBLIC_API_URL}/api/getFile/${media.fileName}`}
+                              src={`${process.env.NEXT_PUBLIC_API_URL}/api/file/${media.fileName}`}
                               alt={`Media ${index + 1}`}
                               className="h-full w-full rounded object-cover"
                             />
+                          ) : FileType.Video ? (
+                            <video className="h-fit w-fit" playsInline controls>
+                              <source
+                                src={`${process.env.NEXT_PUBLIC_API_URL}/api/file/${media.fileName}`}
+                              />
+                            </video>
                           ) : (
                             <div className="text-muted-foreground text-sm">
                               {media.type} file
