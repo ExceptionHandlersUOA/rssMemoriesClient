@@ -8,6 +8,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { ContentTabs } from "../content-tabs"
+import { Suspense } from "react"
 
 export const AddFeedPopup = () => {
   const [isOpen, setIsOpen] = useQueryState("add-feed", {
@@ -25,13 +26,15 @@ export const AddFeedPopup = () => {
   }
 
   return (
-    <Dialog open={isOpen} onOpenChange={handleOpenChange}>
-      <DialogContent className="sm:max-w-4xl">
-        <DialogHeader>
-          <DialogTitle>Add Feed</DialogTitle>
-        </DialogHeader>
-        <ContentTabs />
-      </DialogContent>
-    </Dialog>
+    <Suspense>
+      <Dialog open={isOpen} onOpenChange={handleOpenChange}>
+        <DialogContent className="sm:max-w-4xl">
+          <DialogHeader>
+            <DialogTitle>Add Feed</DialogTitle>
+          </DialogHeader>
+          <ContentTabs />
+        </DialogContent>
+      </Dialog>
+    </Suspense>
   )
 }

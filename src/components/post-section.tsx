@@ -34,7 +34,6 @@ import { useCreateCustomPost } from "@/lib/mutations/posts"
 import { useAddFile } from "@/lib/mutations/files"
 import { useAddCustomFeed } from "@/lib/mutations/feeds"
 import { useFeeds } from "@/query/feeds"
-import { FileType } from "@/lib/schemas/enums"
 import {
   Select,
   SelectTrigger,
