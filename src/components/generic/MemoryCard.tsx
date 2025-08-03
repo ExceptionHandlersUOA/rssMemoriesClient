@@ -39,6 +39,7 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
     title,
     description,
     body,
+    favourited,
     sourceUrl,
     publishedAt,
     media,
@@ -97,14 +98,19 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
             <p className="line-clamp-5 whitespace-break-spaces">{body}</p>
           )}
 
-          <div className="flex flex-row justify-center w-sm items-center gap-2">
+          <div className="flex w-sm flex-row items-center justify-center gap-2">
             {media
               ?.filter(media => media.type === FileType.Video)
               .map(video => (
-                <video className="h-fit w-fit rounded-xl" playsInline controls>
-                    <source
+                <video
+                  key={video.fileName}
+                  className="h-fit w-fit rounded-xl"
+                  playsInline
+                  controls
+                >
+                  <source
                     src={`${process.env.NEXT_PUBLIC_API_URL}/api/file/${video.fileName}`}
-                    />
+                  />
                 </video>
               ))}
           </div>
