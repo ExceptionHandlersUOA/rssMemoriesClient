@@ -1,4 +1,4 @@
-import { PostSection } from "@/components/post-section"
+import { ContentTabs } from "@/components/content-tabs"
 import { DashboardSection } from "@/components/client"
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query"
 import { getQueryClient } from "@/utils/query"
@@ -12,7 +12,7 @@ export default async function Page() {
     <>
       {/* HOME PAGE SECTION */}
       <div className="text-muted-foreground flex flex-col gap-4 text-sm">
-        <PostSection />
+        <ContentTabs />
         <HydrationBoundary state={dehydrate(queryClient)}>
           <DashboardSection />
         </HydrationBoundary>

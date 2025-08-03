@@ -1,5 +1,5 @@
-import { AddFeedForm } from "@/components/add-feed/add-feed-form"
+import { redirect } from "next/navigation"
 
-export default function Search() {
-  return <AddFeedForm />
+export default function AddPage() {
+  redirect("/dashboard?tab=feed")
 }

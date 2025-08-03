@@ -2,6 +2,7 @@
 
 import { type LucideIcon } from "lucide-react"
 import Link from "next/link"
+import { useQueryState } from "nuqs"
 
 import {
   SidebarMenu,
@@ -18,16 +19,32 @@ export function NavMain({
     url: string
     icon: LucideIcon
     badge?: string
+    isButton?: boolean
   }[]
 }) {
   const { isActive } = useActivePath()
+  const [, setIsAddFeedOpen] = useQueryState("add-feed", {
+    defaultValue: false,
+    parse: (value): boolean => {
+      return value === "true"
+    },
+    serialize: (value): string => {
+      return value ? "true" : "false"
+    },
+  })
 
   return (
     <SidebarMenu>
       {items.map(item => (
         <SidebarMenuItem key={item.title}>
-          <SidebarMenuButton asChild isActive={isActive(item.url)}>
-            <Link href={item.url}>
+          {item.isButton ? (
+            <SidebarMenuButton
+              onClick={() => {
+                if (item.title === "Add") {
+                  setIsAddFeedOpen(true)
+                }
+              }}
+            >
               <item.icon />
               <span>{item.title}</span>
               {item.badge && (
@@ -35,8 +52,20 @@ export function NavMain({
                   {item.badge}
                 </span>
               )}
-            </Link>
-          </SidebarMenuButton>
+            </SidebarMenuButton>
+          ) : (
+            <SidebarMenuButton asChild isActive={isActive(item.url)}>
+              <Link href={item.url}>
+                <item.icon />
+                <span>{item.title}</span>
+                {item.badge && (
+                  <span className="bg-primary text-primary-foreground ml-auto rounded-full px-2 py-0.5 text-xs">
+                    {item.badge}
+                  </span>
+                )}
+              </Link>
+            </SidebarMenuButton>
+          )}
         </SidebarMenuItem>
       ))}
     </SidebarMenu>

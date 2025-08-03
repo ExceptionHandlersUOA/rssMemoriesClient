@@ -8,7 +8,7 @@ export const DashboardSection = () => {
 
   if (isLoading) {
     return (
-      <div className="mx-auto w-full max-w-3xl">
+      <div className="mx-auto w-full max-w-4xl">
         <div className="flex flex-col gap-4">
           <div className="text-center">Loading feeds...</div>
         </div>
@@ -18,7 +18,7 @@ export const DashboardSection = () => {
 
   if (error) {
     return (
-      <div className="mx-auto w-full max-w-3xl">
+      <div className="mx-auto w-full max-w-4xl">
         <div className="flex flex-col gap-4">
           <div className="text-destructive text-center">
             Error loading feeds. Please try again.
@@ -29,7 +29,7 @@ export const DashboardSection = () => {
   }
 
   return (
-    <div className="mx-auto w-full max-w-3xl">
+    <div className="mx-auto w-full max-w-4xl">
       <div className="flex flex-col gap-4">
         {feedsData && feedsData.length > 0 ? (
           feedsData.map(feed => <MemoryCard key={feed.feedId} {...feed} />)
