@@ -1,0 +1,165 @@
+/* Landing Page Styles */
+
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes fadeInText {
+  0% { 
+    opacity: 0;
+    transform: translateY(10vh);
+  }
+  100% { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fadeOut {
+  animation: fadeOut 0.5s ease-out forwards;
+}
+
+.bookContent {
+  animation: fadeInText 0.6s ease-in 0.6s forwards;
+  opacity: 0;
+  z-index: 20;
+}
+
+.bookContent * {
+  pointer-events: auto;
+}
+
+.bookTitle {
+  font-size: 4rem;
+  font-family: 'Times New Roman', 'Georgia', serif;
+  color: #2c1810;
+  text-shadow: 1px 1px 2px rgba(139, 69, 19, 0.3);
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+}
+
+.bookText {
+  font-family: 'Times New Roman', 'Georgia', serif;
+  color: #3a2317;
+  text-shadow: 0.5px 0.5px 1px rgba(139, 69, 19, 0.2);
+  line-height: 1.6;
+  letter-spacing: 0.3px;
+  text-align: center;
+}
+
+.bookContentWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2% 3%;
+  overflow: hidden;
+}
+
+.contentDivider {
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #8B4513, transparent);
+  opacity: 0.3;
+}
+
+.returnBox {
+  border: 2px solid #8B4513;
+  border-radius: 8px;
+  padding: 30px 25px;
+  max-width: 90%;
+  background: rgba(245, 245, 220, 0.1);
+  box-shadow: 0 2px 4px rgba(139, 69, 19, 0.2);
+}
+
+.welcomeTextContainer {
+  text-align: center;
+  max-width: 85%;
+}
+
+.welcomeTitle {
+  font-family: 'Times New Roman', 'Georgia', serif;
+  color: #2c1810;
+  text-shadow: 1px 1px 2px rgba(139, 69, 19, 0.3);
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.welcomeText {
+  font-family: 'Times New Roman', 'Georgia', serif;
+  color: #3a2317;
+  text-shadow: 0.5px 0.5px 1px rgba(139, 69, 19, 0.2);
+  line-height: 1.6;
+  letter-spacing: 0.3px;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.getStartedButton {
+  background: #8B4513;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-family: 'Times New Roman', 'Georgia', serif;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+  pointer-events: auto;
+  min-width: 150px;
+}
+
+.getStartedButton:hover {
+  background: #A0522D;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(139, 69, 19, 0.3);
+}
+
+.flex2 {
+  flex: 2;
+}
+
+.mainText {
+  font-family: 'Times New Roman', 'Georgia', serif;
+  color: #2c1810;
+  text-align: center;
+  line-height: 1.4;
+  letter-spacing: 0.3px;
+  text-shadow: 1px 1px 2px rgba(139, 69, 19, 0.2);
+}
+
+.returnText {
+  font-family: 'Times New Roman', 'Georgia', serif;
+  color: #2c1810;
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.4;
+  margin-bottom: 15px;
+  letter-spacing: 0.3px;
+}
+
+.loginButton {
+  background: #8B4513;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-family: 'Times New Roman', 'Georgia', serif;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+  width: 100%;
+  pointer-events: auto;
+}
+
+.loginButton:hover {
+  background: #A0522D;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(139, 69, 19, 0.3);
+}
