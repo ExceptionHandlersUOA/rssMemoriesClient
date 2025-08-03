@@ -41,6 +41,7 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
     body,
     sourceUrl,
     publishedAt,
+    favourited,
     media,
     platform,
   }) => {
