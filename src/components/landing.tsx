@@ -27,7 +27,7 @@ export function Landing() {
 
         {/* Optional content below the book */}
         <div className={`text-center ${isAnimating ? styles.fadeOut : ""}`}>
-          <h1 className="mb-4 text-4xl font-bold md:text-6xl">RSS Memories</h1>
+          <h1 className="mb-4 text-4xl font-bold md:text-6xl">Web Memories</h1>
           <p className="text-muted-foreground text-lg">
             Your memories, organized and preserved
           </p>
@@ -58,12 +58,12 @@ export function Landing() {
               <h2
                 className={`${styles.bookTitle} mb-4 text-2xl font-bold md:text-4xl`}
               >
-                RSS MEMORIES
+                Web Memories
               </h2>
               <div className={`${styles.contentDivider} mb-4`}></div>
-              <p className={`${styles.bookText} text-lg md:text-xl`}>
-                Our product description goes here. It can be a brief overview of
-                what the product does and its key features.
+              <p className={`${styles.bookText} text-lg md:text-2xl`}>
+                Web Memories helps you save, organize, and revisit your favorite
+                web content and personal memories in one secure place.
               </p>
             </div>
           </div>
