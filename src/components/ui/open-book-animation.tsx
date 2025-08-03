@@ -1,13 +1,12 @@
 "use client"
 
+import Image from "next/image"
+import openBook from "@/assets/open_book.png"
+
 export function OpenBookAnimation() {
   return (
     <div className="open-book-animation absolute">
-      <img
-        src="/open_book.png"
-        alt="Open Book"
-        className="h-48 w-48 object-contain md:h-64 md:w-64"
-      />
+      <Image priority src={openBook} alt="Open Book" className="z-1 w-screen" />
       <style jsx>{`
         @keyframes openBookSlideUp {
           0% {

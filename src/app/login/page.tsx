@@ -1,4 +1,6 @@
 import { LoginForm } from "@/components/ui/login-form"
+import Image from "next/image"
+import loginImage from "@/assets/Login_img.gif"
 
 export default function LoginPage() {
   return (
@@ -19,8 +21,8 @@ export default function LoginPage() {
         </div>
       </div>
       <div className="relative hidden lg:block lg:pl-2">
-        <img
-          src="/Login_img.gif"
+        <Image
+          src={loginImage}
           alt="Login Image"
           className="absolute inset-0 h-full w-full object-contain object-left dark:brightness-[0.2] dark:grayscale"
         />

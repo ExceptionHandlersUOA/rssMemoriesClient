@@ -69,6 +69,7 @@
   --font-weight-medium: 700;
   --font-weight-semibold: 700;
   --font-serif: PT Serif, serif;
+  --font-times: "Times New Roman", Georgia, serif;
   --shadow-xs: 0 2px 0 0 var(--border);
   --shadow-sm: 0 2px 0 0 var(--border);
   --shadow-md: 0 2px 0 0 var(--border);
