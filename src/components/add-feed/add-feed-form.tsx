@@ -1,7 +1,13 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import {
   FormField,
   FormItem,
@@ -50,18 +56,17 @@ export const AddFeedForm = () => {
   }
 
   return (
-    <div className="flex flex-col items-center gap-4">
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-2xl">
-            Add your Memories from a feed on the Web
-          </CardTitle>
-          <CardDescription>
-            <span>
-              Supported Platforms: YouTube, Instagram, RSS, Reddit and GitHub
-            </span>
-          </CardDescription>
-        </CardHeader>
+    <Card>
+      <CardHeader>
+        <CardTitle className="text-2xl">
+          Add your Memories from a feed on the Web
+        </CardTitle>
+        <CardDescription>
+          <span>
+            Supported Platforms: YouTube, Instagram, RSS, Reddit and GitHub
+          </span>
+        </CardDescription>
+      </CardHeader>
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
