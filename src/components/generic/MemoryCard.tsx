@@ -24,6 +24,7 @@ import { useFavouritePost, useUnfavouritePost } from "@/lib/mutations/posts"
 import { cn } from "@/lib/utils"
 import { StarIcon } from "lucide-react"
 import { Button } from "../ui/button"
+import Link from "next/link"
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
@@ -67,12 +68,12 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
       <Card className="py-4">
         <CardHeader>
           <CardTitle className={cn("flex flex-row justify-between gap-2")}>
-            <a
+            <Link
               className="text-2xl hover:underline"
               href={`/dashboard/memories/${postId}`}
             >
               {title || "Untitled"}
-            </a>
+            </Link>
             <Button variant="ghost" onClick={toggleFavourite} className="p-1">
               {localFavourited ? (
                 <StarIcon stroke="#000000" fill="#000000" />
