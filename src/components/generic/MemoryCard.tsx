@@ -8,6 +8,8 @@ import {
 } from "../ui/card"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
+import utc from "dayjs/plugin/utc"
+import timezone from "dayjs/plugin/timezone"
 import {
   Dialog,
   DialogTrigger,
@@ -18,6 +20,8 @@ import {
 import { FileType, Platform } from "@/lib/schemas/enums"
 import { Post } from "@/lib/schemas"
 
+dayjs.extend(utc)
+dayjs.extend(timezone)
 dayjs.extend(relativeTime)
 
 export interface MemoryCardProps extends Post {
@@ -49,7 +53,7 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
             </a>
           </CardTitle>
           <CardDescription>
-            {publishedAt && dayjs(publishedAt).fromNow()}
+            {publishedAt && dayjs.utc(publishedAt).local().fromNow()}
             {platform && ` · ${platform}`}
           </CardDescription>
           <CardDescription
