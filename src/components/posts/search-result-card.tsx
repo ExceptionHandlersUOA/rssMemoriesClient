@@ -25,7 +25,12 @@ export const SearchResultCard = ({ post }: SearchResultCardProps) => {
       <CardHeader>
         <div className="flex items-start justify-between">
           <CardTitle className="line-clamp-2 text-lg">
-            {post.title || "Untitled Post"}
+            <a
+              className="text-2xl hover:underline"
+              href={`/dashboard/memories/${post.postId}`}
+            >
+              {post.title || "Untitled"}
+            </a>
           </CardTitle>
           {post.favourited && (
             <Heart className="h-5 w-5 fill-current text-red-500" />

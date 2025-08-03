@@ -28,6 +28,7 @@ export interface MemoryCardProps extends Post {
 
 export const MemoryCard: FC<MemoryCardProps> = memo(
   ({
+    postId,
     title,
     description,
     body,
@@ -46,7 +47,10 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
       <Card className="py-4">
         <CardHeader>
           <CardTitle>
-            <a className="text-2xl hover:underline" href={sourceUrl || "#"}>
+            <a
+              className="text-2xl hover:underline"
+              href={`/dashboard/memories/${postId}`}
+            >
               {title || "Untitled"}
             </a>
           </CardTitle>
