@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { ExternalLink, Heart } from "lucide-react"
 import { type Post } from "@/lib/schemas/post"
 import { format } from "date-fns"
+import { FileType } from "@/lib/schemas"
 
 type SearchResultCardProps = {
   post: Post
@@ -49,6 +50,23 @@ export const SearchResultCard = ({ post }: SearchResultCardProps) => {
               {/* {post.description} */}
             </p>
           )}
+
+          <div className="flex w-xs flex-row items-center justify-center gap-2">
+            {post.media
+              ?.filter(media => media.type === FileType.Video)
+              .map(video => (
+                <video
+                  key={video.fileName}
+                  className="h-fit w-fit rounded-xl"
+                  playsInline
+                  controls
+                >
+                  <source
+                    src={`${process.env.NEXT_PUBLIC_API_URL}/api/file/${video.fileName}`}
+                  />
+                </video>
+              ))}
+          </div>
 
           <div className="text-muted-foreground flex items-center justify-between text-xs">
             <div className="flex items-center gap-2">
