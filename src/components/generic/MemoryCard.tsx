@@ -43,24 +43,25 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
     return (
       <Card className="py-4">
         <CardHeader>
-          <span className="flex items-center gap-4">
-            <CardTitle>
-              <a className="text-3xl hover:underline" href={sourceUrl || "#"}>
-                {title || "Untitled"}
-              </a>
-            </CardTitle>
-            <CardDescription>
-              {publishedAt && dayjs(publishedAt).fromNow()}
-              {platform && ` · ${platform}`}
-            </CardDescription>
-          </span>
+          <CardTitle>
+            <a className="text-2xl hover:underline" href={sourceUrl || "#"}>
+              {title || "Untitled"}
+            </a>
+          </CardTitle>
           <CardDescription>
-            {description || "No description available"}
+            {publishedAt && dayjs(publishedAt).fromNow()}
+            {platform && ` · ${platform}`}
           </CardDescription>
+          <CardDescription
+            className="prose prose-h2:mt-1 prose-h2:text-foreground"
+            dangerouslySetInnerHTML={{
+              __html: description ?? "",
+            }}
+          ></CardDescription>
         </CardHeader>
 
         <CardContent className="flex flex-col gap-4">
-          {description && <p>{description}</p>}
+          {body && <p className="whitespace-break-spaces">{body}</p>}
 
           {/* TODO: make this cool */}
           {/* TODO: make this waay cooler */}
