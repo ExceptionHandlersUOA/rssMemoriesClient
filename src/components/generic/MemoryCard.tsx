@@ -15,47 +15,60 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../ui/dialog"
-import type { Feed } from "@/lib/schemas/feeds"
-import { FileType } from "@/lib/schemas/enums"
+import { FileType, Platform } from "@/lib/schemas/enums"
+import { Post } from "@/lib/schemas"
 
 dayjs.extend(relativeTime)
 
-export type MemoryCardProps = Feed
+export interface MemoryCardProps extends Post {
+  platform: Platform
+}
 
 export const MemoryCard: FC<MemoryCardProps> = memo(
-  ({ title, description, url, posts, platform }) => {
-    const firstPost = posts?.[0]
-
-    const imageUrl = firstPost?.media?.[0]?.fileName
-      ? `${process.env.NEXT_PUBLIC_API_URL}/api/getFile/${firstPost?.media?.[0]?.fileName}`
-      : undefined
+  ({
+    title,
+    description,
+    body,
+    sourceUrl,
+    publishedAt,
+    media,
+    categories,
+    favourited,
+    platform,
+  }) => {
+    // const imageUrl = firstPost?.media?.[0]?.fileName
+    //   ? `${process.env.NEXT_PUBLIC_API_URL}/api/getFile/${firstPost?.media?.[0]?.fileName}`
+    //   : undefined
 
     return (
       <Card className="py-4">
         <CardHeader>
-          <span className="flex items-center gap-4">
-            <CardTitle>
-              <a className="text-3xl hover:underline" href={url || "#"}>
-                {title || "Untitled"}
-              </a>
-            </CardTitle>
-            <CardDescription>
-              {firstPost?.publishedAt && dayjs(firstPost.publishedAt).fromNow()}
-              {platform && ` · ${platform}`}
-            </CardDescription>
-          </span>
+          <CardTitle>
+            <a className="text-2xl hover:underline" href={sourceUrl || "#"}>
+              {title || "Untitled"}
+            </a>
+          </CardTitle>
           <CardDescription>
-            {description || "No description available"}
+            {publishedAt && dayjs(publishedAt).fromNow()}
+            {platform && ` · ${platform}`}
           </CardDescription>
+          <CardDescription
+            className="prose prose-h2:mt-1 prose-h2:text-foreground prose-a:text-foreground line-clamp-5"
+            dangerouslySetInnerHTML={{
+              __html: description ?? "",
+            }}
+          ></CardDescription>
         </CardHeader>
 
         <CardContent className="flex flex-col gap-4">
-          {firstPost?.description && <p>{firstPost.description}</p>}
+          {body && (
+            <p className="line-clamp-5 whitespace-break-spaces">{body}</p>
+          )}
 
           {/* TODO: make this cool */}
           {/* TODO: make this waay cooler */}
           <div className="flex flex-row justify-center gap-2">
-            {firstPost?.media
+            {media
               ?.filter(media => media.type === FileType.Video)
               .map((video, index) => (
                 <Dialog key={index}>
@@ -93,7 +106,7 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
 
           <div className="flex flex-col gap-2 overflow-x-auto overflow-y-hidden">
             <div className="flex flex-row gap-2">
-              {firstPost?.media
+              {media
                 ?.filter(media => media.type === FileType.Image)
                 .map((image, index) => (
                   // TODO: extract into component
@@ -120,7 +133,7 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
                 ))}
             </div>
             <div className="flex flex-row gap-2">
-              {firstPost?.media
+              {media
                 ?.filter(media => media.type === FileType.Image)
                 .map((image, index) => (
                   <Dialog key={index}>
