@@ -219,6 +219,8 @@ export const PostSection = () => {
             sourceUrl: null,
             categories: data.tags,
             favourited: false,
+            lastUpdated: new Date().toISOString(),
+            publishedAt: new Date().toISOString(),
           },
         },
       })
@@ -246,9 +248,9 @@ export const PostSection = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Card className="py-4">
+      <Card className={cn("gap-4")}>
         <CardHeader>
-          <CardTitle>
+          <CardTitle className={cn("flex flex-row space-x-2")}>
             <Input
               {...register("title", {
                 required: "Please enter a title",
@@ -297,14 +299,22 @@ export const PostSection = () => {
                 </Select>
               )}
             />
-        </CardTitle>
-        {errors.feedId && (
-          <p className="text-destructive text-sm">{errors.feedId.message}</p>
-        )}
-        {errors.title && (
-          <p className="text-destructive text-sm">{errors.title.message}</p>
-        )}
-      </CardHeader>
+          </CardTitle>
+          {(errors.feedId || errors.title) && (
+            <div className="flex flex-row items-center justify-between">
+              {errors.title && (
+                <p className="text-destructive text-sm">
+                  {errors.title.message}
+                </p>
+              )}
+              {errors.feedId && (
+                <p className="text-destructive text-sm">
+                  {errors.feedId.message}
+                </p>
+              )}
+            </div>
+          )}
+        </CardHeader>
         <CardContent className="flex flex-col gap-4">
           <div className="flex flex-wrap items-center gap-2">
             {tags.map((tag, index) => (
@@ -482,10 +492,9 @@ export const PostSection = () => {
                     </button>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        )}
+              ))}
+            </div>
+          )}
         </CardContent>
       </Card>
 
