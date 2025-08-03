@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/nextjs"
+import type { Meta, StoryObj } from "@storybook/nextjs-vite"
 import { MemoryCard } from "./memory-card"
 import { Platform } from "@/lib/schemas/enums"
 import type { Feed } from "@/lib/schemas/feeds"

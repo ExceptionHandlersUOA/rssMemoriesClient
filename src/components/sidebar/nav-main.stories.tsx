@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/nextjs"
+import type { Meta, StoryObj } from "@storybook/nextjs-vite"
 import { NavMain } from "./nav-main"
 import { Home, Search, Heart, Plus } from "lucide-react"
 
