@@ -39,7 +39,6 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
     title,
     description,
     body,
-    favourited,
     sourceUrl,
     publishedAt,
     media,
@@ -126,7 +125,7 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
                     <DialogTrigger className="max-h-full w-fit flex-shrink-0 odd:hidden">
                       <img
                         className="h-40 max-h-full w-fit flex-shrink-0 cursor-pointer rounded"
-                        src={`${process.env.NEXT_PUBLIC_API_URL}/api/getFile/${image.fileName}`}
+                        src={`${process.env.NEXT_PUBLIC_API_URL}/api/file/${image.fileName}`}
                         alt={`Image ${index + 1}`}
                       />
                     </DialogTrigger>
@@ -135,7 +134,7 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
                         <DialogTitle>Image</DialogTitle>
                       </DialogHeader>
                       <img
-                        src={`${process.env.NEXT_PUBLIC_API_URL}/api/getFile/${image.fileName}`}
+                        src={`${process.env.NEXT_PUBLIC_API_URL}/api/file/${image.fileName}`}
                         alt={`Image ${index + 1}`}
                         key={index}
                         className="h-80 max-w-5xl rounded object-cover"
@@ -152,7 +151,7 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
                     <DialogTrigger className="max-h-full w-fit flex-shrink-0 even:hidden">
                       <img
                         className="h-40 max-h-full w-fit flex-shrink-0 cursor-pointer rounded"
-                        src={`${process.env.NEXT_PUBLIC_API_URL}/api/getFile/${image.fileName}`}
+                        src={`${process.env.NEXT_PUBLIC_API_URL}/api/file/${image.fileName}`}
                         alt={`Image ${index + 1}`}
                       />
                     </DialogTrigger>
@@ -161,7 +160,7 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
                         <DialogTitle>Image</DialogTitle>
                       </DialogHeader>
                       <img
-                        src={`${process.env.NEXT_PUBLIC_API_URL}/api/getFile/${image.fileName}`}
+                        src={`${process.env.NEXT_PUBLIC_API_URL}/api/file/${image.fileName}`}
                         alt={`Image ${index + 1}`}
                         key={index}
                         className="h-80 max-w-5xl rounded object-cover"
