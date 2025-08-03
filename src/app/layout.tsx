@@ -5,6 +5,7 @@ import "./globals.css"
 import Providers from "./providers"
 import { Toaster } from "@/components/ui/sonner"
 import { NuqsAdapter } from "nuqs/adapters/next/app"
+import { AddFeedPopup } from "@/components/add-feed/add-feed-popup"
 
 const nunito = Nunito({
   variable: "--font-nunito",
@@ -36,6 +37,7 @@ export default function RootLayout({
           <Providers>
             <div className="texture" />
             {children}
+            <AddFeedPopup />
             <Toaster />
           </Providers>
         </NuqsAdapter>

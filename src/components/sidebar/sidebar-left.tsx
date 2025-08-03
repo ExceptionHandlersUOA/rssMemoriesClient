@@ -53,8 +53,9 @@ const data = {
     },
     {
       title: "Add Feed",
-      url: "/add",
+      url: "/dashboard?tab=feed",
       icon: Plus,
+      isButton: true,
     },
     {
       title: "Home",
