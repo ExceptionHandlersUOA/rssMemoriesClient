@@ -24,10 +24,7 @@ export const addFileClient = async ({
       )
     }
 
-    return {
-      success: true,
-      message: "File added successfully",
-    }
+    return response.text()
   } catch (error) {
     if (error instanceof Error) {
       throw new Error(`Failed to add file: ${error.message}`)

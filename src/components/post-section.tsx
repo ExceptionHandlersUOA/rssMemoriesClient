@@ -31,7 +31,7 @@ import { cn } from "@/lib/utils"
 import Image from "next/image"
 import { motion } from "framer-motion"
 import { useCreateCustomPost } from "@/lib/mutations/posts"
-// import { useAddFile } from "@/lib/mutations/files"
+import { useAddFile } from "@/lib/mutations/files"
 import { useAddCustomFeed } from "@/lib/mutations/feeds"
 import { useFeeds } from "@/query/feeds"
 import {
@@ -41,6 +41,7 @@ import {
   SelectItem,
   SelectValue,
 } from "./ui/select"
+import { FileType } from "@/lib/schemas/enums"
 
 type PostFormData = {
   title: string
@@ -75,7 +76,7 @@ export const PostSection = () => {
 
   const { data: feeds, isLoading } = useFeeds()
 
-  // const addFileMutation = useAddFile()
+  const addFileMutation = useAddFile()
   const createPostMutation = useCreateCustomPost()
   const addCustomFeedMutation = useAddCustomFeed()
 
@@ -185,23 +186,25 @@ export const PostSection = () => {
 
   const onSubmit = async (data: PostFormData) => {
     try {
-      // const filesToUpload = [];
+      const filesToUpload = []
 
       // Upload files and collect their information
-      // for (const file of Array.from(data.files || [])) {
-      // 	await addFileMutation.mutateAsync({
-      // 		file,
-      // 		filename: file.name,
-      // 	});
+      for (const file of Array.from(data.files || [])) {
+        const serverFile = await addFileMutation.mutateAsync({
+          file,
+          filename: file.name,
+        })
 
-      // 	// Add file info to the array with proper FileType enum
-      // 	filesToUpload.push({
-      // 		type: file.type.startsWith("image/")
-      // 			? FileType.Image
-      // 			: FileType.Video,
-      // 		fileName: file.name,
-      // 	});
-      // }
+        console.log(JSON.stringify(serverFile))
+
+        // Add file info to the array with proper FileType enum
+        filesToUpload.push({
+          type: file.type.startsWith("image/")
+            ? FileType.Image
+            : FileType.Video,
+          fileName: serverFile,
+        })
+      }
 
       if (data.feedId === "") {
         throw new Error("Please select a feed")
@@ -213,7 +216,7 @@ export const PostSection = () => {
           post: {
             title: data.title,
             description: data.description,
-            media: [],
+            media: filesToUpload,
             body: null,
             sourceUrl: null,
             categories: data.tags,
@@ -227,7 +230,7 @@ export const PostSection = () => {
       // Handle form submission here
       console.log("Form data:", data)
       console.log("Uploaded files:", uploadedFiles)
-      // console.log("Files to upload:", filesToUpload);
+      console.log("Files to upload:", filesToUpload)
       console.log("Selected feed ID:", data.feedId)
 
       filePreviewUrls.forEach(url => URL.revokeObjectURL(url))
