@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/nextjs"
+import type { Meta, StoryObj } from "@storybook/nextjs-vite"
 import { SearchResultCard } from "./search-result-card"
 import { FileType } from "@/lib/schemas/enums"
 import type { Post } from "@/lib/schemas"
