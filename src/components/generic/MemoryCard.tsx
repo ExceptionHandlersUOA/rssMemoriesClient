@@ -19,6 +19,7 @@ import {
 } from "../ui/dialog"
 import { FileType, Platform } from "@/lib/schemas/enums"
 import { Post } from "@/lib/schemas"
+import { ExternalLink } from "lucide-react"
 import { useFavouritePost, useUnfavouritePost } from "@/lib/mutations/posts"
 import { cn } from "@/lib/utils"
 import { StarIcon } from "lucide-react"
@@ -41,8 +42,6 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
     sourceUrl,
     publishedAt,
     media,
-    categories,
-    favourited,
     platform,
   }) => {
     const [localFavourited, setLocalFavourited] = useState(favourited)
@@ -67,7 +66,10 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
       <Card className="py-4">
         <CardHeader>
           <CardTitle className={cn("flex flex-row justify-between gap-2")}>
-            <a className="text-2xl hover:underline" href={sourceUrl || "#"}>
+            <a
+              className="text-2xl hover:underline"
+              href={`/dashboard/memories/${postId}`}
+            >
               {title || "Untitled"}
             </a>
             <Button variant="ghost" onClick={toggleFavourite} className="p-1">
@@ -83,7 +85,7 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
             {platform && ` · ${platform}`}
           </CardDescription>
           <CardDescription
-            className="prose prose-h2:mt-1 prose-h2:text-foreground prose-a:text-foreground line-clamp-5"
+            className="prose prose-h2:mt-1 prose-h2:text-foreground prose-a:text-foreground line-clamp-4 w-full max-w-none text-wrap"
             dangerouslySetInnerHTML={{
               __html: description ?? "",
             }}
@@ -91,46 +93,19 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
         </CardHeader>
 
         <CardContent className="flex flex-col gap-4">
-          {body && (
+          {body && body.length >= 0 && (
             <p className="line-clamp-5 whitespace-break-spaces">{body}</p>
           )}
 
-          {/* TODO: make this cool */}
-          {/* TODO: make this waay cooler */}
-          <div className="flex flex-row justify-center gap-2">
+          <div className="flex flex-row justify-center w-sm items-center gap-2">
             {media
               ?.filter(media => media.type === FileType.Video)
-              .map((video, index) => (
-                <Dialog key={index}>
-                  <DialogTrigger className="max-h-full w-fit flex-shrink-0 even:hidden">
-                    {/* TODO: placeholder for video*/}
-                    <img
-                      className="h-40 max-h-full w-fit flex-shrink-0 cursor-pointer rounded"
-                      src="/mask-shape-1.svg"
-                      alt="Video"
+              .map(video => (
+                <video className="h-fit w-fit rounded-xl" playsInline controls>
+                    <source
+                    src={`${process.env.NEXT_PUBLIC_API_URL}/api/file/${video.fileName}`}
                     />
-                  </DialogTrigger>
-                  <DialogContent className="flex w-fit min-w-5xl flex-col items-center">
-                    <DialogHeader>
-                      <DialogTitle>Video</DialogTitle>
-                    </DialogHeader>
-                    <video
-                      autoPlay
-                      className="aspect-video rounded"
-                      key={index}
-                      controls
-                      width="320"
-                      height="160"
-                      preload="none"
-                    >
-                      <source
-                        src={`${process.env.NEXT_PUBLIC_API_URL}/api/getFile/${video.fileName}`}
-                        type="video/mp4"
-                      />
-                      Your browser does not support the video tag.
-                    </video>
-                  </DialogContent>
-                </Dialog>
+                </video>
               ))}
           </div>
 
@@ -139,7 +114,8 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
               {media
                 ?.filter(media => media.type === FileType.Image)
                 .map((image, index) => (
-                  // TODO: extract into component
+                  // TODO: extract into component ~ brandon
+                  // NAH YOU SUCK ~ brandon
                   <Dialog key={index}>
                     <DialogTrigger className="max-h-full w-fit flex-shrink-0 odd:hidden">
                       <img
@@ -189,6 +165,20 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
                 ))}
             </div>
           </div>
+
+          {sourceUrl && (
+            <Button variant="outline" size="sm" asChild className="w-fit">
+              <a
+                href={sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2"
+              >
+                <ExternalLink className="h-4 w-4" />
+                View Source
+              </a>
+            </Button>
+          )}
         </CardContent>
       </Card>
     )
