@@ -24,6 +24,7 @@ import { useFavouritePost, useUnfavouritePost } from "@/lib/mutations/posts"
 import { cn } from "@/lib/utils"
 import { StarIcon } from "lucide-react"
 import { Button } from "../ui/button"
+import Image from "next/image"
 import Link from "next/link"
 
 dayjs.extend(utc)
@@ -125,21 +126,25 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
                   // NAH YOU SUCK ~ brandon
                   <Dialog key={index}>
                     <DialogTrigger className="max-h-full w-fit flex-shrink-0 odd:hidden">
-                      <img
+                      <Image
                         className="h-40 max-h-full w-fit flex-shrink-0 cursor-pointer rounded"
                         src={`${process.env.NEXT_PUBLIC_API_URL}/api/file/${image.fileName}`}
                         alt={`Image ${index + 1}`}
+                        width={200}
+                        height={125}
                       />
                     </DialogTrigger>
-                    <DialogContent className="flex w-fit min-w-5xl flex-col items-center">
+                    <DialogContent className="flex max-h-[80vh] w-fit min-w-5xl flex-col items-center">
                       <DialogHeader>
                         <DialogTitle>Image</DialogTitle>
                       </DialogHeader>
-                      <img
+                      <Image
                         src={`${process.env.NEXT_PUBLIC_API_URL}/api/file/${image.fileName}`}
                         alt={`Image ${index + 1}`}
                         key={index}
                         className="h-80 max-w-5xl rounded object-cover"
+                        width={800}
+                        height={600}
                       />
                     </DialogContent>
                   </Dialog>
@@ -151,21 +156,25 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
                 .map((image, index) => (
                   <Dialog key={index}>
                     <DialogTrigger className="max-h-full w-fit flex-shrink-0 even:hidden">
-                      <img
-                        className="h-40 max-h-full w-fit flex-shrink-0 cursor-pointer rounded"
+                      <Image
+                        className="max-h-full w-fit flex-shrink-0 cursor-pointer rounded"
                         src={`${process.env.NEXT_PUBLIC_API_URL}/api/file/${image.fileName}`}
                         alt={`Image ${index + 1}`}
+                        width={200}
+                        height={125}
                       />
                     </DialogTrigger>
-                    <DialogContent className="flex w-fit min-w-5xl flex-col items-center">
+                    <DialogContent className="flex max-h-[80vh] w-fit min-w-5xl flex-col items-center overflow-scroll">
                       <DialogHeader>
                         <DialogTitle>Image</DialogTitle>
                       </DialogHeader>
-                      <img
+                      <Image
                         src={`${process.env.NEXT_PUBLIC_API_URL}/api/file/${image.fileName}`}
                         alt={`Image ${index + 1}`}
                         key={index}
-                        className="h-80 max-w-5xl rounded object-cover"
+                        className="max-w-5xl rounded object-cover"
+                        width={800}
+                        height={600}
                       />
                     </DialogContent>
                   </Dialog>
