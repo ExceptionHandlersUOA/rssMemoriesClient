@@ -23,21 +23,17 @@ export function Landing() {
   }
 
   return (
-    <div className="flex min-h-svh items-center justify-center bg-background relative overflow-hidden">
+    <div className="bg-background relative flex min-h-svh items-center justify-center overflow-hidden">
       {/* Header - hidden during animation */}
-      {!isAnimating && (
-        <Header onLoginClick={handleLoginClick} />
-      )}
+      {!isAnimating && <Header onLoginClick={handleLoginClick} />}
 
       <div className="flex flex-col items-center gap-8">
         {/* Book Image with Shaking Animation */}
         <BookAnimation isAnimating={isAnimating} onClick={handleBookClick} />
-        
+
         {/* Optional content below the book */}
-        <div className={`text-center ${isAnimating ? styles.fadeOut : ''}`}>
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">
-            RSS Memories
-          </h1>
+        <div className={`text-center ${isAnimating ? styles.fadeOut : ""}`}>
+          <h1 className="mb-4 text-4xl font-bold md:text-6xl">RSS Memories</h1>
           <p className="text-muted-foreground text-lg">
             Your memories, organized and preserved
           </p>
@@ -45,56 +41,82 @@ export function Landing() {
       </div>
 
       {/* Open Book Animation */}
-      {isAnimating && 
-        <OpenBookAnimation></OpenBookAnimation>}    
+      {isAnimating && <OpenBookAnimation></OpenBookAnimation>}
 
-    {/* Open Book Animation */}
+      {/* Open Book Animation */}
       {isAnimating && (
-        <div className={`${styles.bookContent} absolute inset-0 flex items-center justify-between text-center px-8 md:px-16`}>
-            {/* Back Arrow Icon */}
-            <BackArrow onClick={() => setIsAnimating(false)} />
-            
-            {/* Book Content */}    
+        <div
+          className={`${styles.bookContent} absolute inset-0 flex items-center justify-between px-8 text-center md:px-16`}
+        >
+          {/* Back Arrow Icon */}
+          <BackArrow onClick={() => setIsAnimating(false)} />
 
-            <div className="flex-1 flex flex-col justify-center items-center" style={{paddingRight: '8%'} }>
-                <div className={styles.bookContentWrapper} style={{maxWidth: '85%', maxHeight: '70%'}}>
-                    <h2 className={`${styles.bookTitle} text-2xl md:text-4xl font-bold mb-4`}>
-                        RSS MEMORIES
-                    </h2>
-                    <div className={`${styles.contentDivider} mb-4`}></div>
-                    <p className={`${styles.bookText} text-lg md:text-xl`}>
-                        Our product description goes here. It can be a brief overview of what the product does and its key features.
-                    </p>
-                </div>
+          {/* Book Content */}
+
+          <div
+            className="flex flex-1 flex-col items-center justify-center"
+            style={{ paddingRight: "8%" }}
+          >
+            <div
+              className={styles.bookContentWrapper}
+              style={{ maxWidth: "85%", maxHeight: "70%" }}
+            >
+              <h2
+                className={`${styles.bookTitle} mb-4 text-2xl font-bold md:text-4xl`}
+              >
+                RSS MEMORIES
+              </h2>
+              <div className={`${styles.contentDivider} mb-4`}></div>
+              <p className={`${styles.bookText} text-lg md:text-xl`}>
+                Our product description goes here. It can be a brief overview of
+                what the product does and its key features.
+              </p>
             </div>
-            <div className="flex-1 flex flex-col" style={{paddingTop: '10%', paddingBottom: '10%'}}>
-                <div className={`${styles.contentDivider} mb-8 opacity-0`}></div>
-                <div className="flex items-start justify-center" style={{paddingTop: '5%', paddingBottom: '5%'}}>
-                    <div className={styles.welcomeTextContainer}>
-                        <h2 className={`${styles.welcomeText} text-1xl md:text-2xl font-bold`}>
-                            Your memories deserve a special place. 
-                        </h2>
-                        <br></br>
-                        <h2 className={`${styles.welcomeText} text-1xl md:text-2xl font-bold`}>
-                            Sign in to keep writing your story and revisit the memories that matter most.
-                        </h2>
-                        <br></br>
-                    </div>
-                </div>
-                <div className={`${styles.contentDivider} mb-8`}></div>
-                <div className="flex items-end justify-center" style={{paddingTop: '5%'}}>
-                    <button type="button" className={`${styles.getStartedButton} cursor-pointer`} onClick={handleLoginClick}>
-                        Get Started
-                    </button>
-                </div>
+          </div>
+          <div
+            className="flex flex-1 flex-col"
+            style={{ paddingTop: "10%", paddingBottom: "10%" }}
+          >
+            <div className={`${styles.contentDivider} mb-8 opacity-0`}></div>
+            <div
+              className="flex items-start justify-center"
+              style={{ paddingTop: "5%", paddingBottom: "5%" }}
+            >
+              <div className={styles.welcomeTextContainer}>
+                <h2
+                  className={`${styles.welcomeText} text-1xl font-bold md:text-2xl`}
+                >
+                  Your memories deserve a special place.
+                </h2>
+                <br></br>
+                <h2
+                  className={`${styles.welcomeText} text-1xl font-bold md:text-2xl`}
+                >
+                  Sign in to keep writing your story and revisit the memories
+                  that matter most.
+                </h2>
+                <br></br>
+              </div>
             </div>
+            <div className={`${styles.contentDivider} mb-8`}></div>
+            <div
+              className="flex items-end justify-center"
+              style={{ paddingTop: "5%" }}
+            >
+              <button
+                type="button"
+                className={`${styles.getStartedButton} cursor-pointer`}
+                onClick={handleLoginClick}
+              >
+                Get Started
+              </button>
+            </div>
+          </div>
         </div>
       )}
-      
+
       {/* Footer */}
-        {!isAnimating && (
-            <Footer />
-        )}
+      {!isAnimating && <Footer />}
     </div>
   )
 }

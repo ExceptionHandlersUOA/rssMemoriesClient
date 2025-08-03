@@ -1,10 +1,10 @@
-import Image from "next/image";
-import { Landing } from "@/components/landing";
+import Image from "next/image"
+import { Landing } from "@/components/landing"
 
 export default function Home() {
   return (
-    <div > 
+    <div>
       <Landing></Landing>
     </div>
-  );
+  )
 }

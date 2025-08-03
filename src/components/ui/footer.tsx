@@ -1,20 +1,26 @@
 export function Footer() {
   return (
-    <footer className="footer absolute bottom-0 left-0 right-0">
+    <footer className="footer absolute right-0 bottom-0 left-0">
       <div className="footer-content">
         <p className="footer-text">
           © 2025 RSS Memories. All rights reserved.
         </p>
         <div className="footer-links">
-          <a href="#" className="footer-link">Privacy Policy</a>
+          <a href="#" className="footer-link">
+            Privacy Policy
+          </a>
           <span className="footer-divider">|</span>
-          <a href="#" className="footer-link">Terms of Service</a>
+          <a href="#" className="footer-link">
+            Terms of Service
+          </a>
           <span className="footer-divider">|</span>
-          <a href="#" className="footer-link">Contact</a>
+          <a href="#" className="footer-link">
+            Contact
+          </a>
         </div>
       </div>
-    
-    <style jsx>{`
+
+      <style jsx>{`
         .footer {
           background: rgba(245, 245, 220, 0.05);
           border-top: 1px solid rgba(139, 69, 19, 0.1);
