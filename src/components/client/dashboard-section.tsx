@@ -2,9 +2,38 @@
 
 import { MemoryCard } from "@/components/generic/MemoryCard"
 import { useFeeds } from "@/query/feeds"
+import {
+  useAddFeed,
+  useAddCustomFeed,
+  useDeleteFeed,
+} from "@/lib/mutations/feeds"
+import { Button } from "@/components/ui/button"
+import { Post } from "@/lib/schemas"
+import { Platform } from "@/lib/schemas/enums"
+import dayjs from "dayjs"
+
+type PostWithPlatform = Post & {
+  platform: Platform
+}
 
 export const DashboardSection = () => {
   const { data: feedsData, isLoading, error } = useFeeds()
+  const addFeedMutation = useAddFeed()
+  const addCustomFeedMutation = useAddCustomFeed()
+  const deleteCustomFeedMutation = useDeleteFeed()
+
+  const allPosts: PostWithPlatform[] = []
+  feedsData?.forEach(feed => {
+    if (feed.posts) {
+      const postsWithPlatform = feed.posts.map(post => ({
+        ...post,
+        platform: feed.platform || "Unknown Platform",
+      }))
+      allPosts.push(...postsWithPlatform)
+    }
+  })
+  allPosts.sort((a, b) => dayjs(b.publishedAt).diff(dayjs(a.publishedAt)))
+  allPosts.forEach(post => console.log(post.publishedAt))
 
   if (isLoading) {
     return (
@@ -31,8 +60,8 @@ export const DashboardSection = () => {
   return (
     <div className="mx-auto w-full max-w-4xl">
       <div className="flex flex-col gap-4">
-        {feedsData && feedsData.length > 0 ? (
-          feedsData.map(feed => <MemoryCard key={feed.feedId} {...feed} />)
+        {allPosts && allPosts.length > 0 ? (
+          allPosts.map(post => <MemoryCard key={post.postId} {...post} />)
         ) : (
           <div className="flex flex-col gap-4">
             <h1 className="text-2xl font-bold">No feeds found</h1>

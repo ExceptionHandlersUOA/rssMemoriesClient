@@ -1,5 +1,8 @@
 "use client"
 
+import Image from "next/image"
+import book from "@/assets/book.png"
+
 interface BookAnimationProps {
   isAnimating: boolean
   onClick: () => void
@@ -11,8 +14,9 @@ export function BookAnimation({ isAnimating, onClick }: BookAnimationProps) {
       className={`animate-shake ${isAnimating ? "book-fly-up" : ""}`}
       onClick={onClick}
     >
-      <img
-        src="/book.png"
+      <Image
+        priority
+        src={book}
         alt="Book"
         className="h-48 w-48 cursor-pointer object-contain drop-shadow-lg md:h-64 md:w-64"
       />

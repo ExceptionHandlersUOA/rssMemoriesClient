@@ -1,31 +1,25 @@
 "use client"
 
 import { useState } from "react"
-import { useRouter } from "next/navigation"
 import { Header } from "@/components/ui/header"
 import { Footer } from "@/components/ui/footer"
 import { BookAnimation } from "@/components/ui/book-animation"
 import { BackArrow } from "./ui/back-arrow"
 import { OpenBookAnimation } from "./ui/open-book-animation"
 import styles from "./landing.module.css"
+import Link from "next/link"
 
 export function Landing() {
   const [isAnimating, setIsAnimating] = useState(false)
-
-  const router = useRouter()
 
   const handleBookClick = () => {
     setIsAnimating(true)
   }
 
-  const handleLoginClick = () => {
-    router.push("/login")
-  }
-
   return (
     <div className="bg-background relative flex min-h-svh items-center justify-center overflow-hidden">
       {/* Header - hidden during animation */}
-      {!isAnimating && <Header onLoginClick={handleLoginClick} />}
+      {!isAnimating && <Header />}
 
       <div className="flex flex-col items-center gap-8">
         {/* Book Image with Shaking Animation */}
@@ -103,13 +97,12 @@ export function Landing() {
               className="flex items-end justify-center"
               style={{ paddingTop: "5%" }}
             >
-              <button
-                type="button"
+              <Link
+                href="/login"
                 className={`${styles.getStartedButton} cursor-pointer`}
-                onClick={handleLoginClick}
               >
                 Get Started
-              </button>
+              </Link>
             </div>
           </div>
         </div>

@@ -11,6 +11,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar"
 import { SidebarLeft } from "@/components/sidebar"
+import { AddFeedPopup } from "@/components/add-feed/add-feed-popup"
 
 type DashboardLayoutProps = {
   children: React.ReactNode
@@ -39,7 +40,10 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             </Breadcrumb>
           </div>
         </header>
-        <main className="flex flex-1 flex-col gap-6 p-6">{children}</main>
+        <main className="flex flex-1 flex-col gap-6 p-6">
+          <AddFeedPopup />
+          {children}
+        </main>
       </SidebarInset>
     </SidebarProvider>
   )
