@@ -18,7 +18,7 @@ export const MemorySection = ({ postId }: MemorySectionProps) => {
       </div>
 
       <div className="space-y-6">
-        <MemoryActionsCard />
+        {/* <MemoryActionsCard /> */}
         <MemoryInfoCard postId={postId} />
       </div>
     </div>
