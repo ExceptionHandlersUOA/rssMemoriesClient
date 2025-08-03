@@ -6,7 +6,6 @@ import {
   StarOff,
   Trash2,
   Star,
-  ChevronDown,
 } from "lucide-react"
 import Link from "next/link"
 
@@ -32,13 +31,7 @@ import { useFeeds } from "@/query/feeds"
 import { NavFavoritesSkeleton } from "@/components/skeletons"
 import { Platform, Post } from "@/lib/schemas"
 import dayjs from "dayjs"
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "../ui/collapsible"
-import { AnimatePresence, motion } from "framer-motion"
-import { Button } from "../ui/button"
+import { motion } from "framer-motion"
 import { useState } from "react"
 
 type PostWithPlatform = Post & {

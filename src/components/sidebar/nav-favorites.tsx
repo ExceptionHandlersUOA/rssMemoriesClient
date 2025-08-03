@@ -5,7 +5,6 @@ import {
   MoreHorizontal,
   StarOff,
   Trash2,
-  Star,
 } from "lucide-react"
 import Link from "next/link"
 
@@ -63,7 +62,7 @@ export function NavFavorites() {
 
   return (
     <SidebarGroup className="flex flex-col group-data-[collapsible=icon]:hidden">
-      <Collapsible>
+      <Collapsible defaultOpen>
         <CollapsibleTrigger>
           <SidebarGroupLabel>Favourites</SidebarGroupLabel>
         </CollapsibleTrigger>

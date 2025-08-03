@@ -35,8 +35,6 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
     sourceUrl,
     publishedAt,
     media,
-    categories,
-    favourited,
     platform,
   }) => {
     // const imageUrl = firstPost?.media?.[0]?.fileName
@@ -71,42 +69,15 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
             <p className="line-clamp-5 whitespace-break-spaces">{body}</p>
           )}
 
-          {/* TODO: make this cool */}
-          {/* TODO: make this waay cooler */}
-          <div className="flex flex-row justify-center gap-2">
+          <div className="flex flex-row justify-center w-sm items-center gap-2">
             {media
               ?.filter(media => media.type === FileType.Video)
-              .map((video, index) => (
-                <Dialog key={index}>
-                  <DialogTrigger className="max-h-full w-fit flex-shrink-0 even:hidden">
-                    {/* TODO: placeholder for video*/}
-                    <img
-                      className="h-40 max-h-full w-fit flex-shrink-0 cursor-pointer rounded"
-                      src="/mask-shape-1.svg"
-                      alt="Video"
+              .map(video => (
+                <video className="h-fit w-fit rounded-xl" playsInline controls>
+                    <source
+                    src={`${process.env.NEXT_PUBLIC_API_URL}/api/file/${video.fileName}`}
                     />
-                  </DialogTrigger>
-                  <DialogContent className="flex w-fit min-w-5xl flex-col items-center">
-                    <DialogHeader>
-                      <DialogTitle>Video</DialogTitle>
-                    </DialogHeader>
-                    <video
-                      autoPlay
-                      className="aspect-video rounded"
-                      key={index}
-                      controls
-                      width="320"
-                      height="160"
-                      preload="none"
-                    >
-                      <source
-                        src={`${process.env.NEXT_PUBLIC_API_URL}/api/getFile/${video.fileName}`}
-                        type="video/mp4"
-                      />
-                      Your browser does not support the video tag.
-                    </video>
-                  </DialogContent>
-                </Dialog>
+                </video>
               ))}
           </div>
 
@@ -115,7 +86,8 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
               {media
                 ?.filter(media => media.type === FileType.Image)
                 .map((image, index) => (
-                  // TODO: extract into component
+                  // TODO: extract into component ~ brandon
+                  // NAH YOU SUCK ~ brandon
                   <Dialog key={index}>
                     <DialogTrigger className="max-h-full w-fit flex-shrink-0 odd:hidden">
                       <img
