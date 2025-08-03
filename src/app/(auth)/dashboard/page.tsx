@@ -6,7 +6,7 @@ import { feedsOptions } from "@/query/feeds"
 import { Suspense } from "react"
 import { ContentTabsSkeleton } from "@/components/skeletons"
 
-export const dynamic = "force-dynamic"
+export const dynamic = "force-static"
 
 export default async function Page() {
   const queryClient = getQueryClient()

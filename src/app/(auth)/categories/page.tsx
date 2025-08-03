@@ -5,7 +5,7 @@ import {
 } from "@/components/memories"
 import { favourites } from "@/lib/data/favourites"
 
-export const dynamic = "force-dynamic"
+export const dynamic = "force-static"
 
 export default function CategoriesPage() {
   return (
