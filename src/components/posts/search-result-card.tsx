@@ -32,31 +32,38 @@ export const SearchResultCard = ({ post }: SearchResultCardProps) => {
           )}
         </div>
       </CardHeader>
-      <CardContent className="space-y-4">
-        {post.description && (
-          <p className="text-muted-foreground line-clamp-3 text-sm">
-            {post.description}
-          </p>
-        )}
+      <CardContent className="flex h-full flex-col justify-between gap-4">
+        <div className="space-y-4">
+          {post.description && (
+            <p
+              className="prose prose-h2:mt-1 prose-h1:text-muted-foreground prose-h1:text-lg prose-h2:text-muted-foreground text-muted-foreground prose-a:text-muted-foreground line-clamp-3 text-sm leading-tight"
+              dangerouslySetInnerHTML={{
+                __html: post.description ?? "",
+              }}
+            >
+              {/* {post.description} */}
+            </p>
+          )}
 
-        <div className="text-muted-foreground flex items-center justify-between text-xs">
-          <div className="flex items-center gap-2">
-            <span>Published: {formatDate(post.publishedAt)}</span>
-            {post.lastUpdated !== post.publishedAt && (
-              <span>Updated: {formatDate(post.lastUpdated)}</span>
-            )}
+          <div className="text-muted-foreground flex items-center justify-between text-xs">
+            <div className="flex items-center gap-2">
+              <span>Published: {formatDate(post.publishedAt)}</span>
+              {post.lastUpdated !== post.publishedAt && (
+                <span>Updated: {formatDate(post.lastUpdated)}</span>
+              )}
+            </div>
           </div>
+
+          {post.categories && post.categories.length > 0 && (
+            <div className="flex flex-wrap gap-1">
+              {post.categories.map(category => (
+                <Badge key={category} variant="secondary" className="text-xs">
+                  {category}
+                </Badge>
+              ))}
+            </div>
+          )}
         </div>
-
-        {post.categories && post.categories.length > 0 && (
-          <div className="flex flex-wrap gap-1">
-            {post.categories.map(category => (
-              <Badge key={category} variant="secondary" className="text-xs">
-                {category}
-              </Badge>
-            ))}
-          </div>
-        )}
 
         {post.sourceUrl && (
           <Button variant="outline" size="sm" asChild className="w-fit">

@@ -53,7 +53,7 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
             {platform && ` · ${platform}`}
           </CardDescription>
           <CardDescription
-            className="prose prose-h2:mt-1 prose-h2:text-foreground"
+            className="prose prose-h2:mt-1 prose-h2:text-foreground prose-a:text-foreground line-clamp-5"
             dangerouslySetInnerHTML={{
               __html: description ?? "",
             }}
@@ -61,7 +61,9 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
         </CardHeader>
 
         <CardContent className="flex flex-col gap-4">
-          {body && <p className="whitespace-break-spaces">{body}</p>}
+          {body && (
+            <p className="line-clamp-5 whitespace-break-spaces">{body}</p>
+          )}
 
           {/* TODO: make this cool */}
           {/* TODO: make this waay cooler */}
