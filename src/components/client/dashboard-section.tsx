@@ -2,14 +2,8 @@
 
 import { MemoryCard } from "@/components/generic/MemoryCard"
 import { useFeeds } from "@/query/feeds"
-import {
-  useAddFeed,
-  useAddCustomFeed,
-  useDeleteFeed,
-} from "@/lib/mutations/feeds"
-import { Button } from "@/components/ui/button"
-import { Post } from "@/lib/schemas"
-import { Platform } from "@/lib/schemas/enums"
+import type { Post } from "@/lib/schemas"
+import type { Platform } from "@/lib/schemas/enums"
 import dayjs from "dayjs"
 
 type PostWithPlatform = Post & {
@@ -18,9 +12,6 @@ type PostWithPlatform = Post & {
 
 export const DashboardSection = () => {
   const { data: feedsData, isLoading, error } = useFeeds()
-  const addFeedMutation = useAddFeed()
-  const addCustomFeedMutation = useAddCustomFeed()
-  const deleteCustomFeedMutation = useDeleteFeed()
 
   const allPosts: PostWithPlatform[] = []
   feedsData?.forEach(feed => {
