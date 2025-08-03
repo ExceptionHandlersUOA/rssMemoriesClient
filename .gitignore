@@ -43,3 +43,5 @@ next-env.d.ts
 .eslintcache
 
 !.env.example
+*storybook.log
+storybook-static

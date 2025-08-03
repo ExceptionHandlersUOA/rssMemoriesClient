@@ -1,4 +1,4 @@
-import { FC, memo } from "react"
+import { FC, memo, useState } from "react"
 import {
   Card,
   CardContent,
@@ -8,6 +8,8 @@ import {
 } from "../ui/card"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
+import utc from "dayjs/plugin/utc"
+import timezone from "dayjs/plugin/timezone"
 import {
   Dialog,
   DialogTrigger,
@@ -17,9 +19,14 @@ import {
 } from "../ui/dialog"
 import { FileType, Platform } from "@/lib/schemas/enums"
 import { Post } from "@/lib/schemas"
-import { Button } from "../ui/button"
 import { ExternalLink } from "lucide-react"
+import { useFavouritePost, useUnfavouritePost } from "@/lib/mutations/posts"
+import { cn } from "@/lib/utils"
+import { StarIcon } from "lucide-react"
+import { Button } from "../ui/button"
 
+dayjs.extend(utc)
+dayjs.extend(timezone)
 dayjs.extend(relativeTime)
 
 export interface MemoryCardProps extends Post {
@@ -37,23 +44,44 @@ export const MemoryCard: FC<MemoryCardProps> = memo(
     media,
     platform,
   }) => {
+    const [localFavourited, setLocalFavourited] = useState(favourited)
     // const imageUrl = firstPost?.media?.[0]?.fileName
     //   ? `${process.env.NEXT_PUBLIC_API_URL}/api/getFile/${firstPost?.media?.[0]?.fileName}`
     //   : undefined
 
+    const favouritePost = useFavouritePost()
+    const unfavouritePost = useUnfavouritePost()
+
+    const toggleFavourite = () => {
+      if (localFavourited) {
+        unfavouritePost.mutateAsync(postId.toString())
+        setLocalFavourited(false) // Update local state immediately
+      } else {
+        favouritePost.mutateAsync(postId.toString())
+        setLocalFavourited(true) // Update local state immediately
+      }
+    }
+
     return (
       <Card className="py-4">
         <CardHeader>
-          <CardTitle>
+          <CardTitle className={cn("flex flex-row justify-between gap-2")}>
             <a
               className="text-2xl hover:underline"
               href={`/dashboard/memories/${postId}`}
             >
               {title || "Untitled"}
             </a>
+            <Button variant="ghost" onClick={toggleFavourite} className="p-1">
+              {localFavourited ? (
+                <StarIcon stroke="#000000" fill="#000000" />
+              ) : (
+                <StarIcon stroke="#000000" />
+              )}
+            </Button>
           </CardTitle>
           <CardDescription>
-            {publishedAt && dayjs(publishedAt).fromNow()}
+            {publishedAt && dayjs.utc(publishedAt).local().fromNow()}
             {platform && ` · ${platform}`}
           </CardDescription>
           <CardDescription
