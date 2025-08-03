@@ -50,10 +50,18 @@ export const AddFeedForm = () => {
   }
 
   return (
-    <Card className="py-4">
-      <CardHeader>
-        <CardTitle>Add New Feed</CardTitle>
-      </CardHeader>
+    <div className="flex flex-col items-center gap-4">
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-2xl">
+            Add your Memories from a feed on the Web
+          </CardTitle>
+          <CardDescription>
+            <span>
+              Supported Platforms: YouTube, Instagram, RSS, Reddit and GitHub
+            </span>
+          </CardDescription>
+        </CardHeader>
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
