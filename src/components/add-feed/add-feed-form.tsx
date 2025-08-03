@@ -56,47 +56,49 @@ export const AddFeedForm = () => {
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="text-2xl">
-          Add your Memories from a feed on the Web
-        </CardTitle>
-        <CardDescription>
-          <span>
-            Supported Platforms: YouTube, Instagram, RSS, Reddit and GitHub
-          </span>
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
-            <div className="flex w-full items-center gap-4">
-              <FormField
-                control={form.control}
-                name="url"
-                render={({ field }) => (
-                  <FormItem className="flex-1">
-                    <FormControl>
-                      <Input
-                        placeholder="Feed URL"
-                        {...field}
-                        className={cn(
-                          form.formState.errors.url &&
-                            "border-destructive focus-visible:ring-destructive"
-                        )}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button className="cursor-pointer" type="submit">
-                <PlusIcon className="size-4" />
-              </Button>
-            </div>
-          </form>
-        </Form>
-      </CardContent>
-    </Card>
+    <div className="flex w-full flex-col items-center gap-4">
+      <Card className="w-full">
+        <CardHeader>
+          <CardTitle className="text-2xl">
+            Add your Memories from a feed on the Web
+          </CardTitle>
+          <CardDescription>
+            <span>
+              Supported Platforms: YouTube, Instagram, RSS, Reddit and GitHub
+            </span>
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)}>
+              <div className="flex w-full items-center gap-4">
+                <FormField
+                  control={form.control}
+                  name="url"
+                  render={({ field }) => (
+                    <FormItem className="flex-1">
+                      <FormControl>
+                        <Input
+                          placeholder="Feed URL"
+                          {...field}
+                          className={cn(
+                            form.formState.errors.url &&
+                              "border-destructive focus-visible:ring-destructive"
+                          )}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button className="cursor-pointer" type="submit">
+                  <PlusIcon className="size-4" />
+                </Button>
+              </div>
+            </form>
+          </Form>
+        </CardContent>
+      </Card>
+    </div>
   )
 }

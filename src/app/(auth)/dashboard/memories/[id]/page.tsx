@@ -9,6 +9,8 @@ type Props = {
   }>
 }
 
+export const dynamic = "force-dynamic"
+
 export default async function MemoryPage({ params }: Props) {
   const decodedId = decodeURIComponent((await params).id)
 

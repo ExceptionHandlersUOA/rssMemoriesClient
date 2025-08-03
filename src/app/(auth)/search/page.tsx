@@ -2,6 +2,8 @@ import { Suspense } from "react"
 import { SearchSection } from "@/components/client"
 import { SearchLoadingSkeleton } from "@/components/skeletons/search-loading-skeleton"
 
+export const dynamic = "force-static"
+
 export default function SearchPage() {
   return (
     <div className="container mx-auto max-w-7xl px-4 py-8">

@@ -8,12 +8,16 @@ import {
 } from "../schemas/post"
 import { z } from "zod"
 
-export const createCustomPostClient = async (
+export const createCustomPostClient = async ({
+  feedId,
+  createCustomPostRequest,
+}: {
+  feedId: string
   createCustomPostRequest: CreateCustomPostRequest
-) => {
+}) => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/feed/${createCustomPostRequest.id}/post/custom`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/feed/${feedId}/post/custom`,
       {
         method: "POST",
         headers: {
