@@ -185,23 +185,23 @@ export const PostSection = () => {
 
   const onSubmit = async (data: PostFormData) => {
     try {
-      const filesToUpload = []
+      // const filesToUpload = [];
 
       // Upload files and collect their information
-      for (const file of Array.from(data.files || [])) {
-        await addFileMutation.mutateAsync({
-          file,
-          filename: file.name,
-        })
+      // for (const file of Array.from(data.files || [])) {
+      // 	await addFileMutation.mutateAsync({
+      // 		file,
+      // 		filename: file.name,
+      // 	});
 
-        // Add file info to the array with proper FileType enum
-        filesToUpload.push({
-          type: file.type.startsWith("image/")
-            ? FileType.Image
-            : FileType.Video,
-          fileName: file.name,
-        })
-      }
+      // 	// Add file info to the array with proper FileType enum
+      // 	filesToUpload.push({
+      // 		type: file.type.startsWith("image/")
+      // 			? FileType.Image
+      // 			: FileType.Video,
+      // 		fileName: file.name,
+      // 	});
+      // }
 
       if (data.feedId === "") {
         throw new Error("Please select a feed")
@@ -213,7 +213,7 @@ export const PostSection = () => {
           post: {
             title: data.title,
             description: data.description,
-            media: filesToUpload,
+            media: [],
             body: null,
             sourceUrl: null,
             categories: data.tags,
@@ -225,7 +225,7 @@ export const PostSection = () => {
       // Handle form submission here
       console.log("Form data:", data)
       console.log("Uploaded files:", uploadedFiles)
-      console.log("Files to upload:", filesToUpload)
+      // console.log("Files to upload:", filesToUpload);
       console.log("Selected feed ID:", data.feedId)
 
       filePreviewUrls.forEach(url => URL.revokeObjectURL(url))
