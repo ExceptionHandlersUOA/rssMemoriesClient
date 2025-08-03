@@ -1,14 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   FormField,
   FormItem,
@@ -25,9 +18,19 @@ import { PlusIcon } from "lucide-react"
 import { AddFeedRequest, AddFeedUrlRequestSchema } from "@/lib/schemas"
 import { useAddFeed } from "@/lib/mutations/feeds"
 import { toast } from "sonner"
+import { useQueryState } from "nuqs"
 
 export const AddFeedForm = () => {
   const mutation = useAddFeed()
+  const [, setIsOpen] = useQueryState("add-feed", {
+    defaultValue: false,
+    parse: (value): boolean => {
+      return value === "true"
+    },
+    serialize: (value): string => {
+      return value ? "true" : "false"
+    },
+  })
 
   const form = useForm<AddFeedRequest>({
     resolver: zodResolver(AddFeedUrlRequestSchema),
@@ -40,6 +43,8 @@ export const AddFeedForm = () => {
     try {
       mutation.mutate(addFeedDetails)
       toast("Feed was added successfully!")
+      setIsOpen(false)
+      form.reset()
     } catch (error) {
       toast("Feed was not added :(")
     }
@@ -58,23 +63,22 @@ export const AddFeedForm = () => {
             </span>
           </CardDescription>
         </CardHeader>
+      <CardContent>
         <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="flex flex-col items-center gap-8"
-          >
-            <CardContent className="flex w-full justify-center">
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <div className="flex w-full items-center gap-4">
               <FormField
                 control={form.control}
                 name="url"
                 render={({ field }) => (
-                  <FormItem className="w-lg">
+                  <FormItem className="flex-1">
                     <FormControl>
                       <Input
                         placeholder="Feed URL"
                         {...field}
                         className={cn(
-                          form.formState.errors.url && "border-destructive"
+                          form.formState.errors.url &&
+                            "border-destructive focus-visible:ring-destructive"
                         )}
                       />
                     </FormControl>
@@ -82,13 +86,13 @@ export const AddFeedForm = () => {
                   </FormItem>
                 )}
               />
-              <Button className="mx-2 cursor-pointer text-lg" type="submit">
-                <PlusIcon />
+              <Button className="cursor-pointer" type="submit">
+                <PlusIcon className="size-4" />
               </Button>
-            </CardContent>
+            </div>
           </form>
         </Form>
-      </Card>
-    </div>
+      </CardContent>
+    </Card>
   )
 }

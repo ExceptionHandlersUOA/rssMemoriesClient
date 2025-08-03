@@ -52,9 +52,10 @@ const data = {
       icon: Search,
     },
     {
-      title: "Add Feed",
-      url: "/add",
+      title: "Add",
+      url: "/dashboard?tab=feed",
       icon: Plus,
+      isButton: true,
     },
     {
       title: "Home",
