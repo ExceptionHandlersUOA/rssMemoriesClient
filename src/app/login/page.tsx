@@ -1,6 +1,12 @@
 import { LoginForm } from "@/components/ui/login-form"
 import Image from "next/image"
 import loginImage from "@/assets/Login_img.gif"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Login",
+  description: "Login to your Web Memories account",
+}
 
 export default function LoginPage() {
   return (
